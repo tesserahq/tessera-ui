@@ -1,4 +1,4 @@
-import type React from "react";
+import * as React from "react";
 import { cn } from "../../../utils/misc";
 
 interface Props {
