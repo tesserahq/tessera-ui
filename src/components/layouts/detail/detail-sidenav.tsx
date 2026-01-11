@@ -1,3 +1,4 @@
+import * as React from "react";
 import { cn } from "../../../utils/misc";
 import { useLocation, Link } from "react-router";
 import type { DetailItemsProps } from "../types";
