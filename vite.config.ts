@@ -2,11 +2,17 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { resolve } from "path";
 import dts from "vite-plugin-dts";
-import tailwindcss from "@tailwindcss/vite";
+// import tailwindcss from "@tailwindcss/vite";
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), dts(), tailwindcss()],
+  plugins: [
+    react({
+      jsxRuntime: "automatic",
+    }),
+    dts(),
+    // tailwindcss(),
+  ],
   optimizeDeps: {
     esbuildOptions: {
       jsx: "automatic",
