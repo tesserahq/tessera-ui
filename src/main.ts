@@ -15,8 +15,3 @@ export type {
 
 // Layout
 export * from "./components";
-// export { default as NestedLayout } from "./components/layouts/nested.layout.tsx";
-// export type {
-//   DetailItemsProps,
-//   BreadcrumbItemData,
-// } from "./components/layouts/types";

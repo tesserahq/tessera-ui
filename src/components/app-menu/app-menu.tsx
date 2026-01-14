@@ -48,7 +48,7 @@ export function AppMenu({ apps }: { apps: AppMenuProps[] }) {
               className="flex flex-col items-center justify-center rounded-lg px-4 py-2
                 transition-all duration-200 hover:bg-accent"
             >
-              <Avatar>
+              <Avatar className="ring-0">
                 <AvatarImage src={`/images/apps/${app.name}-logo.png`} />
               </Avatar>
               <span className="text-xs capitalize">{app.name}</span>
