@@ -40,9 +40,9 @@
     "unlink": "bun unlink"
   },
   "peerDependencies": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-router": "^6.0.0",
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0",
+    "react-router": "^6.0.0 || ^7.0.0",
     "tailwindcss": "^4.1.11",
     "class-variance-authority": "^0.7.1"
   },
