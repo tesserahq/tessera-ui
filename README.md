@@ -35,3 +35,5 @@ Import in your App
 ```shellscript
 import ProfileMenu from 'core-ui'
 ```
+
+![Alt](https://repobeats.axiom.co/api/embed/40d6e73948c2ab3ef2497becbc54ba3be6a73d21.svg "Repobeats analytics image")
