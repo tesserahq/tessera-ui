@@ -23,7 +23,7 @@ The CoreUIProvider wraps your application and provides:
 
 ## Installation
 
-The CoreUIProvider is part of the core-ui package and doesn't require additional installation.
+The CoreUIProvider is part of the tessera-ui package and doesn't require additional installation.
 
 ## Basic Usage
 

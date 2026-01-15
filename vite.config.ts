@@ -2,11 +2,19 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { resolve } from "path";
 import dts from "vite-plugin-dts";
-// import tailwindcss from "@tailwindcss/vite";
+import tailwindcss from "@tailwindcss/vite";
+import tsconfigPaths from "vite-tsconfig-paths";
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), dts()],
+  plugins: [
+    react({
+      jsxRuntime: "automatic",
+    }),
+    tsconfigPaths(),
+    dts(),
+    tailwindcss(),
+  ],
   optimizeDeps: {
     esbuildOptions: {
       jsx: "automatic",
@@ -18,8 +26,8 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, "./src/main.ts"),
-      name: "CoreUI",
-      fileName: "core-ui",
+      name: "TesseraUI",
+      fileName: "tessera-ui",
     },
     rollupOptions: {
       external: ["react", "react-dom"],

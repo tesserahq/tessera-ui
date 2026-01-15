@@ -1,0 +1,40 @@
+import * as React from "react";
+
+import { Plus } from "lucide-react";
+import { Button } from "../ui/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "../ui/tooltip";
+
+interface IProps {
+  label: string;
+  onClick: () => void;
+  size?: "sm" | "lg" | "default" | "xs" | "icon" | null | undefined;
+  disabled?: boolean;
+}
+
+export function NewButton({
+  label,
+  onClick,
+  size = "default",
+  disabled = false,
+}: IProps) {
+  return (
+    <TooltipProvider delayDuration={100}>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Button onClick={onClick} size={size} disabled={disabled}>
+            <Plus />
+            <span className="font-semibold">New</span>
+          </Button>
+        </TooltipTrigger>
+        <TooltipContent side="bottom">
+          <span>{label}</span>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
+  );
+}

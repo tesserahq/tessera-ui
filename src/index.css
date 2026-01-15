@@ -2,6 +2,7 @@
 
 @theme {
   --color-background: #f8f9fb;
+  --color-black: #000000;
   --color-foreground: #333333;
   --color-card: #ffffff;
   --color-card-foreground: #333333;
@@ -25,5 +26,30 @@
 @layer base {
   * {
     @apply text-slate-800 border-border;
+  }
+
+  .d-list {
+    margin: 0;
+  }
+
+  .d-list .d-item {
+    @apply dark:border-slate-200 flex items-center gap-1 border-b pb-2.5;
+  }
+
+  .d-list .d-item:last-child {
+    @apply border-none pb-0;
+  }
+
+  .d-list > :not([hidden]) ~ :not([hidden]) {
+    @apply mt-2;
+  }
+
+  .d-list .d-item .d-label {
+    @apply text-secondary-foreground max-w-48 min-w-32 shrink-0 overflow-hidden text-ellipsis whitespace-nowrap;
+  }
+
+  .d-list .d-item .d-content {
+    word-break: break-all;
+    @apply dark:text-slate-50 line-clamp-1 flex items-center text-sm font-medium text-slate-800;
   }
 }
