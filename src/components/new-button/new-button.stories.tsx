@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import NewButton from "./new-button";
+import {NewButton} from "./new-button";
 
 const meta: Meta<typeof NewButton> = {
   title: "Components/NewButton",
@@ -63,6 +63,46 @@ export const CustomLabel: Story = {
     label: "Add new project",
     onClick: () => console.log("New button clicked"),
     size: "default",
+    disabled: false,
+  },
+};
+
+export const CustomTitle: Story = {
+  args: {
+    label: "Create new item",
+    title: "Create",
+    onClick: () => console.log("New button clicked"),
+    size: "default",
+    disabled: false,
+  },
+};
+
+export const VariantSecondary: Story = {
+  args: {
+    label: "Create new item",
+    onClick: () => console.log("New button clicked"),
+    size: "default",
+    variant: "secondary",
+    disabled: false,
+  },
+};
+
+export const VariantOutline: Story = {
+  args: {
+    label: "Create new item",
+    onClick: () => console.log("New button clicked"),
+    size: "default",
+    variant: "outline",
+    disabled: false,
+  },
+};
+
+export const VariantGhost: Story = {
+  args: {
+    label: "Create new item",
+    onClick: () => console.log("New button clicked"),
+    size: "default",
+    variant: "ghost",
     disabled: false,
   },
 };
