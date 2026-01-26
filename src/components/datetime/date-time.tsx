@@ -54,6 +54,8 @@ interface DateTimeProps {
   timezone?: string;
   showTimezone?: boolean;
   className?: string;
+  tooltipSide?: "top" | "right" | "bottom" | "left";
+  tooltipAlign?: "start" | "center" | "end";
 }
 
 export function formatDateTime(
@@ -94,6 +96,8 @@ export function DateTime({
   timezone,
   showTimezone = false,
   className,
+  tooltipSide = "bottom",
+  tooltipAlign = "start",
 }: DateTimeProps) {
   let timezoneValue = timezone;
   if (!timezone) {
@@ -128,7 +132,7 @@ export function DateTime({
         <TooltipTrigger>
           <time className={className}>{formattedDate}</time>
         </TooltipTrigger>
-        <TooltipContent className="w-full">
+        <TooltipContent className="w-full" side={tooltipSide} align={tooltipAlign}>
           <div className="d-list">
             <div className="d-item justify-between">
               <div className="d-label">UTC</div>

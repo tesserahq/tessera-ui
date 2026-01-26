@@ -149,3 +149,31 @@ export const TimeOnlyFormat: Story = {
     formatStr: "h:mm:ss a zzzz",
   },
 };
+
+export const TooltipSideTop: Story = {
+  args: {
+    date: now,
+    tooltipSide: "top",
+  },
+};
+
+export const TooltipSideRight: Story = {
+  args: {
+    date: now,
+    tooltipSide: "right",
+  },
+};
+
+export const TooltipAlignCenter: Story = {
+  args: {
+    date: now,
+    tooltipAlign: "center",
+  },
+};
+
+export const TooltipAlignEnd: Story = {
+  args: {
+    date: now,
+    tooltipAlign: "end",
+  },
+};

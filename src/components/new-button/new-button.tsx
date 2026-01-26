@@ -11,7 +11,7 @@ import {
 } from "../ui/tooltip";
 
 interface IProps {
-  label: string;
+  label?: string;
   title?: string;
   onClick: () => void;
   size?: ButtonProps["size"];
