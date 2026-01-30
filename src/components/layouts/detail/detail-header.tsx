@@ -19,6 +19,8 @@ export function DetailHeader({
   breadcrumb: BreadcrumbItemData[];
   className?: string;
 }) {
+  const shouldCapitalize = (label: string) => !label.includes("@");
+
   return (
     <div
       className={cn(
@@ -33,12 +35,15 @@ export function DetailHeader({
               <React.Fragment key={item.link}>
                 <BreadcrumbItem>
                   {index === breadcrumb.length - 1 ? (
-                    <BreadcrumbPage className="capitalize">
+                    <BreadcrumbPage className={shouldCapitalize(item.label) ? "capitalize" : ""}>
                       {item.label}
                     </BreadcrumbPage>
                   ) : (
                     <BreadcrumbLink asChild>
-                      <Link to={item.link} className="capitalize">
+                      <Link
+                        to={item.link}
+                        className={shouldCapitalize(item.label) ? "capitalize" : ""}
+                      >
                         {item.label}
                       </Link>
                     </BreadcrumbLink>
