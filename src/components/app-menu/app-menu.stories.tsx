@@ -4,7 +4,7 @@ import { AppMenu } from "./app-menu";
 import type { AppMenuProps } from "./app-menu";
 
 const meta: Meta<typeof AppMenu> = {
-  title: "Components/AppMenu/AppMenu",
+  title: "Components/AppMenu",
   component: AppMenu,
   parameters: {
     layout: "centered",

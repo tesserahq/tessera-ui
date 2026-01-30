@@ -50,6 +50,6 @@
 
   .d-list .d-item .d-content {
     word-break: break-all;
-    @apply dark:text-slate-50 line-clamp-1 flex items-center text-sm font-medium text-slate-800;
+    @apply text-secondary-foreground line-clamp-1 flex items-center text-sm font-medium;
   }
 }
