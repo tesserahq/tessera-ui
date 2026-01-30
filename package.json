@@ -44,7 +44,8 @@
     "react-dom": "^18.0.0 || ^19.0.0",
     "react-router": "^6.0.0 || ^7.0.0",
     "tailwindcss": "^4.1.11",
-    "class-variance-authority": "^0.7.1"
+    "class-variance-authority": "^0.7.1",
+    "sonner": "^2.0.7"
   },
   "devDependencies": {
     "@eslint/js": "^9.30.1",
@@ -72,10 +73,11 @@
     "eslint-plugin-react-hooks": "^7.0.0",
     "eslint-plugin-react-refresh": "^0.4.20",
     "eslint-plugin-storybook": "^9.0.17",
-    "globals": "^17.0.0",
-    "lucide-react": "^0.563.0",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "globals": "^16.3.0",
+    "lucide-react": "^0.562.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "sonner": "^2.0.7",
     "storybook": "^10.0.0",
     "tailwind-merge": "^3.3.1",
     "tailwindcss": "^4.1.11",
