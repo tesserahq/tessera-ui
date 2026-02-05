@@ -6,6 +6,11 @@
 
 - [Layouts](./src/components/layouts/README.md) - Layout components for building consistent page structures
 - [App Menu](./src/components/app-menu/README.md) - Dropdown menu component for displaying and navigating to multiple applications
+- [Date Time](./src/components/datetime/README.md) - Date and time display component
+- [Delete Confirmation](./src/components/delete-confirmation/README.md) - Confirmation dialog for destructive actions
+- [Empty Content](./src/components/empty-content/README.md) - Empty state component for missing data
+- [New Button](./src/components/new-button/README.md) - Primary action button variant
+- [Pagination](./src/components/pagination/README.md) - Pagination controls and helpers
 
 ## Development
 
@@ -15,11 +20,27 @@ Install dependencies:
 bun install
 ```
 
-Run storybook:
+Run storybook on development:
 
 ```shellscript
 bun storybook
 ```
+
+### Storybook with Docker
+
+Build the Storybook image:
+
+```shellscript
+docker build -t tessera-ui .
+```
+
+Run the Storybook container:
+
+```shellscript
+docker run -p 6006:80 tessera-ui
+```
+
+Then open `http://localhost:6006`.
 
 ### Developing Components for Use in Other Projects
 
