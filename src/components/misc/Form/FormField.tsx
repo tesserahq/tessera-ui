@@ -1,30 +1,30 @@
-import { Input } from "../../ui/input";
-import { Label } from "../../ui/label";
-import { Textarea } from "../../ui/textarea";
-import { cn } from "../../../utils/misc";
-import React from "react";
+import { Input } from '../../ui/input'
+import { Label } from '../../ui/label'
+import { Textarea } from '../../ui/textarea'
+import { cn } from '../../../utils/misc'
+import React from 'react'
 
 interface FormFieldProps {
-  label: string;
-  name: string;
-  type?: "text" | "email" | "password" | "url" | "textarea";
-  required?: boolean;
-  error?: string;
-  value?: string;
-  defaultValue?: string;
-  onChange?: (value: string) => void;
-  onBlur?: () => void;
-  placeholder?: string;
-  autoFocus?: boolean;
-  disabled?: boolean;
-  className?: string;
-  children?: React.ReactNode;
+  label: string
+  name: string
+  type?: 'text' | 'email' | 'password' | 'url' | 'textarea'
+  required?: boolean
+  error?: string
+  value?: string
+  defaultValue?: string
+  onChange?: (value: string) => void
+  onBlur?: () => void
+  placeholder?: string
+  autoFocus?: boolean
+  disabled?: boolean
+  className?: string
+  children?: React.ReactNode
 }
 
 export default function FormField({
   label,
   name,
-  type = "text",
+  type = 'text',
   required = false,
   error,
   value,
@@ -37,22 +37,20 @@ export default function FormField({
   className,
   children,
 }: FormFieldProps) {
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     if (onChange) {
-      onChange(e.target.value);
+      onChange(e.target.value)
     }
-  };
+  }
 
   return (
-    <div className={cn("mb-3", className)}>
-      <Label htmlFor={name} className={cn(required && "required")}>
+    <div className={cn('mb-3', className)}>
+      <Label htmlFor={name} className={cn(required && 'required')}>
         {label}
       </Label>
       {children || (
         <>
-          {type === "textarea" ? (
+          {type === 'textarea' ? (
             <Textarea
               id={name}
               name={name}
@@ -63,7 +61,7 @@ export default function FormField({
               placeholder={placeholder}
               autoFocus={autoFocus}
               disabled={disabled}
-              className={cn(error && "input-error")}
+              className={cn(error && 'input-error')}
             />
           ) : (
             <Input
@@ -77,12 +75,12 @@ export default function FormField({
               placeholder={placeholder}
               autoFocus={autoFocus}
               disabled={disabled}
-              className={cn(error && "input-error")}
+              className={cn(error && 'input-error')}
             />
           )}
         </>
       )}
       {error && <span className="error-message">{error}</span>}
     </div>
-  );
+  )
 }

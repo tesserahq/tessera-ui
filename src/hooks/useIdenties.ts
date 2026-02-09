@@ -1,73 +1,72 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState, useEffect, useCallback } from "react";
-import { createIdentiesClient, type IdentiesClientConfig } from "../api/client";
-import type { User, UserUpdate, ApiError } from "../types/user";
+import { useState, useEffect, useCallback } from 'react'
+import { createIdentiesClient, type IdentiesClientConfig } from '../api/client'
+import type { User, UserUpdate, ApiError } from '../types/user'
 
 export interface UseIdentiesConfig extends IdentiesClientConfig {
-  autoFetchUser?: boolean;
+  autoFetchUser?: boolean
 }
 
 export interface UseIdentiesReturn {
   // User state
-  user: User | null;
-  loading: boolean;
-  error: ApiError | null;
+  user: User | null
+  loading: boolean
+  error: ApiError | null
 
   // User actions
-  fetchUser: () => Promise<void>;
-  updateUser: (userUpdate: UserUpdate) => Promise<void>;
+  fetchUser: () => Promise<void>
+  updateUser: (userUpdate: UserUpdate) => Promise<void>
 }
 
 export function useIdenties(config: UseIdentiesConfig): UseIdentiesReturn {
-  const { token, ...clientConfig } = config;
+  const { token, ...clientConfig } = config
 
   // Create client instance
-  const client = createIdentiesClient({ ...clientConfig, token });
+  const client = createIdentiesClient({ ...clientConfig, token })
 
   // State
-  const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<ApiError | null>(null);
+  const [user, setUser] = useState<User | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<ApiError | null>(null)
 
   // Fetch user function
   const fetchUser = useCallback(async () => {
-    setLoading(true);
-    setError(null);
+    setLoading(true)
+    setError(null)
 
     try {
-      const userData = await client.getCurrentUser();
-      setUser(userData);
+      const userData = await client.getCurrentUser()
+      setUser(userData)
     } catch (err) {
-      setError(err as ApiError);
-      setUser(null);
+      setError(err as ApiError)
+      setUser(null)
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  }, [client, token]);
+  }, [client, token])
 
   // Update user function
   const updateUser = useCallback(
     async (userUpdate: UserUpdate) => {
-      setError(null);
+      setError(null)
 
       try {
-        const updatedUser = await client.updateUser(userUpdate);
-        setUser(updatedUser);
+        const updatedUser = await client.updateUser(userUpdate)
+        setUser(updatedUser)
       } catch (err) {
-        setError(err as ApiError);
-        throw err;
+        setError(err as ApiError)
+        throw err
       } finally {
-        setLoading(false);
+        setLoading(false)
       }
     },
     [client, token]
-  );
+  )
 
   useEffect(() => {
     if (token) {
-      fetchUser();
+      fetchUser()
     }
-  }, [token]);
+  }, [token])
 
   return {
     user,
@@ -75,5 +74,5 @@ export function useIdenties(config: UseIdentiesConfig): UseIdentiesReturn {
     fetchUser,
     error,
     updateUser,
-  };
+  }
 }

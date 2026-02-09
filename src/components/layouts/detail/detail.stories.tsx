@@ -1,84 +1,75 @@
-import type { Meta, StoryObj } from "@storybook/react-vite";
-import { MemoryRouter } from "react-router-dom";
-import {
-  Home,
-  Settings,
-  User,
-  FileText,
-  BarChart3,
-  Mail,
-  Bell,
-  Shield,
-} from "lucide-react";
-import { DetailLayout } from "./detail.layout";
-import type { DetailItemsProps, BreadcrumbItemData } from "../types";
+import type { Meta, StoryObj } from '@storybook/react-vite'
+import { MemoryRouter } from 'react-router-dom'
+import { Home, Settings, User, FileText, BarChart3, Mail, Bell, Shield } from 'lucide-react'
+import { DetailLayout } from './detail.layout'
+import type { DetailItemsProps, BreadcrumbItemData } from '../types'
 
 const meta: Meta<typeof DetailLayout> = {
-  title: "Components/Layouts/DetailLayout",
+  title: 'Components/Layouts/DetailLayout',
   component: DetailLayout,
   parameters: {
-    layout: "fullscreen",
+    layout: 'fullscreen',
   },
   decorators: [
     (Story) => (
-      <MemoryRouter initialEntries={["/dashboard"]}>
+      <MemoryRouter initialEntries={['/dashboard']}>
         <div className="h-screen">
           <Story />
         </div>
       </MemoryRouter>
     ),
   ],
-};
+}
 
-export default meta;
+export default meta
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof meta>
 
 const defaultMenuItems: DetailItemsProps[] = [
   {
-    title: "Dashboard",
-    path: "/dashboard",
+    title: 'Dashboard',
+    path: '/dashboard',
     icon: <Home className="w-4 h-4" />,
   },
   {
-    title: "Analytics",
-    path: "/dashboard/analytics",
+    title: 'Analytics',
+    path: '/dashboard/analytics',
     icon: <BarChart3 className="w-4 h-4" />,
   },
   {
-    title: "Documents",
-    path: "/dashboard/documents",
+    title: 'Documents',
+    path: '/dashboard/documents',
     icon: <FileText className="w-4 h-4" />,
     children: [
       {
-        title: "All Documents",
-        path: "/dashboard/documents",
+        title: 'All Documents',
+        path: '/dashboard/documents',
         icon: <FileText className="w-4 h-4" />,
       },
       {
-        title: "Recent",
-        path: "/dashboard/documents/recent",
+        title: 'Recent',
+        path: '/dashboard/documents/recent',
         icon: <FileText className="w-4 h-4" />,
       },
     ],
   },
   {
-    title: "Settings",
-    path: "/dashboard/settings",
+    title: 'Settings',
+    path: '/dashboard/settings',
     icon: <Settings className="w-4 h-4" />,
     divider: true,
   },
   {
-    title: "Profile",
-    path: "/dashboard/profile",
+    title: 'Profile',
+    path: '/dashboard/profile',
     icon: <User className="w-4 h-4" />,
   },
-];
+]
 
 const defaultBreadcrumb: BreadcrumbItemData[] = [
-  { label: "Home", link: "/" },
-  { label: "Dashboard", link: "/dashboard" },
-];
+  { label: 'Home', link: '/' },
+  { label: 'Dashboard', link: '/dashboard' },
+]
 
 export const DefaultDetailLayout: Story = {
   args: {
@@ -107,87 +98,85 @@ export const DefaultDetailLayout: Story = {
       </div>
     ),
   },
-};
+}
 
 export const WithNestedBreadcrumb: Story = {
   args: {
     menuItems: defaultMenuItems,
     breadcrumb: [
-      { label: "Home", link: "/" },
-      { label: "Dashboard", link: "/dashboard" },
-      { label: "Settings", link: "/dashboard/settings" },
-      { label: "Account", link: "/dashboard/settings/account" },
+      { label: 'Home', link: '/' },
+      { label: 'Dashboard', link: '/dashboard' },
+      { label: 'Settings', link: '/dashboard/settings' },
+      { label: 'Account', link: '/dashboard/settings/account' },
     ],
     children: (
       <div className="space-y-4 p-3">
         <h1 className="text-2xl font-bold">Account Settings</h1>
-        <p className="text-muted-foreground">
-          Manage your account settings and preferences.
-        </p>
+        <p className="text-muted-foreground">Manage your account settings and preferences.</p>
       </div>
     ),
   },
-};
+}
 
 export const WithManyMenuItems: Story = {
   args: {
     menuItems: [
       {
-        title: "Dashboard",
-        path: "/dashboard",
+        title: 'Dashboard',
+        path: '/dashboard',
         icon: <Home className="w-4 h-4" />,
       },
       {
-        title: "Analytics",
-        path: "/dashboard/analytics",
+        title: 'Analytics',
+        path: '/dashboard/analytics',
         icon: <BarChart3 className="w-4 h-4" />,
       },
       {
-        title: "Documents",
-        path: "/dashboard/documents",
+        title: 'Documents',
+        path: '/dashboard/documents',
         icon: <FileText className="w-4 h-4" />,
         children: [
           {
-            title: "All Documents",
-            path: "/dashboard/documents",
+            title: 'All Documents',
+            path: '/dashboard/documents',
             icon: <FileText className="w-4 h-4" />,
           },
           {
-            title: "Recent",
-            path: "/dashboard/documents/recent",
+            title: 'Recent',
+            path: '/dashboard/documents/recent',
             icon: <FileText className="w-4 h-4" />,
           },
           {
-            title: "Archived",
-            path: "/dashboard/documents/archived",
+            title: 'Archived',
+            path: '/dashboard/documents/archived',
             icon: <FileText className="w-4 h-4" />,
           },
         ],
       },
       {
-        title: "Messages",
-        path: "/dashboard/messages",
+        title: 'Messages',
+        path: '/dashboard/messages',
         icon: <Mail className="w-4 h-4" />,
       },
       {
-        title: "Notifications",
-        path: "/dashboard/notifications",
+        title: 'Notifications',
+        path: '/dashboard/notifications',
         icon: <Bell className="w-4 h-4" />,
       },
       {
-        title: "Settings",
-        path: "/dashboard/settings",
+        title: 'Settings',
+        path: '/dashboard/settings',
         icon: <Settings className="w-4 h-4" />,
         divider: true,
       },
       {
-        title: "Profile",
-        path: "/dashboard/profile",
+        title: 'Profile',
+        path: '/dashboard/profile',
         icon: <User className="w-4 h-4" />,
       },
       {
-        title: "Security",
-        path: "/dashboard/security",
+        title: 'Security',
+        path: '/dashboard/security',
         icon: <Shield className="w-4 h-4" />,
       },
     ],
@@ -201,4 +190,4 @@ export const WithManyMenuItems: Story = {
       </div>
     ),
   },
-};
+}

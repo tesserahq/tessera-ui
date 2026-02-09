@@ -57,45 +57,42 @@ The `DetailLayout` component is a complete layout solution that combines a fixed
 **Example:**
 
 ```tsx
-import { Layout } from "@tessera-ui/components/layouts";
-import type {
-  DetailItemsProps,
-  BreadcrumbItemData,
-} from "@tessera-ui/components/layouts";
-import { Home, Settings, User } from "lucide-react";
+import { Layout } from '@tessera-ui/components/layouts'
+import type { DetailItemsProps, BreadcrumbItemData } from '@tessera-ui/components/layouts'
+import { Home, Settings, User } from 'lucide-react'
 
 function DashboardPage() {
   const menuItems: DetailItemsProps[] = [
     {
-      title: "Overview",
-      path: "/dashboard",
+      title: 'Overview',
+      path: '/dashboard',
       icon: <Home className="w-4 h-4" />,
     },
     {
-      title: "Settings",
-      path: "/dashboard/settings",
+      title: 'Settings',
+      path: '/dashboard/settings',
       icon: <Settings className="w-4 h-4" />,
       divider: true,
     },
     {
-      title: "Profile",
-      path: "/dashboard/profile",
+      title: 'Profile',
+      path: '/dashboard/profile',
       icon: <User className="w-4 h-4" />,
       children: [
         {
-          title: "Edit Profile",
-          path: "/dashboard/profile/edit",
+          title: 'Edit Profile',
+          path: '/dashboard/profile/edit',
           icon: <User className="w-4 h-4" />,
         },
       ],
     },
-  ];
+  ]
 
   const breadcrumb: BreadcrumbItemData[] = [
-    { label: "Home", link: "/" },
-    { label: "Dashboard", link: "/dashboard" },
-    { label: "Settings", link: "/dashboard/settings" },
-  ];
+    { label: 'Home', link: '/' },
+    { label: 'Dashboard', link: '/dashboard' },
+    { label: 'Settings', link: '/dashboard/settings' },
+  ]
 
   return (
     <Layout.Detail menuItems={menuItems} breadcrumb={breadcrumb}>
@@ -104,7 +101,7 @@ function DashboardPage() {
         <p>Your dashboard settings content goes here.</p>
       </div>
     </Layout.Detail>
-  );
+  )
 }
 ```
 
@@ -131,14 +128,14 @@ The `DetailLayoutHeader` component provides a fixed breadcrumb navigation header
 **Example:**
 
 ```tsx
-import { Layout } from "@tessera-ui/components/layouts";
-import type { BreadcrumbItemData } from "@tessera-ui/components/layouts";
+import { Layout } from '@tessera-ui/components/layouts'
+import type { BreadcrumbItemData } from '@tessera-ui/components/layouts'
 
 function CustomPage() {
   const breadcrumb: BreadcrumbItemData[] = [
-    { label: "Home", link: "/" },
-    { label: "Custom Page", link: "/custom" },
-  ];
+    { label: 'Home', link: '/' },
+    { label: 'Custom Page', link: '/custom' },
+  ]
 
   return (
     <div>
@@ -149,7 +146,7 @@ function CustomPage() {
         <p>Your content here</p>
       </div>
     </div>
-  );
+  )
 }
 ```
 
@@ -167,23 +164,23 @@ The `DetailLayoutSidenav` component provides a fixed sidebar navigation menu. Us
 **Example:**
 
 ```tsx
-import { Layout } from "@tessera-ui/components/layouts";
-import type { DetailItemsProps } from "@tessera-ui/components/layouts";
-import { Home, Settings, User } from "lucide-react";
+import { Layout } from '@tessera-ui/components/layouts'
+import type { DetailItemsProps } from '@tessera-ui/components/layouts'
+import { Home, Settings, User } from 'lucide-react'
 
 function SidebarOnlyPage() {
   const menuItems: DetailItemsProps[] = [
     {
-      title: "Home",
-      path: "/",
+      title: 'Home',
+      path: '/',
       icon: <Home className="w-4 h-4" />,
     },
     {
-      title: "Settings",
-      path: "/settings",
+      title: 'Settings',
+      path: '/settings',
       icon: <Settings className="w-4 h-4" />,
     },
-  ];
+  ]
 
   return (
     <div className="flex">
@@ -194,7 +191,7 @@ function SidebarOnlyPage() {
         <p>Your content here</p>
       </div>
     </div>
-  );
+  )
 }
 ```
 
@@ -212,31 +209,28 @@ The `DetailLayoutContent` component provides a content wrapper with proper spaci
 **Example:**
 
 ```tsx
-import { Layout } from "@tessera-ui/components/layouts";
-import type {
-  DetailItemsProps,
-  BreadcrumbItemData,
-} from "@tessera-ui/components/layouts";
-import { Home, Settings } from "lucide-react";
+import { Layout } from '@tessera-ui/components/layouts'
+import type { DetailItemsProps, BreadcrumbItemData } from '@tessera-ui/components/layouts'
+import { Home, Settings } from 'lucide-react'
 
 function CustomLayoutPage() {
   const menuItems: DetailItemsProps[] = [
     {
-      title: "Home",
-      path: "/",
+      title: 'Home',
+      path: '/',
       icon: <Home className="w-4 h-4" />,
     },
     {
-      title: "Settings",
-      path: "/settings",
+      title: 'Settings',
+      path: '/settings',
       icon: <Settings className="w-4 h-4" />,
     },
-  ];
+  ]
 
   const breadcrumb: BreadcrumbItemData[] = [
-    { label: "Home", link: "/" },
-    { label: "Settings", link: "/settings" },
-  ];
+    { label: 'Home', link: '/' },
+    { label: 'Settings', link: '/settings' },
+  ]
 
   return (
     <>
@@ -249,7 +243,7 @@ function CustomLayoutPage() {
         </Layout.DetailContent>
       </div>
     </>
-  );
+  )
 }
 ```
 
@@ -260,19 +254,16 @@ function CustomLayoutPage() {
 You can combine all three components to create layouts that match your specific design requirements:
 
 ```tsx
-import { Layout } from "@tessera-ui/components/layouts";
-import type {
-  DetailItemsProps,
-  BreadcrumbItemData,
-} from "@tessera-ui/components/layouts";
+import { Layout } from '@tessera-ui/components/layouts'
+import type { DetailItemsProps, BreadcrumbItemData } from '@tessera-ui/components/layouts'
 
 function AdvancedCustomLayout() {
   const menuItems: DetailItemsProps[] = [
     /* ... */
-  ];
+  ]
   const breadcrumb: BreadcrumbItemData[] = [
     /* ... */
-  ];
+  ]
 
   return (
     <>
@@ -300,7 +291,7 @@ function AdvancedCustomLayout() {
         </div>
       </div>
     </>
-  );
+  )
 }
 ```
 
@@ -312,11 +303,11 @@ Menu item structure for sidebar navigation:
 
 ```tsx
 interface DetailItemsProps {
-  title: string; // Display text for the menu item
-  path: string; // Route path (e.g., "/dashboard")
-  icon: React.ReactNode; // Icon component (e.g., from lucide-react)
-  children?: ItemProps[]; // Optional nested menu items
-  divider?: boolean; // Optional divider after this item
+  title: string // Display text for the menu item
+  path: string // Route path (e.g., "/dashboard")
+  icon: React.ReactNode // Icon component (e.g., from lucide-react)
+  children?: ItemProps[] // Optional nested menu items
+  divider?: boolean // Optional divider after this item
 }
 ```
 
@@ -326,8 +317,8 @@ Breadcrumb item structure:
 
 ```tsx
 interface BreadcrumbItemData {
-  label: string; // Display text for the breadcrumb
-  link: string; // Route path for navigation
+  label: string // Display text for the breadcrumb
+  link: string // Route path for navigation
 }
 ```
 
@@ -337,7 +328,7 @@ Wrapper for sidebar menu items:
 
 ```tsx
 interface SidebarItemsProps {
-  menuItems: DetailItemsProps[];
+  menuItems: DetailItemsProps[]
 }
 ```
 
@@ -390,23 +381,23 @@ The layout components use Tailwind CSS classes and support:
 ```tsx
 const menuItems: DetailItemsProps[] = [
   {
-    title: "Dashboard",
-    path: "/dashboard",
+    title: 'Dashboard',
+    path: '/dashboard',
     icon: <Home />,
     children: [
       {
-        title: "Analytics",
-        path: "/dashboard/analytics",
+        title: 'Analytics',
+        path: '/dashboard/analytics',
         icon: <BarChart />,
       },
       {
-        title: "Reports",
-        path: "/dashboard/reports",
+        title: 'Reports',
+        path: '/dashboard/reports',
         icon: <FileText />,
       },
     ],
   },
-];
+]
 ```
 
 ### Menu with Dividers
@@ -414,55 +405,55 @@ const menuItems: DetailItemsProps[] = [
 ```tsx
 const menuItems: DetailItemsProps[] = [
   {
-    title: "Dashboard",
-    path: "/dashboard",
+    title: 'Dashboard',
+    path: '/dashboard',
     icon: <Home />,
   },
   {
-    title: "Settings",
-    path: "/settings",
+    title: 'Settings',
+    path: '/settings',
     icon: <Settings />,
     divider: true, // Adds a divider after this item
   },
   {
-    title: "Profile",
-    path: "/profile",
+    title: 'Profile',
+    path: '/profile',
     icon: <User />,
   },
-];
+]
 ```
 
 ### Dynamic Breadcrumb Based on Route
 
 ```tsx
-import { useLocation } from "react-router";
+import { useLocation } from 'react-router'
 
 function MyPage() {
-  const location = useLocation();
+  const location = useLocation()
 
   const getBreadcrumb = (): BreadcrumbItemData[] => {
-    const paths = location.pathname.split("/").filter(Boolean);
-    const breadcrumb: BreadcrumbItemData[] = [{ label: "Home", link: "/" }];
+    const paths = location.pathname.split('/').filter(Boolean)
+    const breadcrumb: BreadcrumbItemData[] = [{ label: 'Home', link: '/' }]
 
-    let currentPath = "";
+    let currentPath = ''
     paths.forEach((path) => {
-      currentPath += `/${path}`;
+      currentPath += `/${path}`
       breadcrumb.push({
         label: path.charAt(0).toUpperCase() + path.slice(1),
         link: currentPath,
-      });
-    });
+      })
+    })
 
-    return breadcrumb;
-  };
+    return breadcrumb
+  }
 
-  const breadcrumb = getBreadcrumb();
+  const breadcrumb = getBreadcrumb()
 
   return (
     <Layout.Detail menuItems={menuItems} breadcrumb={breadcrumb}>
       {/* Your content */}
     </Layout.Detail>
-  );
+  )
 }
 ```
 
@@ -503,5 +494,5 @@ import {
   DetailHeader,
   DetailSidenav,
   DetailContent,
-} from "@tessera-ui/components/layouts";
+} from '@tessera-ui/components/layouts'
 ```

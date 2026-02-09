@@ -1,38 +1,33 @@
-import * as React from "react";
+import * as React from 'react'
 
-import { format, formatDistanceToNow } from "date-fns";
-import { formatInTimeZone, toZonedTime } from "date-fns-tz";
-import { enUS } from "date-fns/locale";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "../ui/tooltip";
+import { format, formatDistanceToNow } from 'date-fns'
+import { formatInTimeZone, toZonedTime } from 'date-fns-tz'
+import { enUS } from 'date-fns/locale'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../ui/tooltip'
 
-const DEFAULT_TIMEZONE = "America/New_York";
-const DEFAULT_FORMAT = "MMM dd, yyyy HH:mm:ss";
+const DEFAULT_TIMEZONE = 'America/New_York'
+const DEFAULT_FORMAT = 'MMM dd, yyyy HH:mm:ss'
 
 /**
  * Gets the timezone abbreviation (e.g., "PST", "EST")
  */
 function getTimezoneAbbreviation(date: Date, timezone: string): string {
-  return formatInTimeZone(date, timezone, "zzz", { locale: enUS });
+  return formatInTimeZone(date, timezone, 'zzz', { locale: enUS })
 }
 
 function parseDate(date: string | Date): Date {
-  let dateToParse = date;
-  if (typeof date === "string") {
-    const trimmedDate = date.trim();
+  let dateToParse = date
+  if (typeof date === 'string') {
+    const trimmedDate = date.trim()
     // Check if it doesn't already end with 'z' or 'Z' (UTC indicator)
     if (!/[zZ]$/.test(trimmedDate)) {
-      dateToParse = trimmedDate + "Z";
+      dateToParse = trimmedDate + 'Z'
     } else {
-      dateToParse = trimmedDate;
+      dateToParse = trimmedDate
     }
   }
 
-  return new Date(dateToParse);
+  return new Date(dateToParse)
 }
 
 /**
@@ -41,21 +36,21 @@ function parseDate(date: string | Date): Date {
  */
 function getBrowserTimezone(): string {
   try {
-    return Intl.DateTimeFormat().resolvedOptions().timeZone;
+    return Intl.DateTimeFormat().resolvedOptions().timeZone
   } catch {
     // Fallback to UTC if timezone detection fails
-    return DEFAULT_TIMEZONE;
+    return DEFAULT_TIMEZONE
   }
 }
 
 interface DateTimeProps {
-  date: string | Date;
-  formatStr?: string;
-  timezone?: string;
-  showTimezone?: boolean;
-  className?: string;
-  tooltipSide?: "top" | "right" | "bottom" | "left";
-  tooltipAlign?: "start" | "center" | "end";
+  date: string | Date
+  formatStr?: string
+  timezone?: string
+  showTimezone?: boolean
+  className?: string
+  tooltipSide?: 'top' | 'right' | 'bottom' | 'left'
+  tooltipAlign?: 'start' | 'center' | 'end'
 }
 
 export function formatDateTime(
@@ -64,30 +59,27 @@ export function formatDateTime(
   timezone: string,
   showTimezone: boolean = false
 ): string {
-  let timezoneValue = timezone;
+  let timezoneValue = timezone
   if (!timezone) {
-    timezoneValue = getBrowserTimezone();
+    timezoneValue = getBrowserTimezone()
   }
 
   // If date is a string without timezone indicator, add 'Z' to indicate UTC
-  const parsedDate = parseDate(date);
-  const zonedDate = toZonedTime(parsedDate, timezoneValue);
-  const formattedDate = format(zonedDate, formatStr);
+  const parsedDate = parseDate(date)
+  const zonedDate = toZonedTime(parsedDate, timezoneValue)
+  const formattedDate = format(zonedDate, formatStr)
 
   if (showTimezone) {
-    return `${formattedDate} (${getTimezoneAbbreviation(
-      parsedDate,
-      timezoneValue
-    )})`;
+    return `${formattedDate} (${getTimezoneAbbreviation(parsedDate, timezoneValue)})`
   }
 
-  return formattedDate;
+  return formattedDate
 }
 
 export function getRelativeTime(date: Date): string {
-  const parsedDate = parseDate(date);
+  const parsedDate = parseDate(date)
 
-  return formatDistanceToNow(parsedDate, { addSuffix: true, locale: enUS });
+  return formatDistanceToNow(parsedDate, { addSuffix: true, locale: enUS })
 }
 
 export function DateTime({
@@ -96,12 +88,12 @@ export function DateTime({
   timezone,
   showTimezone = false,
   className,
-  tooltipSide = "bottom",
-  tooltipAlign = "start",
-}: DateTimeProps) {
-  let timezoneValue = timezone;
+  tooltipSide = 'bottom',
+  tooltipAlign = 'start',
+}: DateTimeProps): React.ReactElement {
+  let timezoneValue = timezone
   if (!timezone) {
-    timezoneValue = getBrowserTimezone();
+    timezoneValue = getBrowserTimezone()
   }
 
   const formattedDate = formatDateTime(
@@ -109,13 +101,13 @@ export function DateTime({
     formatStr,
     timezoneValue ?? DEFAULT_TIMEZONE,
     showTimezone
-  );
+  )
 
-  const parsedDate = parseDate(date);
-  const relativeTime = getRelativeTime(parsedDate);
-  const utcFormattedDate = formatInTimeZone(parsedDate, "UTC", DEFAULT_FORMAT, {
+  const parsedDate = parseDate(date)
+  const relativeTime = getRelativeTime(parsedDate)
+  const utcFormattedDate = formatInTimeZone(parsedDate, 'UTC', DEFAULT_FORMAT, {
     locale: enUS,
-  });
+  })
   const timezoneFormattedDate = formatInTimeZone(
     parsedDate,
     timezoneValue ?? DEFAULT_TIMEZONE,
@@ -123,8 +115,8 @@ export function DateTime({
     {
       locale: enUS,
     }
-  );
-  const timestamp = parsedDate.getTime();
+  )
+  const timestamp = parsedDate.getTime()
 
   return (
     <TooltipProvider delayDuration={100}>
@@ -154,5 +146,5 @@ export function DateTime({
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>
-  );
+  )
 }

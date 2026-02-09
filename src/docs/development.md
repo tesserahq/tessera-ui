@@ -25,18 +25,18 @@ bun link tessera-ui
 In your other project's `vite.config.ts`:
 
 ```typescript
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import path from "path";
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import path from 'path'
 
 export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      "@tessera-ui": path.resolve(__dirname, "../tessera-ui/src"),
+      '@tessera-ui': path.resolve(__dirname, '../tessera-ui/src'),
     },
   },
-});
+})
 ```
 
 ### Step 4: Configure TypeScript
@@ -61,11 +61,8 @@ In your other project's `tailwind.config.ts`:
 
 ```typescript
 export default {
-  content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
-    "../tessera-ui/src/**/*.{js,jsx,ts,tsx}",
-  ],
-};
+  content: ['./src/**/*.{js,jsx,ts,tsx}', '../tessera-ui/src/**/*.{js,jsx,ts,tsx}'],
+}
 ```
 
 ### Step 6: Install Peer Dependencies
@@ -77,9 +74,9 @@ bun add react react-dom tailwindcss class-variance-authority
 ### Step 7: Import and Use
 
 ```typescript
-import { ProfileMenu, FormField, CoreUIProvider } from "@tessera-ui";
-import { Layout } from "@tessera-ui/components/layouts";
-import "@tessera-ui/src/styles/layout.css";
+import { ProfileMenu, FormField, CoreUIProvider } from '@tessera-ui'
+import { Layout } from '@tessera-ui/components/layouts'
+import '@tessera-ui/src/styles/layout.css'
 ```
 
 ## Unlinking

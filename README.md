@@ -67,20 +67,20 @@ To use `tessera-ui` as your import prefix in other apps, configure path aliases:
 #### 1. Configure Vite (vite.config.ts)
 
 ```typescript
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import path from "path";
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import path from 'path'
 
 export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      "@tessera-ui": path.resolve(__dirname, "node_modules/tessera-ui/src"),
+      '@tessera-ui': path.resolve(__dirname, 'node_modules/tessera-ui/src'),
       // Or if using bun link:
       // "tessera-ui": path.resolve(__dirname, "../tessera-ui/src"),
     },
   },
-});
+})
 ```
 
 #### 2. Configure TypeScript (tsconfig.json)
@@ -102,25 +102,22 @@ Add config in `tailwind.config.ts`:
 
 ```typescript
 export default {
-  content: [
-    "./src/**/*.{js,jsx,ts,tsx}",
-    "./node_modules/tessera-ui/src/**/*.{js,jsx,ts,tsx}",
-  ],
-};
+  content: ['./src/**/*.{js,jsx,ts,tsx}', './node_modules/tessera-ui/src/**/*.{js,jsx,ts,tsx}'],
+}
 ```
 
 Or for Tailwind v4, add to your CSS:
 
 ```css
-@import "tailwindcss";
-@source "./node_modules/tessera-ui/src/**/*.{js,jsx,ts,tsx}";
+@import 'tailwindcss';
+@source './node_modules/tessera-ui/src/**/*.{js,jsx,ts,tsx}';
 ```
 
 #### 4. Import in your App
 
 ```typescript
-import { Layout, ProfileMenu, FormField } from "tessera-ui/components/layouts";
-import { ProfileMenu } from "tessera-ui";
+import { Layout, ProfileMenu, FormField } from 'tessera-ui/components/layouts'
+import { ProfileMenu } from 'tessera-ui'
 ```
 
-![Alt](https://repobeats.axiom.co/api/embed/40d6e73948c2ab3ef2497becbc54ba3be6a73d21.svg "Repobeats analytics image")
+![Alt](https://repobeats.axiom.co/api/embed/40d6e73948c2ab3ef2497becbc54ba3be6a73d21.svg 'Repobeats analytics image')

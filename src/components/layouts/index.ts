@@ -1,20 +1,11 @@
 // Main Layout
-import Layout from "./layout.tsx";
+import Layout from './layout.tsx'
 
 // Detail Layout
-import {
-  DetailHeader,
-  DetailLayout,
-  DetailSidenav,
-  DetailContent,
-} from "./detail";
+import { DetailHeader, DetailLayout, DetailSidenav, DetailContent } from './detail'
 
 // All types from layout
-export type {
-  DetailItemsProps,
-  BreadcrumbItemData,
-  SidebarItemsProps,
-} from "./types";
+export type { DetailItemsProps, BreadcrumbItemData, SidebarItemsProps } from './types'
 
 // Compound Layout
 const LayoutCompound = Object.assign(Layout, {
@@ -22,6 +13,6 @@ const LayoutCompound = Object.assign(Layout, {
   DetailHeader: DetailHeader,
   DetailSidenav: DetailSidenav,
   DetailContent: DetailContent,
-});
+})
 
-export { LayoutCompound as Layout };
+export { LayoutCompound as Layout }

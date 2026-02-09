@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
   --color-background: #f8f9fb;
@@ -25,7 +25,7 @@
 
 @layer base {
   * {
-    @apply text-slate-800 border-border;
+    @apply border-border text-slate-800;
   }
 
   .d-list {
@@ -33,7 +33,7 @@
   }
 
   .d-list .d-item {
-    @apply dark:border-slate-200 flex items-center gap-1 border-b pb-2.5;
+    @apply flex items-center gap-1 border-b pb-2.5 dark:border-slate-200;
   }
 
   .d-list .d-item:last-child {

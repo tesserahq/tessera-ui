@@ -17,82 +17,82 @@ The `AppMenu` component provides a dropdown menu for displaying and navigating t
 ### Basic Example
 
 ```tsx
-import { AppMenu } from "tessera-ui/components/app-menu";
-import type { AppMenuProps } from "tessera-ui/components/app-menu";
+import { AppMenu } from 'tessera-ui/components/app-menu'
+import type { AppMenuProps } from 'tessera-ui/components/app-menu'
 
 function Header() {
   const apps: AppMenuProps[] = [
-    { name: "dashboard", link: "https://dashboard.example.com" },
-    { name: "analytics", link: "https://analytics.example.com" },
-    { name: "settings", link: "https://settings.example.com" },
-    { name: "reports", link: "https://reports.example.com" },
-  ];
+    { name: 'dashboard', link: 'https://dashboard.example.com' },
+    { name: 'analytics', link: 'https://analytics.example.com' },
+    { name: 'settings', link: 'https://settings.example.com' },
+    { name: 'reports', link: 'https://reports.example.com' },
+  ]
 
   return (
     <header>
       <AppMenu apps={apps} />
     </header>
-  );
+  )
 }
 ```
 
 ### With Navigation Router
 
 ```tsx
-import { AppMenu } from "tessera-ui/components/app-menu";
-import type { AppMenuProps } from "tessera-ui/components/app-menu";
+import { AppMenu } from 'tessera-ui/components/app-menu'
+import type { AppMenuProps } from 'tessera-ui/components/app-menu'
 
 function NavigationBar() {
   const apps: AppMenuProps[] = [
-    { name: "home", link: "/" },
-    { name: "dashboard", link: "/dashboard" },
-    { name: "profile", link: "/profile" },
-  ];
+    { name: 'home', link: '/' },
+    { name: 'dashboard', link: '/dashboard' },
+    { name: 'profile', link: '/profile' },
+  ]
 
   return (
     <nav className="flex items-center justify-between">
       <div>Logo</div>
       <AppMenu apps={apps} />
     </nav>
-  );
+  )
 }
 ```
 
 ### Complete Header Example with Environment Variables
 
 ```tsx
-import { AppMenu } from "tessera-ui/components/app-menu";
-import { ProfileMenu } from "tessera-ui";
-import type { AppMenuProps } from "tessera-ui/components/app-menu";
-import { useMemo } from "react";
+import { AppMenu } from 'tessera-ui/components/app-menu'
+import { ProfileMenu } from 'tessera-ui'
+import type { AppMenuProps } from 'tessera-ui/components/app-menu'
+import { useMemo } from 'react'
 
 function AppHeader() {
   // Get host URLs from environment variables or configuration
-  const quoreHostUrl = import.meta.env.VITE_QUORE_HOST_URL;
-  const looplyHostUrl = import.meta.env.VITE_LOOPLY_HOST_URL;
-  const vaultaHostUrl = import.meta.env.VITE_VAULTA_HOST_URL;
-  const identiesHostUrl = import.meta.env.VITE_IDENTIES_HOST_URL;
+  const quoreHostUrl = import.meta.env.VITE_QUORE_HOST_URL
+  const looplyHostUrl = import.meta.env.VITE_LOOPLY_HOST_URL
+  const vaultaHostUrl = import.meta.env.VITE_VAULTA_HOST_URL
+  const identiesHostUrl = import.meta.env.VITE_IDENTIES_HOST_URL
 
   const apps = useMemo(() => {
     return [
       {
-        name: "quore",
+        name: 'quore',
         link: `${quoreHostUrl}?autologin=true`,
       },
       {
-        name: "looply",
+        name: 'looply',
         link: `${looplyHostUrl}?autologin=true`,
       },
       {
-        name: "vaulta",
+        name: 'vaulta',
         link: `${vaultaHostUrl}?autologin=true`,
       },
       {
-        name: "identies",
+        name: 'identies',
         link: `${identiesHostUrl}?autologin=true`,
       },
-    ];
-  }, [quoreHostUrl, looplyHostUrl, vaultaHostUrl, identiesHostUrl]);
+    ]
+  }, [quoreHostUrl, looplyHostUrl, vaultaHostUrl, identiesHostUrl])
 
   return (
     <header className="flex items-center justify-between p-4 border-b">
@@ -103,12 +103,12 @@ function AppHeader() {
       <ProfileMenu
         selectedTheme="light"
         onSetTheme={(theme) => console.log(theme)}
-        actionLogout={() => console.log("logout")}
-        actionProfile={() => console.log("profile")}
+        actionLogout={() => console.log('logout')}
+        actionProfile={() => console.log('profile')}
         defaultAvatar="/default-avatar.png"
       />
     </header>
-  );
+  )
 }
 ```
 
@@ -205,39 +205,39 @@ The component is built on Radix UI's `DropdownMenu` primitive, which provides:
 This is the recommended pattern for production applications:
 
 ```tsx
-import { AppMenu } from "tessera-ui/components/app-menu";
-import type { AppMenuProps } from "tessera-ui/components/app-menu";
-import { useMemo } from "react";
+import { AppMenu } from 'tessera-ui/components/app-menu'
+import type { AppMenuProps } from 'tessera-ui/components/app-menu'
+import { useMemo } from 'react'
 
 function AppMenuWithEnvVars() {
   // Get host URLs from environment variables or configuration
-  const quoreHostUrl = import.meta.env.VITE_QUORE_HOST_URL;
-  const looplyHostUrl = import.meta.env.VITE_LOOPLY_HOST_URL;
-  const vaultaHostUrl = import.meta.env.VITE_VAULTA_HOST_URL;
-  const identiesHostUrl = import.meta.env.VITE_IDENTIES_HOST_URL;
+  const quoreHostUrl = import.meta.env.VITE_QUORE_HOST_URL
+  const looplyHostUrl = import.meta.env.VITE_LOOPLY_HOST_URL
+  const vaultaHostUrl = import.meta.env.VITE_VAULTA_HOST_URL
+  const identiesHostUrl = import.meta.env.VITE_IDENTIES_HOST_URL
 
   const apps = useMemo(() => {
     return [
       {
-        name: "quore",
+        name: 'quore',
         link: `${quoreHostUrl}?autologin=true`,
       },
       {
-        name: "looply",
+        name: 'looply',
         link: `${looplyHostUrl}?autologin=true`,
       },
       {
-        name: "vaulta",
+        name: 'vaulta',
         link: `${vaultaHostUrl}?autologin=true`,
       },
       {
-        name: "identies",
+        name: 'identies',
         link: `${identiesHostUrl}?autologin=true`,
       },
-    ];
-  }, [quoreHostUrl, looplyHostUrl, vaultaHostUrl, identiesHostUrl]);
+    ]
+  }, [quoreHostUrl, looplyHostUrl, vaultaHostUrl, identiesHostUrl])
 
-  return <AppMenu apps={apps} />;
+  return <AppMenu apps={apps} />
 }
 ```
 
@@ -250,24 +250,24 @@ function AppMenuWithEnvVars() {
 ### Filtered Apps
 
 ```tsx
-import { AppMenu } from "tessera-ui/components/app-menu";
-import type { AppMenuProps } from "tessera-ui/components/app-menu";
+import { AppMenu } from 'tessera-ui/components/app-menu'
+import type { AppMenuProps } from 'tessera-ui/components/app-menu'
 
 function FilteredAppMenu({ userRole }: { userRole: string }) {
   const allApps: AppMenuProps[] = [
-    { name: "dashboard", link: "/dashboard" },
-    { name: "admin", link: "/admin" },
-    { name: "reports", link: "/reports" },
-  ];
+    { name: 'dashboard', link: '/dashboard' },
+    { name: 'admin', link: '/admin' },
+    { name: 'reports', link: '/reports' },
+  ]
 
   const filteredApps = allApps.filter((app) => {
-    if (app.name === "admin" && userRole !== "admin") {
-      return false;
+    if (app.name === 'admin' && userRole !== 'admin') {
+      return false
     }
-    return true;
-  });
+    return true
+  })
 
-  return <AppMenu apps={filteredApps} />;
+  return <AppMenu apps={filteredApps} />
 }
 ```
 
@@ -283,9 +283,9 @@ function FilteredAppMenu({ userRole }: { userRole: string }) {
 
 ```tsx
 // Import component and types
-import { AppMenu } from "tessera-ui/components/app-menu";
-import type { AppMenuProps } from "tessera-ui/components/app-menu";
+import { AppMenu } from 'tessera-ui/components/app-menu'
+import type { AppMenuProps } from 'tessera-ui/components/app-menu'
 
 // Or from main export (if available)
-import { AppMenu } from "tessera-ui";
+import { AppMenu } from 'tessera-ui'
 ```

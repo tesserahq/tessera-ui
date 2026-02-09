@@ -1,4 +1,4 @@
-import * as React from "react";
+import * as React from 'react'
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -6,28 +6,27 @@ import {
   BreadcrumbPage,
   BreadcrumbLink,
   BreadcrumbSeparator,
-} from "../../ui/breadcrumb";
+} from '../../ui/breadcrumb'
 
-import type { BreadcrumbItemData } from "../types";
-import { Link } from "react-router";
-import { cn } from "../../../utils/misc";
+import type { BreadcrumbItemData } from '../types'
+import { Link } from 'react-router'
+import { cn } from '../../../utils/misc'
 
 export function DetailHeader({
   breadcrumb,
   className,
 }: {
-  breadcrumb: BreadcrumbItemData[];
-  className?: string;
+  breadcrumb: BreadcrumbItemData[]
+  className?: string
 }) {
-  const shouldCapitalize = (label: string) => !label.includes("@");
+  const shouldCapitalize = (label: string) => !label.includes('@')
 
   return (
     <div
       className={cn(
-        "bg-white dark:bg-sidebar-background w-full fixed top-[60px] z-10 px-3 py-4 border-y",
+        'bg-white dark:bg-sidebar-background w-full fixed top-[60px] z-10 px-3 py-4 border-y',
         className
-      )}
-    >
+      )}>
       {breadcrumb && breadcrumb.length > 0 && (
         <Breadcrumb>
           <BreadcrumbList>
@@ -35,15 +34,14 @@ export function DetailHeader({
               <React.Fragment key={item.link}>
                 <BreadcrumbItem>
                   {index === breadcrumb.length - 1 ? (
-                    <BreadcrumbPage className={shouldCapitalize(item.label) ? "capitalize" : ""}>
+                    <BreadcrumbPage className={shouldCapitalize(item.label) ? 'capitalize' : ''}>
                       {item.label}
                     </BreadcrumbPage>
                   ) : (
                     <BreadcrumbLink asChild>
                       <Link
                         to={item.link}
-                        className={shouldCapitalize(item.label) ? "capitalize" : ""}
-                      >
+                        className={shouldCapitalize(item.label) ? 'capitalize' : ''}>
                         {item.label}
                       </Link>
                     </BreadcrumbLink>
@@ -56,5 +54,5 @@ export function DetailHeader({
         </Breadcrumb>
       )}
     </div>
-  );
+  )
 }
