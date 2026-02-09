@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { MemoryRouter } from 'react-router-dom'
 import { Pagination } from './pagination'
+import { withRouter } from 'storybook-addon-remix-react-router';
 
 const meta: Meta<typeof Pagination> = {
   title: 'Components/Pagination',
@@ -8,15 +8,7 @@ const meta: Meta<typeof Pagination> = {
   parameters: {
     layout: 'centered',
   },
-  decorators: [
-    (Story) => (
-      <MemoryRouter>
-        <div className="w-screen-2xl w-full">
-          <Story />
-        </div>
-      </MemoryRouter>
-    ),
-  ],
+  decorators: [withRouter],
 }
 
 export default meta
