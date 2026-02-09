@@ -40,17 +40,17 @@ export function createIdentiesClient(config: IdentiesClientConfig) {
         detail: "Network error",
         status_code: 0,
       });
-    }
+    },
   );
 
   const getCurrentUser = async (): Promise<User> => {
-    const response = await client.get<User>("/user");
+    const response = await client.get<User>("/me");
 
     return response.data;
   };
 
   const updateUser = async (userUpdate: UserUpdate): Promise<User> => {
-    const response = await client.put<User>("/user", userUpdate);
+    const response = await client.put<User>("/me", userUpdate);
     return response.data;
   };
 
