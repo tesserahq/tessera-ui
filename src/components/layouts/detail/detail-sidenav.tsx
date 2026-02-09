@@ -9,10 +9,7 @@ interface DetailSidenavProps {
   className?: string
 }
 
-export function DetailSidenav({
-  menuItems,
-  className,
-}: DetailSidenavProps): React.ReactElement {
+export function DetailSidenav({ menuItems, className }: DetailSidenavProps): React.ReactElement {
   const { pathname } = useLocation()
 
   const isMenuActive = (menuPath: string) => {
