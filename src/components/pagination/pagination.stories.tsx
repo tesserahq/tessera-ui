@@ -1,12 +1,12 @@
-import type { Meta, StoryObj } from "@storybook/react-vite";
-import { MemoryRouter } from "react-router-dom";
-import { Pagination } from "./pagination";
+import type { Meta, StoryObj } from '@storybook/react-vite'
+import { MemoryRouter } from 'react-router-dom'
+import { Pagination } from './pagination'
 
 const meta: Meta<typeof Pagination> = {
-  title: "Components/Pagination",
+  title: 'Components/Pagination',
   component: Pagination,
   parameters: {
-    layout: "centered",
+    layout: 'centered',
   },
   decorators: [
     (Story) => (
@@ -17,11 +17,11 @@ const meta: Meta<typeof Pagination> = {
       </MemoryRouter>
     ),
   ],
-};
+}
 
-export default meta;
+export default meta
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
@@ -32,7 +32,7 @@ export const Default: Story = {
       total: 120,
     },
   },
-};
+}
 
 export const MiddlePage: Story = {
   args: {
@@ -43,7 +43,7 @@ export const MiddlePage: Story = {
       total: 200,
     },
   },
-};
+}
 
 export const ManyPages: Story = {
   args: {
@@ -54,7 +54,7 @@ export const ManyPages: Story = {
       total: 580,
     },
   },
-};
+}
 
 export const EmptyResults: Story = {
   args: {
@@ -65,4 +65,4 @@ export const EmptyResults: Story = {
       total: 0,
     },
   },
-};
+}

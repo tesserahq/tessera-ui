@@ -16,7 +16,7 @@ The `NewButton` component provides a standardized "New" button with a plus icon 
 ### Basic Example
 
 ```tsx
-import { NewButton } from "tessera-ui/components/new-button";
+import { NewButton } from 'tessera-ui/components/new-button'
 
 function ProjectHeader({ onCreateProject }) {
   return (
@@ -24,14 +24,14 @@ function ProjectHeader({ onCreateProject }) {
       <h1>Projects</h1>
       <NewButton label="Create a new project" onClick={onCreateProject} />
     </div>
-  );
+  )
 }
 ```
 
 ### With Different Sizes
 
 ```tsx
-import { NewButton } from "tessera-ui/components/new-button";
+import { NewButton } from 'tessera-ui/components/new-button'
 
 function Toolbar() {
   return (
@@ -40,42 +40,36 @@ function Toolbar() {
       <NewButton label="Create item" onClick={handleCreate} size="default" />
       <NewButton label="Create item" onClick={handleCreate} size="lg" />
     </div>
-  );
+  )
 }
 ```
 
 ### With Disabled State
 
 ```tsx
-import { useState } from "react";
-import { NewButton } from "tessera-ui/components/new-button";
+import { useState } from 'react'
+import { NewButton } from 'tessera-ui/components/new-button'
 
 function CreateForm({ onSubmit }) {
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const handleCreate = async () => {
-    setIsSubmitting(true);
+    setIsSubmitting(true)
     try {
-      await onSubmit();
+      await onSubmit()
     } finally {
-      setIsSubmitting(false);
+      setIsSubmitting(false)
     }
-  };
+  }
 
-  return (
-    <NewButton
-      label="Create new item"
-      onClick={handleCreate}
-      disabled={isSubmitting}
-    />
-  );
+  return <NewButton label="Create new item" onClick={handleCreate} disabled={isSubmitting} />
 }
 ```
 
 ### In a Table Header
 
 ```tsx
-import { NewButton } from "tessera-ui/components/new-button";
+import { NewButton } from 'tessera-ui/components/new-button'
 
 function DataTable({ data, onCreate }) {
   return (
@@ -86,29 +80,27 @@ function DataTable({ data, onCreate }) {
       </div>
       <table>{/* Table content */}</table>
     </div>
-  );
+  )
 }
 ```
 
 ### With Permission Check
 
 ```tsx
-import { NewButton } from "tessera-ui/components/new-button";
+import { NewButton } from 'tessera-ui/components/new-button'
 
 function ItemList({ items, userPermissions, onCreate }) {
-  const canCreate = userPermissions.includes("create");
+  const canCreate = userPermissions.includes('create')
 
   return (
     <div>
       <div className="flex items-center justify-between">
         <h1>Items</h1>
-        {canCreate && (
-          <NewButton label="Create a new item" onClick={onCreate} />
-        )}
+        {canCreate && <NewButton label="Create a new item" onClick={onCreate} />}
       </div>
       {/* Item list */}
     </div>
-  );
+  )
 }
 ```
 
@@ -166,29 +158,25 @@ The component supports the following size options (passed to the underlying Butt
 ### In a Card Header
 
 ```tsx
-import { NewButton } from "tessera-ui/components/new-button";
+import { NewButton } from 'tessera-ui/components/new-button'
 
 function Card({ title, onCreate }) {
   return (
     <div className="card">
       <div className="card-header flex items-center justify-between">
         <h3>{title}</h3>
-        <NewButton
-          label={`Create new ${title.toLowerCase()}`}
-          onClick={onCreate}
-          size="sm"
-        />
+        <NewButton label={`Create new ${title.toLowerCase()}`} onClick={onCreate} size="sm" />
       </div>
       <div className="card-content">{/* Card content */}</div>
     </div>
-  );
+  )
 }
 ```
 
 ### Multiple New Buttons
 
 ```tsx
-import { NewButton } from "tessera-ui/components/new-button";
+import { NewButton } from 'tessera-ui/components/new-button'
 
 function Dashboard({ onCreateProject, onCreateTask, onCreateNote }) {
   return (
@@ -208,70 +196,64 @@ function Dashboard({ onCreateProject, onCreateTask, onCreateNote }) {
         </div>
       </div>
     </div>
-  );
+  )
 }
 ```
 
 ### With Loading State
 
 ```tsx
-import { useState } from "react";
-import { NewButton } from "tessera-ui/components/new-button";
+import { useState } from 'react'
+import { NewButton } from 'tessera-ui/components/new-button'
 
 function CreateButton({ onCreate }) {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleClick = async () => {
-    setIsLoading(true);
+    setIsLoading(true)
     try {
-      await onCreate();
+      await onCreate()
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
-  };
+  }
 
-  return (
-    <NewButton
-      label="Create new item"
-      onClick={handleClick}
-      disabled={isLoading}
-    />
-  );
+  return <NewButton label="Create new item" onClick={handleClick} disabled={isLoading} />
 }
 ```
 
 ### With Confirmation
 
 ```tsx
-import { useState } from "react";
-import { NewButton } from "tessera-ui/components/new-button";
+import { useState } from 'react'
+import { NewButton } from 'tessera-ui/components/new-button'
 
 function CreateWithConfirmation({ onCreate }) {
-  const [showConfirm, setShowConfirm] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false)
 
   const handleClick = () => {
     if (showConfirm) {
-      onCreate();
-      setShowConfirm(false);
+      onCreate()
+      setShowConfirm(false)
     } else {
-      setShowConfirm(true);
-      setTimeout(() => setShowConfirm(false), 3000);
+      setShowConfirm(true)
+      setTimeout(() => setShowConfirm(false), 3000)
     }
-  };
+  }
 
   return (
     <NewButton
-      label={showConfirm ? "Click again to confirm" : "Create new item"}
+      label={showConfirm ? 'Click again to confirm' : 'Create new item'}
       onClick={handleClick}
     />
-  );
+  )
 }
 ```
 
 ### In a Sidebar
 
 ```tsx
-import { NewButton } from "tessera-ui/components/new-button";
+import { NewButton } from 'tessera-ui/components/new-button'
 
 function Sidebar({ onCreateItem }) {
   return (
@@ -282,7 +264,7 @@ function Sidebar({ onCreateItem }) {
       </div>
       {/* Sidebar content */}
     </aside>
-  );
+  )
 }
 ```
 
@@ -317,8 +299,8 @@ The button uses the default Button component styling with:
 
 ```tsx
 // Import component
-import { NewButton } from "tessera-ui/components/new-button";
+import { NewButton } from 'tessera-ui/components/new-button'
 
 // Or from main export (if available)
-import { NewButton } from "tessera-ui";
+import { NewButton } from 'tessera-ui'
 ```

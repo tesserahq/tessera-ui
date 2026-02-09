@@ -1,17 +1,17 @@
-import type { Meta, StoryObj } from "@storybook/react-vite";
-import { DetailContent } from "./detail-content";
+import type { Meta, StoryObj } from '@storybook/react-vite'
+import { DetailContent } from './detail-content'
 
 const meta: Meta<typeof DetailContent> = {
-  title: "Components/Layouts/DetailLayout/DetailContent",
+  title: 'Components/Layouts/DetailLayout/DetailContent',
   component: DetailContent,
   parameters: {
-    layout: "fullscreen",
+    layout: 'fullscreen',
   },
-};
+}
 
-export default meta;
+export default meta
 
-type Story = StoryObj<typeof meta>;
+type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
@@ -27,7 +27,7 @@ export const Default: Story = {
       </div>
     ),
   },
-};
+}
 
 export const WithCards: Story = {
   args: {
@@ -51,7 +51,7 @@ export const WithCards: Story = {
       </div>
     ),
   },
-};
+}
 
 export const WithForm: Story = {
   args: {
@@ -75,11 +75,9 @@ export const WithForm: Story = {
               placeholder="Enter your email"
             />
           </div>
-          <button className="px-4 py-2 bg-blue-500 text-white rounded-md">
-            Save Changes
-          </button>
+          <button className="px-4 py-2 bg-blue-500 text-white rounded-md">Save Changes</button>
         </div>
       </div>
     ),
   },
-};
+}

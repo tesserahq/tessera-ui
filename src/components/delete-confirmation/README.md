@@ -16,25 +16,25 @@ The `DeleteConfirmation` component provides a reusable dialog for confirming des
 ### Basic Example with useRef
 
 ```tsx
-import { useRef } from "react";
+import { useRef } from 'react'
 import DeleteConfirmation, {
   DeleteConfirmationHandle,
-} from "tessera-ui/components/delete-confirmation";
-import { Button } from "tessera-ui/components/ui/button";
+} from 'tessera-ui/components/delete-confirmation'
+import { Button } from 'tessera-ui/components/ui/button'
 
 function ItemList({ items, onDelete }) {
-  const deleteRef = useRef<DeleteConfirmationHandle>(null);
+  const deleteRef = useRef<DeleteConfirmationHandle>(null)
 
   const handleDeleteClick = (itemId: string, itemName: string) => {
     deleteRef.current?.open({
       title: `Delete ${itemName}?`,
       description: `Are you sure you want to delete "${itemName}"? This action cannot be undone.`,
       onDelete: async () => {
-        await onDelete(itemId);
-        deleteRef.current?.close();
+        await onDelete(itemId)
+        deleteRef.current?.close()
       },
-    });
-  };
+    })
+  }
 
   return (
     <>
@@ -42,109 +42,107 @@ function ItemList({ items, onDelete }) {
         {items.map((item) => (
           <div key={item.id}>
             <span>{item.name}</span>
-            <Button onClick={() => handleDeleteClick(item.id, item.name)}>
-              Delete
-            </Button>
+            <Button onClick={() => handleDeleteClick(item.id, item.name)}>Delete</Button>
           </div>
         ))}
       </div>
       <DeleteConfirmation ref={deleteRef} />
     </>
-  );
+  )
 }
 ```
 
 ### With Loading State
 
 ```tsx
-import { useRef, useState } from "react";
+import { useRef, useState } from 'react'
 import DeleteConfirmation, {
   DeleteConfirmationHandle,
-} from "tessera-ui/components/delete-confirmation";
+} from 'tessera-ui/components/delete-confirmation'
 
 function DeleteItem({ itemId, onDelete }) {
-  const deleteRef = useRef<DeleteConfirmationHandle>(null);
-  const [isDeleting, setIsDeleting] = useState(false);
+  const deleteRef = useRef<DeleteConfirmationHandle>(null)
+  const [isDeleting, setIsDeleting] = useState(false)
 
   const handleDelete = async () => {
-    setIsDeleting(true);
-    deleteRef.current?.updateConfig({ isLoading: true });
+    setIsDeleting(true)
+    deleteRef.current?.updateConfig({ isLoading: true })
 
     try {
-      await onDelete(itemId);
-      deleteRef.current?.close();
+      await onDelete(itemId)
+      deleteRef.current?.close()
     } catch (error) {
-      console.error("Delete failed:", error);
+      console.error('Delete failed:', error)
     } finally {
-      setIsDeleting(false);
-      deleteRef.current?.updateConfig({ isLoading: false });
+      setIsDeleting(false)
+      deleteRef.current?.updateConfig({ isLoading: false })
     }
-  };
+  }
 
   const openDialog = () => {
     deleteRef.current?.open({
-      title: "Delete Item?",
-      description: "This action cannot be undone.",
+      title: 'Delete Item?',
+      description: 'This action cannot be undone.',
       onDelete: handleDelete,
       isLoading: isDeleting,
-    });
-  };
+    })
+  }
 
   return (
     <>
       <button onClick={openDialog}>Delete</button>
       <DeleteConfirmation ref={deleteRef} />
     </>
-  );
+  )
 }
 ```
 
 ### With Default Configuration
 
 ```tsx
-import { useRef } from "react";
+import { useRef } from 'react'
 import DeleteConfirmation, {
   DeleteConfirmationHandle,
-} from "tessera-ui/components/delete-confirmation";
+} from 'tessera-ui/components/delete-confirmation'
 
 function ProductList({ products, onDeleteProduct }) {
-  const deleteRef = useRef<DeleteConfirmationHandle>(null);
+  const deleteRef = useRef<DeleteConfirmationHandle>(null)
 
   const defaultConfig = {
-    title: "Delete Product?",
-    description: "Are you sure you want to delete this product?",
+    title: 'Delete Product?',
+    description: 'Are you sure you want to delete this product?',
     onDelete: async () => {},
-  };
+  }
 
   const handleDelete = (productId: string) => {
     deleteRef.current?.open({
       ...defaultConfig,
       onDelete: async () => {
-        await onDeleteProduct(productId);
-        deleteRef.current?.close();
+        await onDeleteProduct(productId)
+        deleteRef.current?.close()
       },
-    });
-  };
+    })
+  }
 
   return (
     <>
       {/* Product list */}
       <DeleteConfirmation ref={deleteRef} defaultConfig={defaultConfig} />
     </>
-  );
+  )
 }
 ```
 
 ### Updating Configuration Dynamically
 
 ```tsx
-import { useRef } from "react";
+import { useRef } from 'react'
 import DeleteConfirmation, {
   DeleteConfirmationHandle,
-} from "tessera-ui/components/delete-confirmation";
+} from 'tessera-ui/components/delete-confirmation'
 
 function DynamicDelete({ item }) {
-  const deleteRef = useRef<DeleteConfirmationHandle>(null);
+  const deleteRef = useRef<DeleteConfirmationHandle>(null)
 
   const handleDeleteClick = () => {
     deleteRef.current?.open({
@@ -153,23 +151,23 @@ function DynamicDelete({ item }) {
       onDelete: async () => {
         // Update description during deletion
         deleteRef.current?.updateConfig({
-          description: "Deleting... Please wait.",
+          description: 'Deleting... Please wait.',
           isLoading: true,
-        });
+        })
 
-        await deleteItem(item.id);
+        await deleteItem(item.id)
 
-        deleteRef.current?.close();
+        deleteRef.current?.close()
       },
-    });
-  };
+    })
+  }
 
   return (
     <>
       <button onClick={handleDeleteClick}>Delete</button>
       <DeleteConfirmation ref={deleteRef} />
     </>
-  );
+  )
 }
 ```
 
@@ -201,13 +199,13 @@ Opens the dialog with optional configuration. If `config` is provided, it update
 
 ```tsx
 deleteRef.current?.open({
-  title: "Delete Item?",
-  description: "This action cannot be undone.",
+  title: 'Delete Item?',
+  description: 'This action cannot be undone.',
   onDelete: async () => {
-    await deleteItem();
-    deleteRef.current?.close();
+    await deleteItem()
+    deleteRef.current?.close()
   },
-});
+})
 ```
 
 ### `close()`
@@ -215,7 +213,7 @@ deleteRef.current?.open({
 Closes the dialog.
 
 ```tsx
-deleteRef.current?.close();
+deleteRef.current?.close()
 ```
 
 ### `updateConfig(updates: Partial<DeleteConfirmationConfig>)`
@@ -225,8 +223,8 @@ Updates the dialog configuration without opening/closing it. Useful for updating
 ```tsx
 deleteRef.current?.updateConfig({
   isLoading: true,
-  description: "Deleting... Please wait.",
-});
+  description: 'Deleting... Please wait.',
+})
 ```
 
 ## Behavior
@@ -279,85 +277,82 @@ The component is built on Radix UI's `Dialog` primitive, which provides:
 ### Multiple Items with Shared Dialog
 
 ```tsx
-import { useRef } from "react";
+import { useRef } from 'react'
 import DeleteConfirmation, {
   DeleteConfirmationHandle,
-} from "tessera-ui/components/delete-confirmation";
+} from 'tessera-ui/components/delete-confirmation'
 
 function ItemManager({ items, onDelete }) {
-  const deleteRef = useRef<DeleteConfirmationHandle>(null);
-  const [itemToDelete, setItemToDelete] = useState<string | null>(null);
+  const deleteRef = useRef<DeleteConfirmationHandle>(null)
+  const [itemToDelete, setItemToDelete] = useState<string | null>(null)
 
   const handleDeleteClick = (itemId: string, itemName: string) => {
-    setItemToDelete(itemId);
+    setItemToDelete(itemId)
     deleteRef.current?.open({
       title: `Delete ${itemName}?`,
       description: `Are you sure you want to delete "${itemName}"? This action cannot be undone.`,
       onDelete: async () => {
         if (itemToDelete) {
-          await onDelete(itemToDelete);
-          setItemToDelete(null);
-          deleteRef.current?.close();
+          await onDelete(itemToDelete)
+          setItemToDelete(null)
+          deleteRef.current?.close()
         }
       },
-    });
-  };
+    })
+  }
 
   return (
     <>
       <div>
         {items.map((item) => (
-          <button
-            key={item.id}
-            onClick={() => handleDeleteClick(item.id, item.name)}
-          >
+          <button key={item.id} onClick={() => handleDeleteClick(item.id, item.name)}>
             Delete {item.name}
           </button>
         ))}
       </div>
       <DeleteConfirmation ref={deleteRef} />
     </>
-  );
+  )
 }
 ```
 
 ### With Error Handling
 
 ```tsx
-import { useRef, useState } from "react";
+import { useRef, useState } from 'react'
 import DeleteConfirmation, {
   DeleteConfirmationHandle,
-} from "tessera-ui/components/delete-confirmation";
+} from 'tessera-ui/components/delete-confirmation'
 
 function SafeDelete({ item, onDelete }) {
-  const deleteRef = useRef<DeleteConfirmationHandle>(null);
-  const [error, setError] = useState<string | null>(null);
+  const deleteRef = useRef<DeleteConfirmationHandle>(null)
+  const [error, setError] = useState<string | null>(null)
 
   const handleDelete = async () => {
-    setError(null);
-    deleteRef.current?.updateConfig({ isLoading: true });
+    setError(null)
+    deleteRef.current?.updateConfig({ isLoading: true })
 
     try {
-      await onDelete(item.id);
-      deleteRef.current?.close();
+      await onDelete(item.id)
+      deleteRef.current?.close()
     } catch (err) {
-      setError("Failed to delete item. Please try again.");
+      setError('Failed to delete item. Please try again.')
       deleteRef.current?.updateConfig({
         isLoading: false,
         description: `Error: ${err.message}. Please try again.`,
-      });
+      })
     }
-  };
+  }
 
   const openDialog = () => {
-    setError(null);
+    setError(null)
     deleteRef.current?.open({
       title: `Delete ${item.name}?`,
-      description: "This action cannot be undone.",
+      description: 'This action cannot be undone.',
       onDelete: handleDelete,
       isLoading: false,
-    });
-  };
+    })
+  }
 
   return (
     <>
@@ -365,7 +360,7 @@ function SafeDelete({ item, onDelete }) {
       {error && <div className="error">{error}</div>}
       <DeleteConfirmation ref={deleteRef} />
     </>
-  );
+  )
 }
 ```
 
@@ -385,8 +380,8 @@ function SafeDelete({ item, onDelete }) {
 import DeleteConfirmation, {
   DeleteConfirmationHandle,
   DeleteConfirmationConfig,
-} from "tessera-ui/components/delete-confirmation";
+} from 'tessera-ui/components/delete-confirmation'
 
 // Or from main export (if available)
-import { DeleteConfirmation } from "tessera-ui";
+import { DeleteConfirmation } from 'tessera-ui'
 ```

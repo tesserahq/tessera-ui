@@ -1,15 +1,15 @@
-import React, { useEffect } from "react";
-import type { ApiError, User, UserUpdate } from "../types/user";
-import { useIdenties } from "../hooks/useIdenties";
+import React, { useEffect } from 'react'
+import type { ApiError, User, UserUpdate } from '../types/user'
+import { useIdenties } from '../hooks/useIdenties'
 
 export interface ICoreUIContextProps {
-  user: User | null;
-  loadingRequest: boolean;
-  error: ApiError | null;
-  token: string | null;
+  user: User | null
+  loadingRequest: boolean
+  error: ApiError | null
+  token: string | null
 
   // User actions
-  updateUser: (userUpdate: UserUpdate) => Promise<void>;
+  updateUser: (userUpdate: UserUpdate) => Promise<void>
 }
 
 const CoreUIContext = React.createContext<ICoreUIContextProps>({
@@ -18,14 +18,14 @@ const CoreUIContext = React.createContext<ICoreUIContextProps>({
   loadingRequest: true,
   error: null,
   updateUser: async () => {},
-});
+})
 
 interface IProviderProps {
-  children: React.ReactNode;
-  isAuthenticated: boolean;
-  callbacktUnauthorized: () => void;
-  identiesApiUrl: string;
-  token: string;
+  children: React.ReactNode
+  isAuthenticated: boolean
+  callbacktUnauthorized: () => void
+  identiesApiUrl: string
+  token: string
 }
 
 export function CoreUIProvider({
@@ -37,15 +37,15 @@ export function CoreUIProvider({
 }: IProviderProps) {
   useEffect(() => {
     if (!isAuthenticated) {
-      callbacktUnauthorized();
-      return;
+      callbacktUnauthorized()
+      return
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated])
 
   const { user, loading, error, updateUser } = useIdenties({
     identiesApiUrl: identiesApiUrl,
     token: token,
-  });
+  })
 
   const contextPayload = React.useMemo(
     () => ({
@@ -56,22 +56,17 @@ export function CoreUIProvider({
       updateUser,
     }),
     [user, token]
-  );
+  )
 
-  return (
-    <CoreUIContext.Provider value={contextPayload}>
-      {children}
-    </CoreUIContext.Provider>
-  );
+  return <CoreUIContext.Provider value={contextPayload}>{children}</CoreUIContext.Provider>
 }
 
-// eslint-disable-next-line react-refresh/only-export-components
 export const useCoreUI = (): ICoreUIContextProps => {
-  const context = React.useContext(CoreUIContext);
+  const context = React.useContext(CoreUIContext)
 
   if (!context) {
-    throw new Error("useCoreUI must be used within an IdentiesProvider");
+    throw new Error('useCoreUI must be used within an IdentiesProvider')
   }
 
-  return context;
-};
+  return context
+}

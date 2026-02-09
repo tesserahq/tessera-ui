@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react'
 
 type DebounceOptions = {
-  minLength?: number;
-};
+  minLength?: number
+}
 
 /**
  * Custom hook that debounces a value
@@ -11,30 +11,26 @@ type DebounceOptions = {
  * @param options - Additional debounce options
  * @returns The debounced value
  */
-export function useDebouncedValue(
-  value: string,
-  delay = 300,
-  options?: DebounceOptions,
-) {
-  const [debouncedValue, setDebouncedValue] = useState<string>(value);
-  const minLength = options?.minLength ?? 0;
+export function useDebouncedValue(value: string, delay = 300, options?: DebounceOptions) {
+  const [debouncedValue, setDebouncedValue] = useState<string>(value)
+  const minLength = options?.minLength ?? 0
 
   useEffect(() => {
     if (value.length === 0) {
-      setDebouncedValue(value);
-      return;
+      setDebouncedValue(value)
+      return
     }
 
     if (value.length < minLength) {
-      return;
+      return
     }
 
     const timeout = setTimeout(() => {
-      setDebouncedValue(value);
-    }, delay);
+      setDebouncedValue(value)
+    }, delay)
 
-    return () => clearTimeout(timeout);
-  }, [value, delay, minLength]);
+    return () => clearTimeout(timeout)
+  }, [value, delay, minLength])
 
-  return debouncedValue;
+  return debouncedValue
 }

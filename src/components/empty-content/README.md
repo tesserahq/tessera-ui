@@ -16,7 +16,7 @@ The `EmptyContent` component displays an empty state with an image, title, optio
 ### Basic Example
 
 ```tsx
-import { EmptyContent } from "tessera-ui/components/empty-content";
+import { EmptyContent } from 'tessera-ui/components/empty-content'
 
 function EmptyList() {
   return (
@@ -25,42 +25,40 @@ function EmptyList() {
       title="No items found"
       description="Get started by creating your first item."
     />
-  );
+  )
 }
 ```
 
 ### With Action Button
 
 ```tsx
-import { EmptyContent } from "tessera-ui/components/empty-content";
-import { Button } from "tessera-ui/components/ui/button";
+import { EmptyContent } from 'tessera-ui/components/empty-content'
+import { Button } from 'tessera-ui/components/ui/button'
 
 function EmptyProjects({ onCreateProject }) {
   return (
     <EmptyContent
       image="/images/empty-projects.svg"
       title="No projects yet"
-      description="Create your first project to get started with organizing your work."
-    >
+      description="Create your first project to get started with organizing your work.">
       <Button onClick={onCreateProject}>Create Project</Button>
     </EmptyContent>
-  );
+  )
 }
 ```
 
 ### With Multiple Actions
 
 ```tsx
-import { EmptyContent } from "tessera-ui/components/empty-content";
-import { Button } from "tessera-ui/components/ui/button";
+import { EmptyContent } from 'tessera-ui/components/empty-content'
+import { Button } from 'tessera-ui/components/ui/button'
 
 function EmptySearchResults({ onClearSearch, onNewSearch }) {
   return (
     <EmptyContent
       image="/images/no-results.svg"
       title="No results found"
-      description="Try adjusting your search terms or filters."
-    >
+      description="Try adjusting your search terms or filters.">
       <div className="flex gap-2">
         <Button variant="outline" onClick={onClearSearch}>
           Clear Search
@@ -68,34 +66,33 @@ function EmptySearchResults({ onClearSearch, onNewSearch }) {
         <Button onClick={onNewSearch}>New Search</Button>
       </div>
     </EmptyContent>
-  );
+  )
 }
 ```
 
 ### Without Description
 
 ```tsx
-import { EmptyContent } from "tessera-ui/components/empty-content";
+import { EmptyContent } from 'tessera-ui/components/empty-content'
 
 function SimpleEmpty() {
-  return <EmptyContent image="/images/empty-state.svg" title="Nothing here" />;
+  return <EmptyContent image="/images/empty-state.svg" title="Nothing here" />
 }
 ```
 
 ### With Custom Content
 
 ```tsx
-import { EmptyContent } from "tessera-ui/components/empty-content";
-import { Button } from "tessera-ui/components/ui/button";
-import { Link } from "react-router-dom";
+import { EmptyContent } from 'tessera-ui/components/empty-content'
+import { Button } from 'tessera-ui/components/ui/button'
+import { Link } from 'react-router-dom'
 
 function EmptyDashboard({ userId }) {
   return (
     <EmptyContent
       image="/images/empty-dashboard.svg"
       title="Welcome to your dashboard"
-      description="Start by exploring our features or creating your first item."
-    >
+      description="Start by exploring our features or creating your first item.">
       <div className="flex flex-col gap-3">
         <Button asChild>
           <Link to="/tutorial">View Tutorial</Link>
@@ -105,7 +102,7 @@ function EmptyDashboard({ userId }) {
         </Button>
       </div>
     </EmptyContent>
-  );
+  )
 }
 ```
 
@@ -178,8 +175,8 @@ The component includes a slide-up animation (`animate-slide-up`) that triggers w
 ### Empty Search State
 
 ```tsx
-import { EmptyContent } from "tessera-ui/components/empty-content";
-import { Button } from "tessera-ui/components/ui/button";
+import { EmptyContent } from 'tessera-ui/components/empty-content'
+import { Button } from 'tessera-ui/components/ui/button'
 
 function SearchResults({ query, onClearSearch }) {
   if (results.length === 0) {
@@ -187,23 +184,22 @@ function SearchResults({ query, onClearSearch }) {
       <EmptyContent
         image="/images/search-empty.svg"
         title={`No results for "${query}"`}
-        description="Try different keywords or check your spelling."
-      >
+        description="Try different keywords or check your spelling.">
         <Button onClick={onClearSearch}>Clear Search</Button>
       </EmptyContent>
-    );
+    )
   }
 
-  return <ResultsList results={results} />;
+  return <ResultsList results={results} />
 }
 ```
 
 ### Empty List with Create Action
 
 ```tsx
-import { EmptyContent } from "tessera-ui/components/empty-content";
-import { Button } from "tessera-ui/components/ui/button";
-import { Plus } from "lucide-react";
+import { EmptyContent } from 'tessera-ui/components/empty-content'
+import { Button } from 'tessera-ui/components/ui/button'
+import { Plus } from 'lucide-react'
 
 function TaskList({ tasks, onCreateTask }) {
   if (tasks.length === 0) {
@@ -211,33 +207,31 @@ function TaskList({ tasks, onCreateTask }) {
       <EmptyContent
         image="/images/empty-tasks.svg"
         title="No tasks yet"
-        description="Create your first task to start organizing your work."
-      >
+        description="Create your first task to start organizing your work.">
         <Button onClick={onCreateTask}>
           <Plus className="mr-2 h-4 w-4" />
           Create Task
         </Button>
       </EmptyContent>
-    );
+    )
   }
 
-  return <TaskListItems tasks={tasks} />;
+  return <TaskListItems tasks={tasks} />
 }
 ```
 
 ### Empty State with Multiple Options
 
 ```tsx
-import { EmptyContent } from "tessera-ui/components/empty-content";
-import { Button } from "tessera-ui/components/ui/button";
+import { EmptyContent } from 'tessera-ui/components/empty-content'
+import { Button } from 'tessera-ui/components/ui/button'
 
 function EmptyWorkspace({ onImport, onCreate, onBrowse }) {
   return (
     <EmptyContent
       image="/images/empty-workspace.svg"
       title="Your workspace is empty"
-      description="Get started by importing existing content, creating something new, or browsing templates."
-    >
+      description="Get started by importing existing content, creating something new, or browsing templates.">
       <div className="flex flex-col gap-2 w-full max-w-sm">
         <Button onClick={onCreate} className="w-full">
           Create New
@@ -250,18 +244,18 @@ function EmptyWorkspace({ onImport, onCreate, onBrowse }) {
         </Button>
       </div>
     </EmptyContent>
-  );
+  )
 }
 ```
 
 ### Conditional Empty State
 
 ```tsx
-import { EmptyContent } from "tessera-ui/components/empty-content";
+import { EmptyContent } from 'tessera-ui/components/empty-content'
 
 function DataTable({ data, isLoading, error }) {
   if (isLoading) {
-    return <LoadingSpinner />;
+    return <LoadingSpinner />
   }
 
   if (error) {
@@ -271,7 +265,7 @@ function DataTable({ data, isLoading, error }) {
         title="Something went wrong"
         description={error.message}
       />
-    );
+    )
   }
 
   if (data.length === 0) {
@@ -281,10 +275,10 @@ function DataTable({ data, isLoading, error }) {
         title="No data available"
         description="Data will appear here once available."
       />
-    );
+    )
   }
 
-  return <Table data={data} />;
+  return <Table data={data} />
 }
 ```
 
@@ -320,8 +314,8 @@ function DataTable({ data, isLoading, error }) {
 
 ```tsx
 // Import component
-import { EmptyContent } from "tessera-ui/components/empty-content";
+import { EmptyContent } from 'tessera-ui/components/empty-content'
 
 // Or from main export (if available)
-import { EmptyContent } from "tessera-ui";
+import { EmptyContent } from 'tessera-ui'
 ```

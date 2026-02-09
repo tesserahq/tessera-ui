@@ -1,4 +1,4 @@
-import React,{ useEffect, useState } from 'react'
+import * as React from 'react'
 import type { IPagingInfo } from './types'
 import {
   PaginationComponent,
@@ -21,7 +21,7 @@ interface IProps {
 export const Pagination = ({ meta, scope, callback }: IProps) => {
   const { getScopedSearch } = useScopedParams(scope)
   const navigate = useNavigate()
-  const [pagination, setPagination] = useState<IPagingInfo>(meta)
+  const [pagination, setPagination] = React.useState<IPagingInfo>(meta)
   const { pages, page, total, size } = pagination
   const totalPages = Math.max(1, pages)
   const currentPage = Math.min(Math.max(1, page), totalPages)
@@ -59,7 +59,7 @@ export const Pagination = ({ meta, scope, callback }: IProps) => {
   const rangeLabel =
     total === 0 ? pageCountLabel : `${startRecord}-${endRecord} of ${total.toLocaleString()}`
 
-  const [row, setRow] = useState<string>(size.toString())
+  const [row, setRow] = React.useState<string>(size.toString())
 
   const onChange = (value: string) => {
     const currentValue = { size: Number(value), page: 1 }
@@ -83,7 +83,7 @@ export const Pagination = ({ meta, scope, callback }: IProps) => {
     }
   }
 
-  useEffect(() => {
+  React.useEffect(() => {
     setPagination(meta)
   }, [meta])
 

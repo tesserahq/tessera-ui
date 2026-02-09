@@ -15,40 +15,40 @@ The `Pagination` component renders a paginated control with page buttons, ellips
 ### Basic Example (URL Params)
 
 ```tsx
-import { Pagination } from "tessera-ui/components/pagination";
+import { Pagination } from 'tessera-ui/components/pagination'
 
 function ListPage({ meta }) {
-  return <Pagination meta={meta} />;
+  return <Pagination meta={meta} />
 }
 ```
 
 ### With Scope
 
 ```tsx
-import { Pagination } from "tessera-ui/components/pagination";
+import { Pagination } from 'tessera-ui/components/pagination'
 
 function UsersTable({ meta }) {
-  return <Pagination meta={meta} scope="users" />;
+  return <Pagination meta={meta} scope="users" />
 }
 ```
 
 ### Controlled via Callback
 
 ```tsx
-import { useState } from "react";
-import { Pagination } from "tessera-ui/components/pagination";
+import { useState } from 'react'
+import { Pagination } from 'tessera-ui/components/pagination'
 
 function OrdersList({ initialMeta }) {
-  const [meta, setMeta] = useState(initialMeta);
+  const [meta, setMeta] = useState(initialMeta)
 
   return (
     <Pagination
       meta={meta}
       callback={({ page, size }) => {
-        setMeta((prev) => ({ ...prev, page, size }));
+        setMeta((prev) => ({ ...prev, page, size }))
       }}
     />
-  );
+  )
 }
 ```
 
@@ -56,11 +56,11 @@ function OrdersList({ initialMeta }) {
 
 ### `Pagination`
 
-| Prop       | Type                                                       | Required | Default | Description |
-| ---------- | ---------------------------------------------------------- | -------- | ------- | ----------- |
-| `meta`     | `{ page: number; pages: number; size: number; total: number }` | Yes      | -       | Paging metadata |
-| `scope`    | `string`                                                   | No       | `""`    | Prefix for query params (e.g. `scope:page`) |
-| `callback` | `({ page, size }: { page: number; size: number }) => void` | No       | -       | Handle pagination changes without URL updates |
+| Prop       | Type                                                           | Required | Default | Description                                   |
+| ---------- | -------------------------------------------------------------- | -------- | ------- | --------------------------------------------- |
+| `meta`     | `{ page: number; pages: number; size: number; total: number }` | Yes      | -       | Paging metadata                               |
+| `scope`    | `string`                                                       | No       | `""`    | Prefix for query params (e.g. `scope:page`)   |
+| `callback` | `({ page, size }: { page: number; size: number }) => void`     | No       | -       | Handle pagination changes without URL updates |
 
 ## Behavior
 
@@ -90,8 +90,8 @@ function OrdersList({ initialMeta }) {
 
 ```tsx
 // Import component
-import { Pagination } from "tessera-ui/components/pagination";
+import { Pagination } from 'tessera-ui/components/pagination'
 
 // Or from main export (if available)
-import { Pagination } from "tessera-ui";
+import { Pagination } from 'tessera-ui'
 ```

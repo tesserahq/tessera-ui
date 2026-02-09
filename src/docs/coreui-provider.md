@@ -30,41 +30,40 @@ The CoreUIProvider is part of the tessera-ui package and doesn't require additio
 ### 1. Wrap your application with CoreUIProvider
 
 ```tsx
-import { CoreUIProvider } from "./provider/AppProvider";
+import { CoreUIProvider } from './provider/AppProvider'
 
 function App() {
   const handleUnauthorized = () => {
     // Handle unauthorized access (e.g., redirect to login)
-    window.location.href = "/login";
-  };
+    window.location.href = '/login'
+  }
 
   return (
     <CoreUIProvider
       isAuthenticated={true}
       callbacktUnauthorized={handleUnauthorized}
       identiesApiUrl="https://api.identies.com"
-      token="your-auth-token"
-    >
+      token="your-auth-token">
       <YourAppContent />
     </CoreUIProvider>
-  );
+  )
 }
 ```
 
 ### 2. Use the useCoreUI hook in your components
 
 ```tsx
-import { useCoreUI } from "./provider/AppProvider";
+import { useCoreUI } from './provider/AppProvider'
 
 function UserProfile() {
-  const { user, loadingRequest, error, updateUser } = useCoreUI();
+  const { user, loadingRequest, error, updateUser } = useCoreUI()
 
   if (loadingRequest) {
-    return <div>Loading...</div>;
+    return <div>Loading...</div>
   }
 
   if (error) {
-    return <div>Error: {error.detail}</div>;
+    return <div>Error: {error.detail}</div>
   }
 
   return (
@@ -72,7 +71,7 @@ function UserProfile() {
       <h1>Welcome, {user?.first_name}!</h1>
       <p>Email: {user?.email}</p>
     </div>
-  );
+  )
 }
 ```
 
@@ -104,33 +103,33 @@ The `useCoreUI` hook returns an object with the following properties:
 
 ```tsx
 interface User {
-  id: string;
-  email?: string;
-  username?: string;
-  avatar_url?: string;
-  avatar_asset_id?: string;
-  first_name: string;
-  last_name: string;
-  provider?: string;
-  confirmed_at?: string;
-  verified: boolean;
-  verified_at?: string;
-  external_id?: string;
-  theme_preference?: string;
-  created_at: string;
-  updated_at: string;
+  id: string
+  email?: string
+  username?: string
+  avatar_url?: string
+  avatar_asset_id?: string
+  first_name: string
+  last_name: string
+  provider?: string
+  confirmed_at?: string
+  verified: boolean
+  verified_at?: string
+  external_id?: string
+  theme_preference?: string
+  created_at: string
+  updated_at: string
 }
 
 interface UserUpdate {
-  email?: string;
-  username?: string;
-  avatar_asset_id?: string;
-  first_name?: string;
-  last_name?: string;
-  provider?: string;
-  verified?: boolean;
-  verified_at?: string;
-  theme_preference?: string;
+  email?: string
+  username?: string
+  avatar_asset_id?: string
+  first_name?: string
+  last_name?: string
+  provider?: string
+  verified?: boolean
+  verified_at?: string
+  theme_preference?: string
 }
 ```
 
@@ -148,18 +147,18 @@ The CoreUIProvider is designed to work seamlessly with the ProfileMenu component
 ### ProfileMenu Usage
 
 ```tsx
-import { ProfileMenu } from "./components/misc/ProfileMenu/ProfileMenu";
+import { ProfileMenu } from './components/misc/ProfileMenu/ProfileMenu'
 
 function Header() {
-  const [theme, setTheme] = useState("system");
+  const [theme, setTheme] = useState('system')
 
   const handleLogout = () => {
     // Handle logout logic
-  };
+  }
 
   const handleProfile = () => {
     // Navigate to profile page
-  };
+  }
 
   return (
     <header>
@@ -171,7 +170,7 @@ function Header() {
         defaultAvatar="/default-avatar.png"
       />
     </header>
-  );
+  )
 }
 ```
 
@@ -201,36 +200,35 @@ The ProfileMenu component provides:
 ### Complete App Setup
 
 ```tsx
-import React, { useState } from "react";
-import { CoreUIProvider } from "./provider/AppProvider";
-import { ProfileMenu } from "./components/misc/ProfileMenu/ProfileMenu";
+import React, { useState } from 'react'
+import { CoreUIProvider } from './provider/AppProvider'
+import { ProfileMenu } from './components/misc/ProfileMenu/ProfileMenu'
 
 function App() {
-  const [theme, setTheme] = useState("system");
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
-  const token = "your-auth-token";
+  const [theme, setTheme] = useState('system')
+  const [isAuthenticated, setIsAuthenticated] = useState(true)
+  const token = 'your-auth-token'
 
   const handleUnauthorized = () => {
-    setIsAuthenticated(false);
+    setIsAuthenticated(false)
     // Redirect to login
-  };
+  }
 
   const handleLogout = () => {
-    setIsAuthenticated(false);
+    setIsAuthenticated(false)
     // Clear token and redirect
-  };
+  }
 
   const handleProfile = () => {
     // Navigate to profile page
-  };
+  }
 
   return (
     <CoreUIProvider
       isAuthenticated={isAuthenticated}
       callbacktUnauthorized={handleUnauthorized}
       identiesApiUrl="https://api.identies.com"
-      token={token}
-    >
+      token={token}>
       <div className="app">
         <header>
           <ProfileMenu
@@ -244,30 +242,30 @@ function App() {
         <main>{/* Your app content */}</main>
       </div>
     </CoreUIProvider>
-  );
+  )
 }
 ```
 
 ### User Data Management
 
 ```tsx
-import { useCoreUI } from "./provider/AppProvider";
+import { useCoreUI } from './provider/AppProvider'
 
 function UserSettings() {
-  const { user, updateUser } = useCoreUI();
+  const { user, updateUser } = useCoreUI()
 
   const handleUpdateProfile = async () => {
     try {
       await updateUser({
-        first_name: "John",
-        last_name: "Doe",
-        theme_preference: "dark",
-      });
-      console.log("Profile updated successfully");
+        first_name: 'John',
+        last_name: 'Doe',
+        theme_preference: 'dark',
+      })
+      console.log('Profile updated successfully')
     } catch (error) {
-      console.error("Failed to update profile:", error);
+      console.error('Failed to update profile:', error)
     }
-  };
+  }
 
   return (
     <div>
@@ -277,7 +275,7 @@ function UserSettings() {
       </p>
       <button onClick={handleUpdateProfile}>Update Profile</button>
     </div>
-  );
+  )
 }
 ```
 
@@ -293,8 +291,8 @@ function UserSettings() {
 
 ```tsx
 interface ApiError {
-  detail: string;
-  status_code: number;
+  detail: string
+  status_code: number
 }
 ```
 

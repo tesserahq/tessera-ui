@@ -16,7 +16,7 @@ The `DateTime` component provides a comprehensive date and time display with tim
 ### Basic Example
 
 ```tsx
-import { DateTime } from "tessera-ui/components/datetime";
+import { DateTime } from 'tessera-ui/components/datetime'
 
 function PostCard({ post }) {
   return (
@@ -26,32 +26,29 @@ function PostCard({ post }) {
         Created: <DateTime date={post.createdAt} />
       </p>
     </div>
-  );
+  )
 }
 ```
 
 ### With Custom Format
 
 ```tsx
-import { DateTime } from "tessera-ui/components/datetime";
+import { DateTime } from 'tessera-ui/components/datetime'
 
 function EventCard({ event }) {
   return (
     <div>
       <h2>{event.name}</h2>
-      <DateTime
-        date={event.startTime}
-        formatStr="EEEE, MMMM dd, yyyy 'at' HH:mm"
-      />
+      <DateTime date={event.startTime} formatStr="EEEE, MMMM dd, yyyy 'at' HH:mm" />
     </div>
-  );
+  )
 }
 ```
 
 ### With Custom Timezone
 
 ```tsx
-import { DateTime } from "tessera-ui/components/datetime";
+import { DateTime } from 'tessera-ui/components/datetime'
 
 function GlobalEvent({ event }) {
   return (
@@ -63,52 +60,40 @@ function GlobalEvent({ event }) {
         formatStr="MMM dd, yyyy HH:mm:ss"
       />
     </div>
-  );
+  )
 }
 ```
 
 ### With Timezone Display
 
 ```tsx
-import { DateTime } from "tessera-ui/components/datetime";
+import { DateTime } from 'tessera-ui/components/datetime'
 
 function ScheduledMeeting({ meeting }) {
   return (
     <div>
       <h2>{meeting.title}</h2>
-      <DateTime
-        date={meeting.scheduledTime}
-        timezone="America/New_York"
-        showTimezone={true}
-      />
+      <DateTime date={meeting.scheduledTime} timezone="America/New_York" showTimezone={true} />
     </div>
-  );
+  )
 }
 ```
 
 ### Using Format Functions Directly
 
 ```tsx
-import {
-  formatDateTime,
-  getRelativeTime,
-} from "tessera-ui/components/datetime";
+import { formatDateTime, getRelativeTime } from 'tessera-ui/components/datetime'
 
 function CustomDateDisplay({ date }) {
-  const formatted = formatDateTime(
-    date,
-    "MMM dd, yyyy HH:mm",
-    "America/New_York",
-    true
-  );
-  const relative = getRelativeTime(new Date(date));
+  const formatted = formatDateTime(date, 'MMM dd, yyyy HH:mm', 'America/New_York', true)
+  const relative = getRelativeTime(new Date(date))
 
   return (
     <div>
       <p>Formatted: {formatted}</p>
       <p>Relative: {relative}</p>
     </div>
-  );
+  )
 }
 ```
 
@@ -152,11 +137,11 @@ formatDateTime(
 
 ```tsx
 const formatted = formatDateTime(
-  "2024-01-15T10:30:00Z",
-  "MMM dd, yyyy HH:mm",
-  "America/New_York",
+  '2024-01-15T10:30:00Z',
+  'MMM dd, yyyy HH:mm',
+  'America/New_York',
   true
-);
+)
 // Returns: "Jan 15, 2024 05:30 (EST)"
 ```
 
@@ -177,7 +162,7 @@ getRelativeTime(date: Date): string
 **Example:**
 
 ```tsx
-const relative = getRelativeTime(new Date("2024-01-01"));
+const relative = getRelativeTime(new Date('2024-01-01'))
 // Returns: "2 months ago" (if current date is March 2024)
 ```
 
@@ -233,7 +218,7 @@ See [date-fns format documentation](https://date-fns.org/docs/format) for comple
 ### Displaying Post Timestamps
 
 ```tsx
-import { DateTime } from "tessera-ui/components/datetime";
+import { DateTime } from 'tessera-ui/components/datetime'
 
 function PostList({ posts }) {
   return (
@@ -245,14 +230,14 @@ function PostList({ posts }) {
         </li>
       ))}
     </ul>
-  );
+  )
 }
 ```
 
 ### Event Schedule with Multiple Timezones
 
 ```tsx
-import { DateTime } from "tessera-ui/components/datetime";
+import { DateTime } from 'tessera-ui/components/datetime'
 
 function EventSchedule({ event }) {
   return (
@@ -260,8 +245,7 @@ function EventSchedule({ event }) {
       <h2>{event.name}</h2>
       <div>
         <p>
-          New York:{" "}
-          <DateTime date={event.startTime} timezone="America/New_York" />
+          New York: <DateTime date={event.startTime} timezone="America/New_York" />
         </p>
         <p>
           London: <DateTime date={event.startTime} timezone="Europe/London" />
@@ -271,19 +255,17 @@ function EventSchedule({ event }) {
         </p>
       </div>
     </div>
-  );
+  )
 }
 ```
 
 ### Custom Styled DateTime
 
 ```tsx
-import { DateTime } from "tessera-ui/components/datetime";
+import { DateTime } from 'tessera-ui/components/datetime'
 
 function StyledDateTime({ date }) {
-  return (
-    <DateTime date={date} className="text-lg font-semibold text-blue-600" />
-  );
+  return <DateTime date={date} className="text-lg font-semibold text-blue-600" />
 }
 ```
 
@@ -299,14 +281,11 @@ function StyledDateTime({ date }) {
 
 ```tsx
 // Import component
-import { DateTime } from "tessera-ui/components/datetime";
+import { DateTime } from 'tessera-ui/components/datetime'
 
 // Import utility functions
-import {
-  formatDateTime,
-  getRelativeTime,
-} from "tessera-ui/components/datetime";
+import { formatDateTime, getRelativeTime } from 'tessera-ui/components/datetime'
 
 // Or from main export (if available)
-import { DateTime, formatDateTime, getRelativeTime } from "tessera-ui";
+import { DateTime, formatDateTime, getRelativeTime } from 'tessera-ui'
 ```
