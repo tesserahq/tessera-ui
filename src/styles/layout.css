@@ -1,5 +1,7 @@
+@reference '../index.css';
+
 .coreui-content-center {
-  @apply flex w-full animate-slide-up flex-col items-center;
+  @apply flex w-full flex-col items-center;
 }
 
 .coreui-content-center .coreui-card-center {

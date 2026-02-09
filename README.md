@@ -2,6 +2,16 @@
 
 **Tessera UI** is a reusable component library designed to ensure UI consistency across multiple applications. This project provides a centralized collection of shared, styled, and customizable UI components to accelerate development and maintain a uniform look and feel.
 
+## Documentation
+
+- [Layouts](./src/components/layouts/README.md) - Layout components for building consistent page structures
+- [App Menu](./src/components/app-menu/README.md) - Dropdown menu component for displaying and navigating to multiple applications
+- [Date Time](./src/components/datetime/README.md) - Date and time display component
+- [Delete Confirmation](./src/components/delete-confirmation/README.md) - Confirmation dialog for destructive actions
+- [Empty Content](./src/components/empty-content/README.md) - Empty state component for missing data
+- [New Button](./src/components/new-button/README.md) - Primary action button variant
+- [Pagination](./src/components/pagination/README.md) - Pagination controls and helpers
+
 ## Development
 
 Install dependencies:
@@ -10,30 +20,104 @@ Install dependencies:
 bun install
 ```
 
-Run storybook:
+Run storybook on development:
 
 ```shellscript
 bun storybook
 ```
 
+### Storybook with Docker
+
+Build the Storybook image:
+
+```shellscript
+docker build -t tessera-ui .
+```
+
+Run the Storybook container:
+
+```shellscript
+docker run -p 6006:80 tessera-ui
+```
+
+Then open `http://localhost:6006`.
+
+### Developing Components for Use in Other Projects
+
+To develop components in this library and use them with hot-reload in another project, see [DEVELOPMENT.md](./src/docs/development.md) for detailed instructions.
+
+Quick start:
+
+1. Link this library: `bun link`
+2. In your other project: `bun link tessera-ui`
+3. Configure path aliases in your other project to use `tessera-ui` prefix (see [DEVELOPMENT.md](./src/docs/development.md))
+
+**Note:** The package name is `tessera-ui`, but you can import using the cleaner `tessera-ui` prefix thanks to path aliases.
+
 ## Setup and install
 
 ```shellscript
-bun install git+https://github.com/estate-buddy-tech/core-ui.git
+bun install git+https://github.com/tesserahq/tessera-ui.git
 ```
 
-Add config in tailwind.config.ts
+### Using with `tessera-ui` Import Prefix
 
-```shellscript
-content: [
-  './node_modules/core-ui/src/**/*.{js,jsx,ts,tsx}',
-],
+To use `tessera-ui` as your import prefix in other apps, configure path aliases:
+
+#### 1. Configure Vite (vite.config.ts)
+
+```typescript
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import path from 'path'
+
+export default defineConfig({
+  plugins: [react()],
+  resolve: {
+    alias: {
+      '@tessera-ui': path.resolve(__dirname, 'node_modules/tessera-ui/src'),
+      // Or if using bun link:
+      // "tessera-ui": path.resolve(__dirname, "../tessera-ui/src"),
+    },
+  },
+})
 ```
 
-Import in your App
+#### 2. Configure TypeScript (tsconfig.json)
 
-```shellscript
-import ProfileMenu from 'core-ui'
+```json
+{
+  "compilerOptions": {
+    "paths": {
+      "tessera-ui": ["./node_modules/tessera-ui/src"],
+      "tessera-ui/*": ["./node_modules/tessera-ui/src/*"]
+    }
+  }
+}
 ```
 
-![Alt](https://repobeats.axiom.co/api/embed/40d6e73948c2ab3ef2497becbc54ba3be6a73d21.svg "Repobeats analytics image")
+#### 3. Configure Tailwind
+
+Add config in `tailwind.config.ts`:
+
+```typescript
+export default {
+  content: ['./src/**/*.{js,jsx,ts,tsx}', './node_modules/tessera-ui/src/**/*.{js,jsx,ts,tsx}'],
+}
+```
+
+Or for Tailwind v4, add to your CSS:
+
+```css
+@import 'tailwindcss';
+@source './node_modules/tessera-ui/src/**/*.{js,jsx,ts,tsx}';
+```
+
+#### 4. Import in your App
+
+```typescript
+import { Layout, ProfileMenu, FormField } from 'tessera-ui/components/layouts'
+import { ProfileMenu } from 'tessera-ui'
+```
+
+![Alt](https://repobeats.axiom.co/api/embed/40d6e73948c2ab3ef2497becbc54ba3be6a73d21.svg 'Repobeats analytics image')
