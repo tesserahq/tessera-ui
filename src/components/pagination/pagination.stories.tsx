@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Pagination } from './pagination'
-import { withRouter } from 'storybook-addon-remix-react-router';
+import { withRouter } from 'storybook-addon-remix-react-router'
 
 const meta: Meta<typeof Pagination> = {
   title: 'Components/Pagination',
