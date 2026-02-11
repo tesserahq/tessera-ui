@@ -92,14 +92,14 @@ const DeleteConfirmation = React.forwardRef<DeleteConfirmationHandle, DeleteConf
           <DialogFooter className="mt-3">
             <div className="flex w-full justify-center gap-2">
               <DialogClose asChild>
-                <Button variant="outline" className="w-full">
+                <Button variant="outline" className="w-1/2">
                   Cancel
                 </Button>
               </DialogClose>
 
               <Button
                 variant="destructive"
-                className="w-full"
+                className="w-1/2"
                 onClick={handleDelete}
                 disabled={config.isLoading}>
                 {config.isLoading ? (

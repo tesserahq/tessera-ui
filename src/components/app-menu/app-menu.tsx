@@ -6,6 +6,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '../ui/dr
 import { cn } from '../../utils/misc'
 import { Link } from 'react-router'
 import { Grip } from 'lucide-react'
+import { useState } from 'react'
 
 export interface AppMenuProps {
   name: string
@@ -13,7 +14,7 @@ export interface AppMenuProps {
 }
 
 export function AppMenu({ apps }: { apps: AppMenuProps[] }) {
-  const [isOpenAppMenu, setIsOpenAppMenu] = React.useState(false)
+  const [isOpenAppMenu, setIsOpenAppMenu] = useState(false)
 
   return (
     <DropdownMenu open={isOpenAppMenu} onOpenChange={setIsOpenAppMenu}>
