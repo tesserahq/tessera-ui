@@ -38,6 +38,7 @@ export function DetailSidenav({ menuItems, className }: DetailSidenavProps): Rea
             {item.children && item.children.length > 0 ? (
               <AccordionItem value={item.path} className="border-none">
                 <AccordionTrigger
+                  disabled={item.disabled}
                   className={cn(
                     `dark:hover:bg-background w-full flex py-2.5 px-2 mb-1 items-center
                       justify-start gap-2 overflow-hidden rounded hover:bg-slate-50 cursor-pointer
@@ -53,7 +54,7 @@ export function DetailSidenav({ menuItems, className }: DetailSidenavProps): Rea
                     {item.children.map((child) => (
                       <Link
                         key={child.path}
-                        to={child.path}
+                        to={child.disabled ? '#' : child.path}
                         className={cn(
                           `dark:hover:bg-background w-full flex py-2 px-2 mb-1 items-center
                             justify-start gap-2 overflow-hidden rounded hover:bg-slate-50
@@ -69,7 +70,7 @@ export function DetailSidenav({ menuItems, className }: DetailSidenavProps): Rea
               </AccordionItem>
             ) : (
               <Link
-                to={item.path}
+                to={item.disabled ? '#' : item.path}
                 className={cn(
                   `dark:hover:bg-background w-full flex py-2.5 px-2 mb-1 items-center justify-start
                     gap-2 overflow-hidden rounded hover:bg-slate-50 cursor-pointer`,

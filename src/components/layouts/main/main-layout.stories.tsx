@@ -41,21 +41,25 @@ const defaultMenuItems: MainItemProps[] = [
     title: 'Roles',
     path: '/roles',
     icon: KeyRound,
+    disabled: true,
   },
   {
     title: 'Users',
-    path: '/users',
+    path: '#',
     icon: Users,
+    disabled: true,
   },
   {
     title: 'Dashboard',
-    path: '/dashboard',
+    path: '#',
     icon: Home,
+    disabled: true,
   },
   {
     title: 'Settings',
-    path: '/settings',
+    path: '#',
     icon: Settings,
+    disabled: true,
   },
 ]
 
@@ -64,17 +68,19 @@ const defaultDetailMenuItems: DetailItemsProps[] = [
     title: 'Roles',
     path: '/roles',
     icon: <KeyRound className="w-4 h-4" />,
+    disabled: true,
   },
   {
     title: 'Users',
-    path: '/users',
+    path: '#',
     icon: <Users className="w-4 h-4" />,
+    disabled: true,
   },
 ]
 
 const defaultBreadcrumb: BreadcrumbItemData[] = [
-  { label: 'Home', link: '/' },
-  { label: 'Roles', link: '/roles' },
+  { label: 'Home', link: '#' },
+  { label: 'Roles', link: '#' },
 ]
 
 // Mock page components

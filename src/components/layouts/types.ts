@@ -6,6 +6,7 @@ export interface MainItemProps {
   icon: LucideIcon
   children?: ItemProps[]
   divider?: boolean
+  disabled?: boolean
 }
 
 export interface SidebarPanelProps {
@@ -16,6 +17,7 @@ interface ItemProps {
   title: string
   path: string
   icon: React.ReactNode
+  disabled?: boolean
 }
 export interface DetailItemsProps {
   title: string
@@ -23,6 +25,7 @@ export interface DetailItemsProps {
   icon: React.ReactNode
   children?: ItemProps[]
   divider?: boolean
+  disabled?: boolean
 }
 
 export interface SidebarItemsProps {
@@ -32,4 +35,5 @@ export interface SidebarItemsProps {
 export interface BreadcrumbItemData {
   label: string
   link: string
+  disabled?: boolean
 }

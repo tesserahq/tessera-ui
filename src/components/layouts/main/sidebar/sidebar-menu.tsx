@@ -44,7 +44,7 @@ export function SidebarMenu({ menuItems }: { menuItems: MainItemProps[] }) {
             <SidebarMenuItem key={item.title}>
               <SidebarMenuButton asChild tooltip={item.title}>
                 <Link
-                  to={item.path}
+                  to={item.disabled ? '#' : item.path}
                   className={cn(
                     'hover:bg-accent! hover:text-primary!',
                     isActive(item.path) &&
