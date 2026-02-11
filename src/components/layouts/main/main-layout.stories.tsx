@@ -67,13 +67,13 @@ const defaultDetailMenuItems: DetailItemsProps[] = [
   {
     title: 'Roles',
     path: '/roles',
-    icon: <KeyRound className="w-4 h-4" />,
+    icon: KeyRound,
     disabled: true,
   },
   {
     title: 'Users',
     path: '#',
-    icon: <Users className="w-4 h-4" />,
+    icon: Users,
     disabled: true,
   },
 ]

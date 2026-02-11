@@ -62,40 +62,40 @@ const defaultMenuItems: DetailItemsProps[] = [
   {
     title: 'Dashboard',
     path: '/dashboard',
-    icon: <Home className="w-4 h-4" />,
+    icon: Home,
   },
   {
     title: 'Analytics',
     path: '/dashboard/analytics',
-    icon: <BarChart3 className="w-4 h-4" />,
+    icon: BarChart3,
   },
   {
     title: 'Documents',
     path: '/dashboard/documents',
-    icon: <FileText className="w-4 h-4" />,
+    icon: FileText,
     children: [
       {
         title: 'All Documents',
         path: '/dashboard/documents',
-        icon: <FileText className="w-4 h-4" />,
+        icon: FileText,
       },
       {
         title: 'Recent',
         path: '/dashboard/documents/recent',
-        icon: <FileText className="w-4 h-4" />,
+        icon: FileText,
       },
     ],
   },
   {
     title: 'Settings',
     path: '/dashboard/settings',
-    icon: <Settings className="w-4 h-4" />,
+    icon: Settings,
     divider: true,
   },
   {
     title: 'Profile',
     path: '/dashboard/profile',
-    icon: <User className="w-4 h-4" />,
+    icon: User,
   },
 ]
 

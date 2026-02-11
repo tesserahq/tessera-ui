@@ -48,7 +48,7 @@ export function SidebarMenu({ menuItems }: { menuItems: MainItemProps[] }) {
                   className={cn(
                     'hover:bg-accent! hover:text-primary!',
                     isActive(item.path) &&
-                      'text-primary! bg-accent border border-primary font-semibold'
+                      'text-primary! bg-accent border border-primary font-medium'
                   )}>
                   <item.icon size={18} />
                   <span>{item.title}</span>

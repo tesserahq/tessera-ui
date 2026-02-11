@@ -16,13 +16,13 @@ export interface SidebarPanelProps {
 interface ItemProps {
   title: string
   path: string
-  icon: React.ReactNode
+  icon: LucideIcon
   disabled?: boolean
 }
 export interface DetailItemsProps {
   title: string
   path: string
-  icon: React.ReactNode
+  icon: LucideIcon
   children?: ItemProps[]
   divider?: boolean
   disabled?: boolean
