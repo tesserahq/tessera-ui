@@ -24,7 +24,7 @@ export function DetailHeader({
   return (
     <div
       className={cn(
-        'bg-white dark:bg-sidebar-background w-full fixed top-[60px] z-10 px-3 py-4 border-y',
+        'bg-white dark:bg-sidebar-background w-full fixed top-[60px] z-5 px-3 py-4 border-y',
         className
       )}>
       {breadcrumb && breadcrumb.length > 0 && (
@@ -40,7 +40,7 @@ export function DetailHeader({
                   ) : (
                     <BreadcrumbLink asChild>
                       <Link
-                        to={item.link}
+                        to={item.disabled ? '#' : item.link}
                         className={shouldCapitalize(item.label) ? 'capitalize' : ''}>
                         {item.label}
                       </Link>

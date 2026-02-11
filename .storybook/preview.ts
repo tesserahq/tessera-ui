@@ -1,8 +1,9 @@
 import type { Preview } from '@storybook/react-vite'
-import '../src/index.css'
+import '@/index.css'
 
 const preview: Preview = {
   parameters: {
+    layout: 'fullscreen',
     actions: { argTypesRegex: '^on[A-Z].*' },
     controls: {
       matchers: {

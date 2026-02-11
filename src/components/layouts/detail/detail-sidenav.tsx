@@ -21,6 +21,14 @@ export function DetailSidenav({ menuItems, className }: DetailSidenavProps): Rea
     return item.children.some((child) => isMenuActive(child.path))
   }
 
+  const itemClassName = (active: boolean) => {
+    return cn(
+      `hover:bg-accent w-full text-sm flex p-2 mb-1 items-center justify-start gap-2
+        overflow-hidden rounded-md cursor-pointer hover:text-primary!`,
+      active && ' text-primary bg-accent border border-primary font-medium'
+    )
+  }
+
   return (
     <div
       className={cn(
@@ -38,14 +46,9 @@ export function DetailSidenav({ menuItems, className }: DetailSidenavProps): Rea
             {item.children && item.children.length > 0 ? (
               <AccordionItem value={item.path} className="border-none">
                 <AccordionTrigger
-                  className={cn(
-                    `dark:hover:bg-background w-full flex py-2.5 px-2 mb-1 items-center
-                      justify-start gap-2 overflow-hidden rounded hover:bg-slate-50 cursor-pointer
-                      hover:no-underline`,
-                    (isMenuActive(item.path) || hasActiveChild(item)) &&
-                      'bg-accent hover:bg-accent font-semibold'
-                  )}>
-                  {item.icon}
+                  disabled={item.disabled}
+                  className={itemClassName(isMenuActive(item.path) || hasActiveChild(item))}>
+                  <item.icon size={18} />
                   <span className="flex-1 text-left">{item.title}</span>
                 </AccordionTrigger>
                 <AccordionContent className="pb-0">
@@ -53,14 +56,9 @@ export function DetailSidenav({ menuItems, className }: DetailSidenavProps): Rea
                     {item.children.map((child) => (
                       <Link
                         key={child.path}
-                        to={child.path}
-                        className={cn(
-                          `dark:hover:bg-background w-full flex py-2 px-2 mb-1 items-center
-                            justify-start gap-2 overflow-hidden rounded hover:bg-slate-50
-                            cursor-pointer text-sm`,
-                          isMenuActive(child.path) && 'bg-accent hover:bg-accent font-semibold'
-                        )}>
-                        {child.icon}
+                        to={child.disabled ? '#' : child.path}
+                        className={itemClassName(isMenuActive(child.path))}>
+                        <item.icon size={18} />
                         {child.title}
                       </Link>
                     ))}
@@ -69,13 +67,9 @@ export function DetailSidenav({ menuItems, className }: DetailSidenavProps): Rea
               </AccordionItem>
             ) : (
               <Link
-                to={item.path}
-                className={cn(
-                  `dark:hover:bg-background w-full flex py-2.5 px-2 mb-1 items-center justify-start
-                    gap-2 overflow-hidden rounded hover:bg-slate-50 cursor-pointer`,
-                  isMenuActive(item.path) && 'bg-accent hover:bg-accent font-semibold'
-                )}>
-                {item.icon}
+                to={item.disabled ? '#' : item.path}
+                className={itemClassName(isMenuActive(item.path))}>
+                <item.icon size={18} />
                 {item.title}
               </Link>
             )}

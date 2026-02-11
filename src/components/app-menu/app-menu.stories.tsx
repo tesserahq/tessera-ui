@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { MemoryRouter } from 'react-router-dom'
 import { AppMenu } from './app-menu'
 import type { AppMenuProps } from './app-menu'
+import { withRouter } from 'storybook-addon-remix-react-router'
 
 const meta: Meta<typeof AppMenu> = {
   title: 'Components/AppMenu',
@@ -9,13 +9,7 @@ const meta: Meta<typeof AppMenu> = {
   parameters: {
     layout: 'centered',
   },
-  decorators: [
-    (Story) => (
-      <MemoryRouter>
-        <Story />
-      </MemoryRouter>
-    ),
-  ],
+  decorators: [withRouter],
 }
 
 export default meta
