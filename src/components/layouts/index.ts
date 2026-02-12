@@ -3,7 +3,8 @@ import Layout from './layout.tsx'
 
 // Detail Layout
 import { DetailHeader, DetailLayout, DetailSidenav, DetailContent } from './detail'
-import MainLayout from './main/main-layout'
+import { MainLayout } from './main/main-layout'
+import { Header } from './main/header/header.tsx'
 
 // All types from layout
 export type {
@@ -17,6 +18,7 @@ export type {
 // Compound Layout
 const LayoutCompound = Object.assign(Layout, {
   Main: MainLayout,
+  Header: Header,
   Detail: DetailLayout,
   DetailHeader: DetailHeader,
   DetailSidenav: DetailSidenav,

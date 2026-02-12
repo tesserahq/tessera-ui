@@ -46,9 +46,10 @@ export function SidebarMenu({ menuItems }: { menuItems: MainItemProps[] }) {
                 <Link
                   to={item.disabled ? '#' : item.path}
                   className={cn(
-                    'hover:bg-accent! hover:text-primary!',
+                    'hover:bg-accent! hover:text-primary! dark:hover:text-primary-foreground!',
                     isActive(item.path) &&
-                      'text-primary! bg-accent border border-primary font-medium'
+                      `text-primary! dark:text-primary-foreground! bg-accent border border-primary
+                      opacity-100 font-medium`
                   )}>
                   <item.icon size={18} />
                   <span>{item.title}</span>

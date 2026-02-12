@@ -1,19 +1,52 @@
 import * as React from 'react'
-import { Avatar, AvatarImage } from '../ui/avatar'
+import { Avatar, AvatarImage, AvatarFallback } from '../ui/avatar'
 import { Button } from '../ui/button'
 
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '../ui/dropdown'
 import { cn } from '../../utils/misc'
 import { Link } from 'react-router'
 import { Grip } from 'lucide-react'
+import { logos } from './logo'
 
-export interface AppMenuProps {
-  name: string
-  link: string
+const APPS = ['quore', 'looply', 'vaulta', 'identies', 'custos', 'indexa', 'sendly', 'orcha']
+
+export interface AppHostUrls {
+  quore: string
+  looply: string
+  vaulta: string
+  identies: string
+  custos: string
+  indexa: string
+  sendly: string
+  orcha: string
 }
 
-export function AppMenu({ apps }: { apps: AppMenuProps[] }) {
+type App = 'quore' | 'looply' | 'vaulta' | 'identies' | 'custos' | 'indexa' | 'sendly' | 'orcha'
+
+export interface AppMenuProps {
+  name: App
+  link: string
+  logo: string
+}
+
+export function AppMenu({
+  currentApp,
+  appHostUrls,
+}: {
+  currentApp: string
+  appHostUrls: AppHostUrls
+}) {
   const [isOpenAppMenu, setIsOpenAppMenu] = React.useState(false)
+
+  const filteredApps = APPS.filter((app) => app.toLowerCase() !== currentApp.toLowerCase())
+
+  const apps: AppMenuProps[] = React.useMemo(() => {
+    return filteredApps.map((app) => ({
+      name: app as App,
+      link: `${appHostUrls[app as keyof AppHostUrls]}?autologin=true`,
+      logo: logos[app as keyof typeof logos],
+    }))
+  }, [filteredApps, currentApp])
 
   return (
     <DropdownMenu open={isOpenAppMenu} onOpenChange={setIsOpenAppMenu}>
@@ -29,8 +62,8 @@ export function AppMenu({ apps }: { apps: AppMenuProps[] }) {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent
-        className="grid max-h-[400px] grid-cols-2 gap-1 overflow-auto px-5 py-3"
-        align="end">
+        className="grid max-h-[400px] grid-cols-3 gap-1 overflow-auto p-3"
+        align="start">
         {apps.map((app) => {
           return (
             <Link
@@ -41,7 +74,8 @@ export function AppMenu({ apps }: { apps: AppMenuProps[] }) {
               className="flex flex-col items-center justify-center rounded-lg px-4 py-2
                 transition-all duration-200 hover:bg-accent">
               <Avatar className="ring-0">
-                <AvatarImage src={`/images/apps/${app.name}-logo.png`} />
+                <AvatarImage src={app.logo} alt={`${app.name} logo`} />
+                <AvatarFallback>{app.name.charAt(0).toUpperCase()}</AvatarFallback>
               </Avatar>
               <span className="text-xs capitalize">{app.name}</span>
             </Link>

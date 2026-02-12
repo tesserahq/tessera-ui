@@ -1,11 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { withRouter, reactRouterParameters } from 'storybook-addon-remix-react-router'
 import { MemoryRouter, Routes, Route } from 'react-router-dom'
-import { Home, Settings, Users, KeyRound } from 'lucide-react'
-import MainLayout from './main-layout'
+import { Settings, Users, KeyRound } from 'lucide-react'
+import { MainLayout } from './main-layout'
+import { Header } from './header/header'
 import { DetailLayout } from '../detail/detail.layout'
 import type { MainItemProps } from '../types'
 import type { DetailItemsProps, BreadcrumbItemData } from '../types'
+import type { AppHostUrls } from '../../../main'
 
 const meta: Meta<typeof MainLayout> = {
   title: 'Components/Layouts/MainLayout',
@@ -14,10 +16,6 @@ const meta: Meta<typeof MainLayout> = {
   argTypes: {
     menuItems: {
       description: 'Array of menu items to display in the sidebar navigation',
-      control: { type: 'object' },
-    },
-    header: {
-      description: 'Header component to display at the top of the content area',
       control: { type: 'object' },
     },
     children: {
@@ -50,12 +48,6 @@ const defaultMenuItems: MainItemProps[] = [
     disabled: true,
   },
   {
-    title: 'Dashboard',
-    path: '#',
-    icon: Home,
-    disabled: true,
-  },
-  {
     title: 'Settings',
     path: '#',
     icon: Settings,
@@ -82,6 +74,17 @@ const defaultBreadcrumb: BreadcrumbItemData[] = [
   { label: 'Home', link: '#' },
   { label: 'Roles', link: '#' },
 ]
+
+const defaultAppHostUrls: AppHostUrls = {
+  quore: 'https://quore.example.com',
+  looply: 'https://looply.example.com',
+  vaulta: 'https://vaulta.example.com',
+  identies: 'https://identies.example.com',
+  custos: 'https://custos.example.com',
+  indexa: 'https://indexa.example.com',
+  sendly: 'https://sendly.example.com',
+  orcha: 'https://orcha.example.com',
+}
 
 // Mock page components
 const RolesListPage = () => (
@@ -157,18 +160,23 @@ const RoleDetailPage = () => (
   </div>
 )
 
-const mockHeader = (
-  <header
-    className="fixed h-[60px] z-20! left-0 bg-white pt-3.5 w-full border-b shrink-0 items-center
-      justify-between gap-2 top-0 backdrop-blur-md transition-[width,height] ease-linear px-5">
-    <div className="flex items-center gap-4">
-      <h1 className="text-xl font-semibold">Roles Management</h1>
-    </div>
-  </header>
-)
+const MockHeader = () => {
+  return (
+    <Header
+      title="Custos"
+      selectedTheme="system"
+      onSetTheme={() => {}}
+      actionLogout={() => {}}
+      actionProfile={() => {}}
+      defaultAvatar=""
+      appHostUrls={defaultAppHostUrls}
+      isStorybook
+    />
+  )
+}
 
 // Story with Routes demonstrating sidebar behavior
-export const SidebarBehaviorStory: Story = {
+export const HomePage: Story = {
   decorators: [withRouter],
   parameters: {
     reactRouter: reactRouterParameters({
@@ -184,7 +192,8 @@ export const SidebarBehaviorStory: Story = {
   },
   render: () => (
     <MemoryRouter initialEntries={['/roles']}>
-      <MainLayout header={mockHeader} menuItems={defaultMenuItems}>
+      <MockHeader />
+      <MainLayout menuItems={defaultMenuItems}>
         <Routes>
           <Route path="/roles" element={<RolesListPage />} />
           <Route path="/roles/:id/overview" element={<RoleDetailPage />} />
@@ -195,7 +204,7 @@ export const SidebarBehaviorStory: Story = {
 }
 
 // Story showing MainLayout with DetailLayout inside
-export const MainLayoutWithDetailLayout: Story = {
+export const DetailPage: Story = {
   decorators: [withRouter],
   parameters: {
     reactRouter: reactRouterParameters({
@@ -211,7 +220,8 @@ export const MainLayoutWithDetailLayout: Story = {
   },
   render: () => (
     <MemoryRouter initialEntries={['/roles']}>
-      <MainLayout header={mockHeader} menuItems={defaultMenuItems}>
+      <MockHeader />
+      <MainLayout menuItems={defaultMenuItems}>
         <Routes>
           <Route
             path="/roles"

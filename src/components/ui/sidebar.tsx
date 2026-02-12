@@ -221,15 +221,15 @@ function Sidebar({
             ? `p-2
               group-data-[collapsible=icon]:w-[calc(var(--sidebar-width-icon)+(--spacing(4))+2px)]`
             : `group-data-[collapsible=icon]:w-(--sidebar-width-icon)
-              group-data-[side=left]:border-r group-data-[side=right]:border-l`,
+              group-data-[side=left]:border-r-[0.5px] group-data-[side=right]:border-l-[0.5px]`,
           className
         )}
         {...props}>
         <div
           data-sidebar="sidebar"
           data-slot="sidebar-inner"
-          className="bg-sidebar group-data-[variant=floating]:border-sidebar-border flex h-full
-            w-full flex-col group-data-[variant=floating]:rounded-lg
+          className="bg-sidebar-background group-data-[variant=floating]:border-sidebar-border flex
+            h-full w-full flex-col group-data-[variant=floating]:rounded-lg
             group-data-[variant=floating]:border group-data-[variant=floating]:shadow-sm">
           {children}
         </div>

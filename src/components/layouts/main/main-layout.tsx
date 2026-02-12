@@ -1,7 +1,7 @@
 import React from 'react'
-import { SidebarPanel } from './sidebar/sidebar-panel'
-import type { MainItemProps } from '../types'
 import { SidebarInset, SidebarProvider } from '../../ui/sidebar'
+import type { MainItemProps } from '../types'
+import { SidebarPanel } from './sidebar/sidebar-panel'
 
 /**
  * Props for the MainLayout component
@@ -9,8 +9,6 @@ import { SidebarInset, SidebarProvider } from '../../ui/sidebar'
 export interface MainLayoutProps {
   /** Main content to display in the layout */
   children: React.ReactNode
-  /** Header component to display at the top of the content area */
-  header: React.ReactNode
   /** Array of menu items to display in the sidebar navigation */
   menuItems: MainItemProps[]
   /** Additional CSS classes for the layout container */
@@ -30,18 +28,13 @@ export interface MainLayoutProps {
  * </MainLayout>
  * ```
  */
-function MainLayout({ children, header, menuItems }: MainLayoutProps) {
+export function MainLayout({ children, menuItems }: MainLayoutProps) {
   return (
     <SidebarProvider>
       <SidebarPanel menuItems={menuItems} />
       <SidebarInset>
-        {/* Need updated in this issue https://github.com/tesserahq/tessera-ui/issues/44 */}
-        {header && header}
-
         <div className="pt-[60px] h-full">{children}</div>
       </SidebarInset>
     </SidebarProvider>
   )
 }
-
-export default MainLayout

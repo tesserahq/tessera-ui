@@ -10,12 +10,19 @@ interface DetailLayoutProps {
   menuItems: DetailItemsProps[]
   breadcrumb: BreadcrumbItemData[]
   className?: string
+  headerClassName?: string
 }
 
-export function DetailLayout({ children, menuItems, breadcrumb, className }: DetailLayoutProps) {
+export function DetailLayout({
+  children,
+  menuItems,
+  breadcrumb,
+  className,
+  headerClassName,
+}: DetailLayoutProps) {
   return (
     <>
-      <DetailHeader breadcrumb={breadcrumb} />
+      <DetailHeader breadcrumb={breadcrumb} className={headerClassName} />
 
       <div className={cn('flex items-start gap-3 h-full relative pt-[53px]', className)}>
         <DetailSidenav menuItems={menuItems} />

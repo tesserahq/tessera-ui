@@ -4,15 +4,17 @@ import { Avatar, AvatarImage } from '../../ui/avatar'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '../../ui/dropdown'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../ui/select'
 import { cn } from '../../../utils/misc'
-import { useCoreUI } from '../../../main'
+import { useApp } from '../../../main'
+import AvatarDummy from '../../../../public/images/default-avatar.jpg'
 
 interface Props {
   selectedTheme: string
   onSetTheme: (theme: string) => void
   actionLogout: () => void
   actionProfile: () => void
-  defaultAvatar: string
+  defaultAvatar?: string
   menus?: { label: string; icon: React.ReactNode; onClick: () => void }[]
+  isStorybook?: boolean
 }
 
 export function ProfileMenu({
@@ -22,9 +24,10 @@ export function ProfileMenu({
   actionProfile,
   defaultAvatar,
   menus,
+  isStorybook,
 }: Props) {
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false)
-  const { user, loadingRequest, updateUser } = useCoreUI()
+  const { user, isLoadingIdenties, updateUser } = useApp()
   const [loaded, setLoaded] = React.useState(false)
 
   const onUpdateTheme = async (value: string) => {
@@ -32,7 +35,11 @@ export function ProfileMenu({
     await updateUser({ theme_preference: value })
   }
 
-  if (loadingRequest) {
+  if (isStorybook) {
+    return <ProfileStoryBook open={isDropdownOpen} setIsOpen={setIsDropdownOpen} />
+  }
+
+  if (isLoadingIdenties) {
     return (
       <div className="animate-pulse">
         <div className="rounded-full bg-gray-200 w-10 h-10"></div>
@@ -45,7 +52,7 @@ export function ProfileMenu({
       <div
         className="relative flex size-10 shrink-0 overflow-hidden rounded-full ring-1
           ring-slate-300">
-        <img src={defaultAvatar} alt="default-avatar" />
+        <img src={AvatarDummy} alt="default-avatar" />
       </div>
     )
   }
@@ -75,7 +82,7 @@ export function ProfileMenu({
           className="flex w-[16rem] flex-col px-5 py-5"
           side="bottom"
           align="end">
-          <div className="mb-3 flex flex-row justify-center gap-x-3">
+          <div className="mb-3 flex flex-row justify-start gap-x-3">
             <Avatar>
               <AvatarImage src={user?.avatar_url || defaultAvatar} />
             </Avatar>
@@ -158,4 +165,90 @@ export function ProfileMenu({
         </DropdownMenuContent>
       </DropdownMenu>
     )
+}
+
+const ProfileStoryBook = ({
+  open,
+  setIsOpen,
+}: {
+  open: boolean
+  setIsOpen: (open: boolean) => void
+}) => {
+  return (
+    <DropdownMenu open={open} onOpenChange={setIsOpen}>
+      <DropdownMenuTrigger asChild className="cursor-pointer">
+        <div className="relative">
+          <Avatar>
+            <AvatarImage src={AvatarDummy} loading="lazy" alt="test" />
+          </Avatar>
+        </div>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="flex w-[16rem] flex-col px-5 py-5" side="bottom" align="end">
+        <div className="mb-3 flex flex-row justify-start gap-x-3">
+          <Avatar>
+            <AvatarImage src={AvatarDummy} />
+          </Avatar>
+          <div className="flex flex-col justify-center">
+            <h1 className="font-semibold max-w-40 truncate">User Name</h1>
+            <p className="text-sm text-accent-foreground max-w-40 truncate">user@example.com</p>
+          </div>
+        </div>
+        <div className="mb-3 flex flex-row items-center gap-4">
+          <span>Theme</span>
+          <Select value="system" onValueChange={() => {}}>
+            <SelectTrigger
+              className="h-9 w-full items-center justify-between rounded border text-sm">
+              <SelectValue placeholder="Theme" />
+            </SelectTrigger>
+            <SelectContent className="max-h-48 overflow-y-auto rounded-md border shadow-md">
+              <div className="p-2">
+                <SelectItem
+                  value={'dark'}
+                  className="cursor-pointer rounded px-2 py-1 hover:bg-gray-100">
+                  <div className="flex flex-row items-center gap-2">
+                    <Moon size={15} />
+                    <span>Dark</span>
+                  </div>
+                </SelectItem>
+                <SelectItem
+                  value={'light'}
+                  className="cursor-pointer rounded px-2 py-1 hover:bg-gray-100">
+                  <div className="flex flex-row items-center gap-2">
+                    <Sun size={15} />
+                    <span>Light</span>
+                  </div>
+                </SelectItem>
+                <SelectItem
+                  value={'system'}
+                  className="cursor-pointer rounded px-2 py-1 hover:bg-gray-100">
+                  <div className="flex flex-row items-center gap-2">
+                    <Monitor size={15} />
+                    <span>System</span>
+                  </div>
+                </SelectItem>
+              </div>
+            </SelectContent>
+          </Select>
+        </div>
+        <div className="flex flex-col gap-1">
+          <div className="border-y py-1">
+            <button
+              className="flex w-full flex-row items-center gap-2 rounded-sm px-3 py-2
+                hover:bg-muted"
+              onClick={() => {}}>
+              <UserCog size={16} />
+              <span>Your Profiles</span>
+            </button>
+          </div>
+          <button
+            className="flex w-full flex-row items-center gap-2 rounded-sm px-3 py-2
+              hover:bg-destructive hover:text-white transition-all duration-200"
+            onClick={() => {}}>
+            <LogOut size={16} />
+            Logout
+          </button>
+        </div>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  )
 }
