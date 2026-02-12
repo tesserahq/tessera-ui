@@ -1,10 +1,10 @@
-# CoreUIProvider
+# TesseraProvider
 
-The `CoreUIProvider` is a React context provider that manages user authentication state and provides a centralized way to access user data and perform user-related operations throughout your application.
+The `TesseraProvider` is a React context provider that manages user authentication state and provides a centralized way to access user data and perform user-related operations throughout your application.
 
 ## Overview
 
-The CoreUIProvider wraps your application and provides:
+The TesseraProvider wraps your application and provides:
 
 - User authentication state management
 - User data fetching and caching
@@ -23,14 +23,14 @@ The CoreUIProvider wraps your application and provides:
 
 ## Installation
 
-The CoreUIProvider is part of the tessera-ui package and doesn't require additional installation.
+The TesseraProvider is part of the tessera-ui package and doesn't require additional installation.
 
 ## Basic Usage
 
-### 1. Wrap your application with CoreUIProvider
+### 1. Wrap your application with TesseraProvider
 
 ```tsx
-import { CoreUIProvider } from './provider/AppProvider'
+import { TesseraProvider } from './provider/AppProvider'
 
 function App() {
   const handleUnauthorized = () => {
@@ -39,24 +39,24 @@ function App() {
   }
 
   return (
-    <CoreUIProvider
+    <TesseraProvider
       isAuthenticated={true}
       callbacktUnauthorized={handleUnauthorized}
       identiesApiUrl="https://api.identies.com"
       token="your-auth-token">
       <YourAppContent />
-    </CoreUIProvider>
+    </TesseraProvider>
   )
 }
 ```
 
-### 2. Use the useCoreUI hook in your components
+### 2. Use the useApp hook in your components
 
 ```tsx
-import { useCoreUI } from './provider/AppProvider'
+import { useApp } from './provider/AppProvider'
 
 function UserProfile() {
-  const { user, loadingRequest, error, updateUser } = useCoreUI()
+  const { user, loadingRequest, error, updateUser } = useApp()
 
   if (loadingRequest) {
     return <div>Loading...</div>
@@ -77,7 +77,7 @@ function UserProfile() {
 
 ## Props
 
-### CoreUIProvider Props
+### TesseraProvider Props
 
 | Prop                    | Type              | Required | Description                                             |
 | ----------------------- | ----------------- | -------- | ------------------------------------------------------- |
@@ -89,7 +89,7 @@ function UserProfile() {
 
 ## Context Value
 
-The `useCoreUI` hook returns an object with the following properties:
+The `useApp` hook returns an object with the following properties:
 
 | Property         | Type                                        | Description                                |
 | ---------------- | ------------------------------------------- | ------------------------------------------ |
@@ -142,7 +142,7 @@ The provider automatically handles authentication errors and calls the `callback
 
 ## Integration with ProfileMenu
 
-The CoreUIProvider is designed to work seamlessly with the ProfileMenu component. The ProfileMenu automatically uses the user data and update functions provided by the CoreUIProvider.
+The TesseraProvider is designed to work seamlessly with the ProfileMenu component. The ProfileMenu automatically uses the user data and update functions provided by the TesseraProvider.
 
 ### ProfileMenu Usage
 
@@ -201,7 +201,7 @@ The ProfileMenu component provides:
 
 ```tsx
 import React, { useState } from 'react'
-import { CoreUIProvider } from './provider/AppProvider'
+import { TesseraProvider } from './provider/AppProvider'
 import { ProfileMenu } from './components/misc/ProfileMenu/ProfileMenu'
 
 function App() {
@@ -224,7 +224,7 @@ function App() {
   }
 
   return (
-    <CoreUIProvider
+    <TesseraProvider
       isAuthenticated={isAuthenticated}
       callbacktUnauthorized={handleUnauthorized}
       identiesApiUrl="https://api.identies.com"
@@ -241,7 +241,7 @@ function App() {
         </header>
         <main>{/* Your app content */}</main>
       </div>
-    </CoreUIProvider>
+    </TesseraProvider>
   )
 }
 ```
@@ -249,10 +249,10 @@ function App() {
 ### User Data Management
 
 ```tsx
-import { useCoreUI } from './provider/AppProvider'
+import { useApp } from './provider/AppProvider'
 
 function UserSettings() {
-  const { user, updateUser } = useCoreUI()
+  const { user, updateUser } = useApp()
 
   const handleUpdateProfile = async () => {
     try {
@@ -281,7 +281,7 @@ function UserSettings() {
 
 ## Best Practices
 
-1. **Always wrap your app** with CoreUIProvider at the root level
+1. **Always wrap your app** with TesseraProvider at the root level
 2. **Handle loading states** when using user data
 3. **Implement proper error handling** for authentication failures
 4. **Use the ProfileMenu component** for consistent user interface

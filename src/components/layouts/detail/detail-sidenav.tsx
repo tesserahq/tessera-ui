@@ -24,8 +24,9 @@ export function DetailSidenav({ menuItems, className }: DetailSidenavProps): Rea
   const itemClassName = (active: boolean) => {
     return cn(
       `hover:bg-accent w-full text-sm flex p-2 mb-1 items-center justify-start gap-2
-        overflow-hidden rounded-md cursor-pointer hover:text-primary!`,
-      active && ' text-primary bg-accent border border-primary font-medium'
+        overflow-hidden rounded-md cursor-pointer hover:text-primary dark:hover:text-primary-foreground`,
+      active &&
+        ' text-primary dark:text-primary-foreground bg-accent border border-primary font-medium'
     )
   }
 

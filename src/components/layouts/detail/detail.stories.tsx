@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-import { BarChart3, FileText, Home, Settings, User } from 'lucide-react'
+import { FileText, Home, Settings, User } from 'lucide-react'
 import { withRouter } from 'storybook-addon-remix-react-router'
 import type { BreadcrumbItemData, DetailItemsProps } from '../types'
 import { DetailLayout } from './detail.layout'
@@ -9,6 +9,7 @@ const meta: Meta<typeof DetailLayout> = {
   title: 'Components/Layouts/DetailLayout',
   component: DetailLayout,
   parameters: {
+    layout: 'fullscreen',
     docs: {
       description: {
         component: `
@@ -51,6 +52,10 @@ DetailLayout provides a full-page layout with a fixed sidebar, breadcrumb header
       description: 'Optional class for the layout container.',
       control: { type: 'text' },
     },
+    headerClassName: {
+      description: 'Optional class for the header.',
+      control: { type: 'text' },
+    },
   },
 }
 
@@ -60,14 +65,10 @@ type Story = StoryObj<typeof meta>
 
 const defaultMenuItems: DetailItemsProps[] = [
   {
-    title: 'Dashboard',
-    path: '/dashboard',
+    title: 'Overview',
+    path: '/overview',
     icon: Home,
-  },
-  {
-    title: 'Analytics',
-    path: '/dashboard/analytics',
-    icon: BarChart3,
+    disabled: true,
   },
   {
     title: 'Documents',
@@ -78,11 +79,13 @@ const defaultMenuItems: DetailItemsProps[] = [
         title: 'All Documents',
         path: '/dashboard/documents',
         icon: FileText,
+        disabled: true,
       },
       {
         title: 'Recent',
         path: '/dashboard/documents/recent',
         icon: FileText,
+        disabled: true,
       },
     ],
   },
@@ -96,12 +99,13 @@ const defaultMenuItems: DetailItemsProps[] = [
     title: 'Profile',
     path: '/dashboard/profile',
     icon: User,
+    disabled: true,
   },
 ]
 
 const defaultBreadcrumb: BreadcrumbItemData[] = [
-  { label: 'Home', link: '/' },
-  { label: 'Dashboard', link: '/dashboard' },
+  { label: 'Home', link: '/', disabled: true },
+  { label: 'Dashboard', link: '/dashboard', disabled: true },
 ]
 
 export const DefaultDetailLayout: Story = {
@@ -117,10 +121,8 @@ export const DefaultDetailLayout: Story = {
     breadcrumb: defaultBreadcrumb,
     children: (
       <div className="space-y-4 p-3">
-        <h1 className="text-2xl font-bold">Dashboard</h1>
-        <p className="text-muted-foreground">
-          Welcome to your dashboard. This is the main content area.
-        </p>
+        <h1 className="text-2xl font-bold">Overview</h1>
+        <p className="text-muted-foreground">This layout for Overview page</p>
         <div className="grid grid-cols-3 gap-4">
           <div className="p-4 border rounded-lg">
             <h3 className="font-semibold">Total Users</h3>
@@ -137,5 +139,6 @@ export const DefaultDetailLayout: Story = {
         </div>
       </div>
     ),
+    headerClassName: 'top-0',
   },
 }

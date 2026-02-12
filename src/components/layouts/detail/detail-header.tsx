@@ -24,7 +24,7 @@ export function DetailHeader({
   return (
     <div
       className={cn(
-        'bg-white dark:bg-sidebar-background w-full fixed top-[60px] z-5 px-3 py-4 border-y',
+        'bg-white dark:bg-sidebar-background w-full fixed top-[60px] z-5 px-3 py-4 border-b',
         className
       )}>
       {breadcrumb && breadcrumb.length > 0 && (

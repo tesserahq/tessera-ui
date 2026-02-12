@@ -2,7 +2,7 @@
 import '../src/styles/layout.css'
 
 // Provider
-export { CoreUIProvider, useCoreUI } from './provider/AppProvider'
+export { TesseraProvider, useApp } from './provider/AppProvider'
 
 // Component
 export { ProfileMenu } from './components/misc/ProfileMenu/ProfileMenu'

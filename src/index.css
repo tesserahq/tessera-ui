@@ -25,11 +25,12 @@
   --color-border: #e7ecf4;
   --color-input: #e7ecf4;
   --color-ring: #e05d38;
+  --radius: 0.75rem;
 }
 
 @layer base {
   * {
-    @apply border-border text-slate-800;
+    @apply border-border;
   }
 
   .d-list {

@@ -74,7 +74,7 @@ bun add react react-dom tailwindcss class-variance-authority
 ### Step 7: Import and Use
 
 ```typescript
-import { ProfileMenu, FormField, CoreUIProvider } from '@tessera-ui'
+import { ProfileMenu, FormField, TesseraProvider } from '@tessera-ui'
 import { Layout } from '@tessera-ui/components/layouts'
 import '@tessera-ui/src/styles/layout.css'
 ```

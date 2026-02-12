@@ -29,8 +29,8 @@ export function SidebarPanel({
   return (
     <Sidebar
       collapsible="icon"
-      {...props}
-      className="animate-slide-left mt-[60px] bg-sidebar-background">
+      className="animate-slide-left mt-[60px] bg-sidebar-background"
+      {...props}>
       <SidebarContent>
         <SidebarMenu menuItems={menuItems} />
       </SidebarContent>
