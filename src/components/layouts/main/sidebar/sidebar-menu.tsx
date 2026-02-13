@@ -1,3 +1,5 @@
+import * as React from 'react'
+
 import { Link, useLocation } from 'react-router'
 import { cn } from '../../../../utils/misc'
 import {
@@ -8,7 +10,7 @@ import {
 } from '../../../ui/sidebar'
 import type { MainItemProps } from '../../types'
 
-export function SidebarMenu({ menuItems }: { menuItems: MainItemProps[] }) {
+export function SidebarMenu({ menuItems }: { menuItems: MainItemProps[] }): React.ReactElement {
   const { pathname } = useLocation()
 
   const isActive = (itemUrl: string) => {
