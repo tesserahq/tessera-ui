@@ -5,12 +5,9 @@ import { Check, ChevronDown, X } from 'lucide-react'
 import { cn } from '../../utils/misc'
 import { InputFloat } from '../ui/input'
 import { Button } from '../ui/button'
-import type { DataCommandBoxProps } from './combo-box.type'
+import type { ComboBoxProps } from './combo-box.type'
 
-function DataCommandBoxInner<T>(
-  props: DataCommandBoxProps<T>,
-  ref: React.ForwardedRef<HTMLDivElement>
-) {
+function ComboBoxInner<T>(props: ComboBoxProps<T>, ref: React.ForwardedRef<HTMLDivElement>) {
   const {
     className,
     label,
@@ -152,7 +149,7 @@ function DataCommandBoxInner<T>(
 /**
  * DataCommandBox - A flexible searchable dropdown component
  *
- * @see {@link DataCommandBoxProps} for all available props and examples
+ * @see {@link ComboBoxProps} for all available props and examples
  *
  * @example Basic usage with strings
  * ```tsx
@@ -201,8 +198,8 @@ function DataCommandBoxInner<T>(
  *
  * @template T - The type of items in the options array
  */
-const ComboBox = React.forwardRef(DataCommandBoxInner) as <T>(
-  props: DataCommandBoxProps<T> & { ref?: React.ForwardedRef<HTMLDivElement> }
-) => ReturnType<typeof DataCommandBoxInner>
+const ComboBox = React.forwardRef(ComboBoxInner) as <T>(
+  props: ComboBoxProps<T> & { ref?: React.ForwardedRef<HTMLDivElement> }
+) => ReturnType<typeof ComboBoxInner>
 
 export { ComboBox }

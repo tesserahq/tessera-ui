@@ -1,4 +1,4 @@
-export interface DataCommandBoxProps<T> {
+export interface ComboBoxProps<T> {
   /**
    * Name attribute for the hidden input field (used for form submission)
    * @example "user" or "country" or "plan"
