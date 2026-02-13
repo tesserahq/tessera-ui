@@ -17,6 +17,7 @@ const meta: Meta<typeof ComboBox> = {
       </div>
     ),
   ],
+  tags: ['autodocs'],
 }
 
 export default meta
@@ -52,6 +53,7 @@ export const StringArray: Story = {
       </div>
     )
   },
+  tags: ['!autodocs'],
 }
 
 // 2. Object array - Direct access to all properties!
@@ -185,6 +187,7 @@ export const CustomOptionDisplay: Story = {
       </div>
     )
   },
+  tags: ['!autodocs'],
 }
 
 // 4. Empty state handling
@@ -219,6 +222,7 @@ export const EmptyState: Story = {
       </div>
     )
   },
+  tags: ['!autodocs'],
 }
 
 // 5. Required field with error
@@ -258,4 +262,5 @@ export const Required: Story = {
       </div>
     )
   },
+  tags: ['!autodocs'],
 }

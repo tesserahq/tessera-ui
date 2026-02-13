@@ -5,22 +5,7 @@ import { Check, ChevronDown, X } from 'lucide-react'
 import { cn } from '../../utils/misc'
 import { InputFloat } from '../ui/input'
 import { Button } from '../ui/button'
-
-interface DataCommandBoxProps<T> {
-  name: string
-  label: string
-  value: string
-  onChange: (option: T | undefined) => void
-  options: T[]
-  getOptionId: (option: T) => string
-  getOptionLabel: (option: T) => string
-  getSearchValue?: (option: T) => string
-  renderOption?: (option: T) => React.ReactNode
-  required?: boolean
-  error?: string
-  placeholder?: string
-  className?: string
-}
+import type { DataCommandBoxProps } from './combo-box.type'
 
 function DataCommandBoxInner<T>(
   props: DataCommandBoxProps<T>,
@@ -164,6 +149,58 @@ function DataCommandBoxInner<T>(
   )
 }
 
+/**
+ * DataCommandBox - A flexible searchable dropdown component
+ *
+ * @see {@link DataCommandBoxProps} for all available props and examples
+ *
+ * @example Basic usage with strings
+ * ```tsx
+ * const [fruit, setFruit] = useState('apple')
+ *
+ * <DataCommandBox
+ *   name="fruit"
+ *   label="Select a fruit"
+ *   value={fruit}
+ *   onChange={(selected) => selected && setFruit(selected)}
+ *   options={['apple', 'banana', 'cherry']}
+ *   getOptionId={(f) => f}
+ *   getOptionLabel={(f) => f}
+ * />
+ * ```
+ *
+ * @example Advanced usage with objects
+ * ```tsx
+ * type User = { id: string; name: string; email: string; role: string }
+ *
+ * const [selected, setSelected] = React.useState<User | undefined>(users[0])
+ *
+ * const users: User[] = [
+ *   { id: '1', name: 'John Doe', email: 'john@example.com', role: 'Admin' },
+ *   { id: '2', name: 'Jane Smith', email: 'jane@example.com', role: 'Editor' },
+ * ]
+ *
+ * <ComboBox
+ *   name="user"
+ *   label="Assign to user"
+ *   value={selected?.id ?? ''}
+ *   onChange={(user) => setSelected(user)}
+ *   options={users}
+ *   getOptionId={(user) => user.id}
+ *   getOptionLabel={(user) => user.name}
+ *   getSearchValue={(user) => `${user.name} ${user.email}`}
+ *   renderOption={(user) => (
+ *     <div className="flex flex-col">
+ *       <span className="font-medium">{user.name}</span>
+ *       <span className="text-muted-foreground text-xs">{user.email}</span>
+ *     </div>
+ *   )}
+ *   placeholder="Search users..."
+ * />
+ * ```
+ *
+ * @template T - The type of items in the options array
+ */
 const ComboBox = React.forwardRef(DataCommandBoxInner) as <T>(
   props: DataCommandBoxProps<T> & { ref?: React.ForwardedRef<HTMLDivElement> }
 ) => ReturnType<typeof DataCommandBoxInner>
