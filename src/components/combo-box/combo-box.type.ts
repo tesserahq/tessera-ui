@@ -33,7 +33,7 @@ export interface ComboBoxProps<T> {
    *   }
    * }}
    */
-  onChange: (option: T | undefined) => void
+  onChange: (option: T | null) => void
 
   /**
    * Array of options to display in the dropdown

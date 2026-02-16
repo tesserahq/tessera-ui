@@ -1,5 +1,12 @@
 import React, { useState, useCallback, useRef } from 'react'
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem } from '../ui/command'
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from '../ui/command'
 import { Popover, PopoverContent, PopoverTrigger } from '../ui/popover'
 import { Check, ChevronDown, X } from 'lucide-react'
 import { cn } from '../../utils/misc'
@@ -31,7 +38,7 @@ function ComboBoxInner<T>(props: ComboBoxProps<T>, ref: React.ForwardedRef<HTMLD
   const handleSelect = useCallback(
     (selectedValue: string) => {
       const selectedOption = options.find((opt) => getOptionId(opt) === selectedValue)
-      onChange(selectedOption)
+      onChange(selectedOption ?? null)
       setOpen(false)
     },
     [onChange, options, getOptionId]
@@ -40,7 +47,7 @@ function ComboBoxInner<T>(props: ComboBoxProps<T>, ref: React.ForwardedRef<HTMLD
   const handleClear = useCallback(
     (e: React.MouseEvent) => {
       e.stopPropagation()
-      onChange(undefined)
+      onChange(null)
     },
     [onChange]
   )
@@ -60,7 +67,7 @@ function ComboBoxInner<T>(props: ComboBoxProps<T>, ref: React.ForwardedRef<HTMLD
 
       <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
-          <div className="relative">
+          <div className="relative w-full">
             <InputFloat
               ref={inputRef}
               label={label}
@@ -68,14 +75,26 @@ function ComboBoxInner<T>(props: ComboBoxProps<T>, ref: React.ForwardedRef<HTMLD
               value={displayValue}
               readOnly
               onClick={handleInputClick}
-              className={cn('cursor-pointer capitalize', error && 'input-error', className)}
+              className={cn('cursor-pointer capitalize pr-16', error && 'input-error', className)}
             />
-
-            {/* Dropdown arrow */}
-            <div className="pointer-events-none absolute top-1/2 right-3 -translate-y-1/2">
+            <div className="absolute top-1/2 right-3 -translate-y-1/2 flex items-center gap-x-2">
+              {displayValue && !required && (
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    handleClear(e)
+                  }}
+                  className="h-8 w-8 hover:bg-transparent"
+                  type="button">
+                  <X className="h-4 w-4" />
+                </Button>
+              )}
               <ChevronDown
                 className={cn(
-                  'text-muted-foreground h-4 w-4 transition-transform duration-200',
+                  `text-muted-foreground h-4 w-4 transition-transform duration-200
+                  pointer-events-none `,
                   open && 'rotate-180'
                 )}
               />
@@ -83,27 +102,16 @@ function ComboBoxInner<T>(props: ComboBoxProps<T>, ref: React.ForwardedRef<HTMLD
           </div>
         </PopoverTrigger>
 
-        {/* Clear button - outside trigger, with pointer-events-auto */}
-        {displayValue && !required && (
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={handleClear}
-            className="pointer-events-auto absolute top-1/2 right-10 -translate-y-1/2 h-6 w-6 z-10"
-            type="button">
-            <X className="h-4 w-4" />
-          </Button>
-        )}
         <PopoverContent
-          className="w-(--radix-popover-trigger-width) p-0"
+          className="w-(--radix-popover-trigger-width) p-0 ring-0 border shadow-card"
           align="start"
           side="bottom"
           sideOffset={4}
           avoidCollisions={true}
           collisionPadding={8}>
-          <Command>
+          <Command className="border-0 rounded-xl">
             <CommandInput placeholder={placeholder} className="h-10 border-0 border-b" />
-            <div className="max-h-64 overflow-y-auto">
+            <CommandList className="max-h-64 overflow-y-auto">
               <CommandEmpty className="py-6 text-center text-sm">No items found</CommandEmpty>
               <CommandGroup>
                 {options.map((option) => {
@@ -136,7 +144,7 @@ function ComboBoxInner<T>(props: ComboBoxProps<T>, ref: React.ForwardedRef<HTMLD
                   )
                 })}
               </CommandGroup>
-            </div>
+            </CommandList>
           </Command>
         </PopoverContent>
       </Popover>
