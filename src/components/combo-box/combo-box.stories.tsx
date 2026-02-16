@@ -28,7 +28,7 @@ type Story = StoryObj<typeof meta>
 export const StringArray: Story = {
   render: () => {
     const fruits = ['apple', 'banana', 'cherry', 'date', 'elderberry']
-    const [selected, setSelected] = React.useState<string | undefined>(fruits[0])
+    const [selected, setSelected] = React.useState<string | null>(fruits[0])
 
     return (
       <div className="space-y-4">
@@ -67,7 +67,7 @@ export const ObjectArray: Story = {
       { id: '3', name: 'Bob Johnson', email: 'bob@example.com', role: 'Viewer' },
     ]
 
-    const [selected, setSelected] = React.useState<User | undefined>(users[0])
+    const [selected, setSelected] = React.useState<User | null>(users[0])
 
     return (
       <div className="space-y-4">
@@ -145,7 +145,7 @@ export const CustomOptionDisplay: Story = {
       },
     ]
 
-    const [selectedPlan, setSelectedPlan] = React.useState<Plan | undefined>(plans[0])
+    const [selectedPlan, setSelectedPlan] = React.useState<Plan | null>(plans[0])
 
     return (
       <div className="space-y-4">
@@ -193,7 +193,7 @@ export const CustomOptionDisplay: Story = {
 // 4. Empty state handling
 export const EmptyState: Story = {
   render: () => {
-    const [selected, setSelected] = React.useState<string | undefined>('')
+    const [selected, setSelected] = React.useState<string | null>('')
 
     const categories = ['Technology', 'Design', 'Marketing', 'Sales', 'Support']
 
