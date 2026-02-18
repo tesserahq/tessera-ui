@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { withRouter, reactRouterParameters } from 'storybook-addon-remix-react-router'
 import type React from 'react'
-import { MemoryRouter, Routes, Route, useLocation } from 'react-router-dom'
+import { MemoryRouter, Routes, Route } from 'react-router-dom'
 import { Settings, Users, KeyRound } from 'lucide-react'
 import { MainLayout } from './main-layout'
 import { Header } from './header/header'
