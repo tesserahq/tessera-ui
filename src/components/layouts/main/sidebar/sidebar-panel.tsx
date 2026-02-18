@@ -7,24 +7,23 @@ import { SidebarMenu } from './sidebar-menu'
 
 interface IProps {
   menuItems: MainItemProps[]
+  collapseSidebar: boolean
+  customSidebar?: React.ReactNode
 }
 
 export function SidebarPanel({
   menuItems,
+  collapseSidebar,
+  customSidebar,
   ...props
 }: React.ComponentProps<typeof Sidebar> & IProps) {
   const { pathname } = useLocation()
   const { setOpen } = useSidebar()
 
-  // Check if route matches /roles/:id/overview pattern
-  const isOverviewPage = React.useMemo(() => {
-    return pathname.split('/').length > 2
-  }, [pathname])
-
   // Update sidebar state based on route
   React.useEffect(() => {
-    setOpen(!isOverviewPage)
-  }, [isOverviewPage, setOpen, pathname])
+    setOpen(!collapseSidebar)
+  }, [collapseSidebar, setOpen, pathname])
 
   return (
     <Sidebar
@@ -32,7 +31,7 @@ export function SidebarPanel({
       className="animate-slide-left mt-[60px] bg-sidebar-background"
       {...props}>
       <SidebarContent>
-        <SidebarMenu menuItems={menuItems} />
+        {customSidebar ? customSidebar : <SidebarMenu menuItems={menuItems} />}
       </SidebarContent>
       <SidebarRail />
     </Sidebar>

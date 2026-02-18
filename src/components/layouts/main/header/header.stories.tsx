@@ -3,6 +3,7 @@ import { withRouter } from 'storybook-addon-remix-react-router'
 import { Header } from './header'
 import { TesseraProvider, type AppHostUrls } from '../../../../main'
 import { Button } from '../../../ui/button'
+import type React from 'react'
 
 const defaultAppHostUrls: AppHostUrls = {
   quore: 'https://quore.example.com',
@@ -29,13 +30,25 @@ const meta: Meta<typeof Header> = {
       },
     },
   },
+  args: {
+    title: 'Custos',
+    selectedTheme: 'system',
+    onSetTheme: () => {},
+    actionLogout: () => {},
+    actionProfile: () => {},
+    defaultAvatar: '/images/logo.png',
+    appHostUrls: defaultAppHostUrls,
+    isStorybook: true,
+  },
   argTypes: {
     title: { control: { type: 'text' } },
     selectedTheme: {
       control: { type: 'select' },
       options: ['light', 'dark', 'system'],
     },
-    action: { control: false },
+    contentLeft: { control: false },
+    contentCenter: { control: false },
+    contentRight: { control: false },
     onSetTheme: { action: 'onSetTheme' },
     actionLogout: { action: 'actionLogout' },
     actionProfile: { action: 'actionProfile' },
@@ -63,16 +76,6 @@ const Page = ({ children }: { children: React.ReactNode }) => (
 )
 
 export const Default: Story = {
-  args: {
-    title: 'Custos',
-    selectedTheme: 'system',
-    onSetTheme: () => {},
-    actionLogout: () => {},
-    actionProfile: () => {},
-    defaultAvatar: '/images/logo.png',
-    appHostUrls: defaultAppHostUrls,
-    isStorybook: true,
-  },
   render: (args) => (
     <Page>
       <TesseraProvider identiesApiUrl="" token="">
@@ -85,7 +88,7 @@ export const Default: Story = {
 export const WithAction: Story = {
   args: {
     ...Default.args,
-    action: (
+    contentRight: (
       <Button size="xs" variant="outline">
         Create
       </Button>
@@ -93,7 +96,9 @@ export const WithAction: Story = {
   },
   render: (args) => (
     <Page>
-      <Header {...args} />
+      <TesseraProvider identiesApiUrl="" token="">
+        <Header {...args} />
+      </TesseraProvider>
     </Page>
   ),
 }

@@ -58,7 +58,7 @@ export function AppMenu({
             'focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0',
             isOpenAppMenu && 'bg-accent'
           )}>
-          <Grip />
+          <Grip className={cn('text-foreground', isOpenAppMenu && 'text-primary')} />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent

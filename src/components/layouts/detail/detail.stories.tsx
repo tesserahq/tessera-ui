@@ -24,7 +24,8 @@ DetailLayout provides a full-page layout with a fixed sidebar, breadcrumb header
 \`\`\`tsx
 <DetailLayout
   menuItems={menuItems}
-  breadcrumb={breadcrumb}
+  breadcrumbs={breadcrumbs}
+  isLoading={false}
 >
   <YourPageContent />
 </DetailLayout>
@@ -35,14 +36,23 @@ DetailLayout provides a full-page layout with a fixed sidebar, breadcrumb header
   },
   decorators: [withRouter],
   tags: ['autodocs'],
+  args: {
+    menuItems: [],
+    breadcrumbs: [],
+    isLoading: false,
+  },
   argTypes: {
     menuItems: {
       description: 'Sidebar menu items. Can include nested children and optional divider.',
       control: { type: 'object' },
     },
-    breadcrumb: {
+    breadcrumbs: {
       description: 'Breadcrumb items shown in the header (label + link).',
       control: { type: 'object' },
+    },
+    isLoading: {
+      description: 'Whether to show loading state for breadcrumbs.',
+      control: { type: 'boolean' },
     },
     children: {
       description: 'Main content rendered inside DetailContent.',
@@ -105,7 +115,7 @@ const defaultMenuItems: DetailItemsProps[] = [
 
 const defaultBreadcrumb: BreadcrumbItemData[] = [
   { label: 'Home', link: '/', disabled: true },
-  { label: 'Dashboard', link: '/dashboard', disabled: true },
+  { label: 'Overview', link: '/overview', disabled: true },
 ]
 
 export const DefaultDetailLayout: Story = {
@@ -118,7 +128,8 @@ export const DefaultDetailLayout: Story = {
   },
   args: {
     menuItems: defaultMenuItems,
-    breadcrumb: defaultBreadcrumb,
+    breadcrumbs: defaultBreadcrumb,
+    isLoading: false,
     children: (
       <div className="space-y-4 p-3">
         <h1 className="text-2xl font-bold">Overview</h1>

@@ -12,6 +12,7 @@ import identies from '../../../../../public/logo/identies-logo.png'
 import indexa from '../../../../../public/logo/indexa-logo.png'
 import sendly from '../../../../../public/logo/sendly-logo.png'
 import orcha from '../../../../../public/logo/orcha-logo.png'
+import lindenBackoffice from '../../../../../public/logo/linden-backoffice-logo.png'
 
 export const logos = {
   custos,
@@ -22,6 +23,7 @@ export const logos = {
   indexa,
   sendly,
   orcha,
+  lindenBackoffice,
 }
 
 interface IProps {
@@ -30,15 +32,19 @@ interface IProps {
   onSetTheme: (theme: string) => void
   actionLogout: () => void
   actionProfile: () => void
-  defaultAvatar: string
   appHostUrls: AppHostUrls
-  action?: React.ReactNode
+  defaultAvatar?: string
+  contentLeft?: React.ReactNode
+  contentCenter?: React.ReactNode
+  contentRight?: React.ReactNode
   isStorybook?: boolean
 }
 
 export function Header({
   title,
-  action,
+  contentLeft,
+  contentRight,
+  contentCenter,
   selectedTheme,
   actionLogout,
   actionProfile,
@@ -47,6 +53,17 @@ export function Header({
   appHostUrls,
   isStorybook,
 }: IProps) {
+  const convertTitle = (title: string) => {
+    const toCamelCase = title
+      .split(' ')
+      .map((word, index) =>
+        index === 0 ? word.toLowerCase() : word.charAt(0).toUpperCase() + word.slice(1)
+      )
+      .join('')
+
+    return toCamelCase
+  }
+
   return (
     <header
       className="fixed h-[60px] animate-slide-down duration-100 z-20! left-0 bg-white
@@ -58,26 +75,29 @@ export function Header({
         <AppMenu currentApp={title} appHostUrls={appHostUrls} />
         <Link to="/" className="space-x-2">
           <div className="flex items-center gap-2 lg:ml-0">
-            <Avatar className="ring-0">
-              <AvatarImage src={logos[title.toLowerCase() as keyof typeof logos]} />
+            <Avatar className="ring-0 w-8 h-8">
+              <AvatarImage src={logos[convertTitle(title) as keyof typeof logos]} />
               <AvatarFallback>{title.charAt(0).toUpperCase()}</AvatarFallback>
             </Avatar>
             <span className="text-base font-bold">{title}</span>
           </div>
         </Link>
-        {action && (
+        {contentLeft && (
           <>
             <Separator
               orientation="vertical"
               className="mr-1.5 h-3 bg-slate-400 dark:bg-slate-500"
             />
-            {action}
+            {contentLeft}
           </>
         )}
       </div>
 
+      {contentCenter && <div className="flex-1">{contentCenter}</div>}
+
       {/* Right Content */}
-      <div className="pe-4">
+      <div className="pe-4 flex items-center gap-2">
+        {contentRight && <div>{contentRight}</div>}
         <ProfileMenu
           isStorybook={isStorybook}
           selectedTheme={selectedTheme}

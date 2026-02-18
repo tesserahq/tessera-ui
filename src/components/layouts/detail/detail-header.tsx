@@ -12,11 +12,23 @@ import type { BreadcrumbItemData } from '../types'
 import { Link } from 'react-router'
 import { cn } from '../../../utils/misc'
 
+function BreadcrumbLoader() {
+  return (
+    <div className="flex items-center gap-2">
+      <div className="h-5 w-16 animate-pulse bg-slate-200 dark:bg-slate-600 rounded-lg"></div>
+      <div className="h-5 w-32 animate-pulse bg-slate-200 dark:bg-slate-600 rounded-lg"></div>
+      <div className="h-5 w-16 animate-pulse bg-slate-200 dark:bg-slate-600 rounded-lg"></div>
+    </div>
+  )
+}
+
 export function DetailHeader({
-  breadcrumb,
+  breadcrumbs,
   className,
+  isLoading,
 }: {
-  breadcrumb: BreadcrumbItemData[]
+  breadcrumbs: BreadcrumbItemData[]
+  isLoading: boolean
   className?: string
 }) {
   const shouldCapitalize = (label: string) => !label.includes('@')
@@ -27,13 +39,14 @@ export function DetailHeader({
         'bg-white dark:bg-sidebar-background w-full fixed top-[60px] z-5 px-3 py-4 border-b',
         className
       )}>
-      {breadcrumb && breadcrumb.length > 0 && (
+      {isLoading && <BreadcrumbLoader />}
+      {!isLoading && breadcrumbs && breadcrumbs.length > 0 && (
         <Breadcrumb>
           <BreadcrumbList>
-            {breadcrumb.map((item, index) => (
+            {breadcrumbs.map((item, index) => (
               <React.Fragment key={item.link}>
                 <BreadcrumbItem>
-                  {index === breadcrumb.length - 1 ? (
+                  {index === breadcrumbs.length - 1 ? (
                     <BreadcrumbPage className={shouldCapitalize(item.label) ? 'capitalize' : ''}>
                       {item.label}
                     </BreadcrumbPage>
@@ -47,7 +60,7 @@ export function DetailHeader({
                     </BreadcrumbLink>
                   )}
                 </BreadcrumbItem>
-                {index < breadcrumb.length - 1 && <BreadcrumbSeparator />}
+                {index < breadcrumbs.length - 1 && <BreadcrumbSeparator />}
               </React.Fragment>
             ))}
           </BreadcrumbList>
