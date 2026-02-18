@@ -11,6 +11,10 @@ export interface MainLayoutProps {
   children: React.ReactNode
   /** Array of menu items to display in the sidebar navigation */
   menuItems: MainItemProps[]
+  /** Collapse main sidebar */
+  collapseSidebar: boolean
+  /** Custom sidebar menu */
+  customSidebar?: React.ReactNode
   /** Additional CSS classes for the layout container */
   className?: string
 }
@@ -28,10 +32,19 @@ export interface MainLayoutProps {
  * </MainLayout>
  * ```
  */
-export function MainLayout({ children, menuItems }: MainLayoutProps) {
+export function MainLayout({
+  children,
+  menuItems,
+  collapseSidebar,
+  customSidebar,
+}: MainLayoutProps) {
   return (
     <SidebarProvider>
-      <SidebarPanel menuItems={menuItems} />
+      <SidebarPanel
+        menuItems={menuItems}
+        collapseSidebar={collapseSidebar}
+        customSidebar={customSidebar}
+      />
       <SidebarInset>
         <div className="pt-[60px] h-full">{children}</div>
       </SidebarInset>

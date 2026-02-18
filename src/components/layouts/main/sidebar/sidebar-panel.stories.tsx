@@ -66,11 +66,15 @@ export const Default: Story = {
       },
     },
   },
-  render: () => {
+  render: ({ collapseSidebar }) => {
     return (
       <MemoryRouter initialEntries={['/roles']}>
         <SidebarProvider>
-          <SidebarPanel menuItems={defaultMenuItems} className="mt-0" />
+          <SidebarPanel
+            menuItems={defaultMenuItems}
+            className="mt-0"
+            collapseSidebar={collapseSidebar}
+          />
           <Content />
         </SidebarProvider>
       </MemoryRouter>
@@ -91,10 +95,14 @@ export const Collapsible: Story = {
       },
     },
   },
-  render: () => (
+  render: ({ collapseSidebar }) => (
     <MemoryRouter initialEntries={['/roles/123/overview']}>
       <SidebarProvider>
-        <SidebarPanel menuItems={defaultMenuItems} className="mt-0" />
+        <SidebarPanel
+          menuItems={defaultMenuItems}
+          className="mt-0"
+          collapseSidebar={collapseSidebar}
+        />
         <Content />
       </SidebarProvider>
     </MemoryRouter>

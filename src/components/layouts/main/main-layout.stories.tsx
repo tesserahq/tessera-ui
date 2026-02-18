@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { withRouter, reactRouterParameters } from 'storybook-addon-remix-react-router'
+import type React from 'react'
 import { MemoryRouter, Routes, Route } from 'react-router-dom'
 import { Settings, Users, KeyRound } from 'lucide-react'
 import { MainLayout } from './main-layout'
@@ -8,6 +9,27 @@ import { DetailLayout } from '../detail/detail.layout'
 import type { MainItemProps } from '../types'
 import type { DetailItemsProps, BreadcrumbItemData } from '../types'
 import type { AppHostUrls } from '../../../main'
+
+const AutoCollapseMainLayout = ({
+  children,
+  menuItems,
+  customSidebar,
+  collapseSidebar,
+}: {
+  children: React.ReactNode
+  menuItems: MainItemProps[]
+  collapseSidebar: boolean
+  customSidebar?: React.ReactNode
+}) => {
+  return (
+    <MainLayout
+      menuItems={menuItems}
+      collapseSidebar={collapseSidebar}
+      customSidebar={customSidebar}>
+      {children}
+    </MainLayout>
+  )
+}
 
 const meta: Meta<typeof MainLayout> = {
   title: 'Components/Layouts/MainLayout',
@@ -25,6 +47,14 @@ const meta: Meta<typeof MainLayout> = {
     className: {
       description: 'Additional CSS classes for the layout container',
       control: { type: 'text' },
+    },
+    collapseSidebar: {
+      description: 'Collapse main sidebar',
+      control: { type: 'boolean' },
+    },
+    customSidebar: {
+      description: 'Custom sidebar menu',
+      control: false,
     },
   },
 }
@@ -190,15 +220,15 @@ export const HomePage: Story = {
       },
     },
   },
-  render: () => (
+  render: ({ collapseSidebar }) => (
     <MemoryRouter initialEntries={['/roles']}>
       <MockHeader />
-      <MainLayout menuItems={defaultMenuItems}>
+      <AutoCollapseMainLayout menuItems={defaultMenuItems} collapseSidebar={collapseSidebar}>
         <Routes>
           <Route path="/roles" element={<RolesListPage />} />
           <Route path="/roles/:id/overview" element={<RoleDetailPage />} />
         </Routes>
-      </MainLayout>
+      </AutoCollapseMainLayout>
     </MemoryRouter>
   ),
 }
@@ -221,12 +251,15 @@ export const DetailPage: Story = {
   render: () => (
     <MemoryRouter initialEntries={['/roles']}>
       <MockHeader />
-      <MainLayout menuItems={defaultMenuItems}>
+      <AutoCollapseMainLayout menuItems={defaultMenuItems} collapseSidebar={true}>
         <Routes>
           <Route
             path="/roles"
             element={
-              <DetailLayout menuItems={defaultDetailMenuItems} breadcrumb={defaultBreadcrumb}>
+              <DetailLayout
+                menuItems={defaultDetailMenuItems}
+                breadcrumbs={defaultBreadcrumb}
+                isLoading={false}>
                 <div className="space-y-4 p-3">
                   <h1 className="text-2xl font-bold">Roles List</h1>
                   <p className="text-muted-foreground">
@@ -251,11 +284,12 @@ export const DetailPage: Story = {
             element={
               <DetailLayout
                 menuItems={defaultDetailMenuItems}
-                breadcrumb={[
+                breadcrumbs={[
                   { label: 'Home', link: '/' },
                   { label: 'Roles', link: '/roles' },
                   { label: 'Role Detail', link: '/roles/123/overview' },
-                ]}>
+                ]}
+                isLoading={false}>
                 <div className="space-y-4 p-3">
                   <h1 className="text-2xl font-bold">Role Detail</h1>
                   <p className="text-muted-foreground">
@@ -279,7 +313,7 @@ export const DetailPage: Story = {
             }
           />
         </Routes>
-      </MainLayout>
+      </AutoCollapseMainLayout>
     </MemoryRouter>
   ),
 }

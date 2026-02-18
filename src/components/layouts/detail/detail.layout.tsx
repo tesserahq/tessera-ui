@@ -8,7 +8,8 @@ import { DetailContent } from './detail-content'
 interface DetailLayoutProps {
   children: React.ReactNode
   menuItems: DetailItemsProps[]
-  breadcrumb: BreadcrumbItemData[]
+  breadcrumbs: BreadcrumbItemData[]
+  isLoading: boolean
   className?: string
   headerClassName?: string
 }
@@ -16,13 +17,14 @@ interface DetailLayoutProps {
 export function DetailLayout({
   children,
   menuItems,
-  breadcrumb,
+  breadcrumbs,
   className,
   headerClassName,
+  isLoading,
 }: DetailLayoutProps) {
   return (
     <>
-      <DetailHeader breadcrumb={breadcrumb} className={headerClassName} />
+      <DetailHeader breadcrumbs={breadcrumbs} className={headerClassName} isLoading={isLoading} />
 
       <div className={cn('flex items-start gap-3 h-full relative pt-[53px]', className)}>
         <DetailSidenav menuItems={menuItems} />
