@@ -48,10 +48,10 @@ export function SidebarMenu({ menuItems }: { menuItems: MainItemProps[] }): Reac
                 <Link
                   to={item.disabled ? '#' : item.path}
                   className={cn(
-                    'hover:bg-accent! hover:text-primary! dark:hover:text-primary-foreground!',
+                    'hover:bg-primary/20! hover:text-primary! dark:hover:text-primary-foreground!',
                     isActive(item.path) &&
-                      `text-primary! dark:text-primary-foreground! bg-accent border border-primary
-                      opacity-100 font-medium`
+                      `text-primary! dark:text-primary-foreground! bg-primary/10 border
+                      border-primary opacity-100 font-medium`
                   )}>
                   <item.icon size={18} />
                   <span>{item.title}</span>
