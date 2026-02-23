@@ -38,13 +38,13 @@ async function copyTextToClipboard(text: string): Promise<boolean> {
 }
 
 export interface ResourceIdProps extends Omit<React.HTMLAttributes<HTMLSpanElement>, 'children'> {
-  value?: string | null
+  value: string
   truncate?: number
   showCopyOnHover?: boolean
   copyFeedbackDurationMs?: number
 }
 
-export function ResourceId({
+export function ResourceID({
   value,
   truncate = 8,
   showCopyOnHover = true,
@@ -97,7 +97,7 @@ export function ResourceId({
             <TooltipTrigger asChild>
               <span className="font-mono tabular-nums">{displayValue}</span>
             </TooltipTrigger>
-            <TooltipContent side="top">
+            <TooltipContent side="top" align="end">
               <span className="font-mono tabular-nums">{safeValue}</span>
             </TooltipContent>
           </Tooltip>
