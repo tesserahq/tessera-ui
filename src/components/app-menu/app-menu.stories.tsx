@@ -15,7 +15,7 @@ const CURRENT_APP_OPTIONS = [
 ] as const
 
 const meta: Meta<typeof AppMenu> = {
-  title: 'Components/AppMenu',
+  title: 'Shortcut/AppMenu',
   component: AppMenu,
   parameters: {
     layout: 'centered',

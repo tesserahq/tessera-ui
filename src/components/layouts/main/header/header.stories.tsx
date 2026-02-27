@@ -17,7 +17,7 @@ const defaultAppHostUrls: AppHostUrls = {
 }
 
 const meta: Meta<typeof Header> = {
-  title: 'Components/Layouts/Header',
+  title: 'Layouts/Header',
   component: Header,
   tags: ['autodocs'],
   decorators: [withRouter],

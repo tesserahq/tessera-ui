@@ -8,7 +8,7 @@ import type { MainItemProps } from '../../types'
 import { SidebarPanel } from './sidebar-panel'
 
 const meta: Meta<typeof SidebarPanel> = {
-  title: 'Components/Layouts/Sidebar',
+  title: 'Layouts/Sidebar',
   component: SidebarPanel,
   tags: ['autodocs'],
   decorators: [withRouter],

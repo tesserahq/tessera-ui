@@ -32,7 +32,7 @@ const AutoCollapseMainLayout = ({
 }
 
 const meta: Meta<typeof MainLayout> = {
-  title: 'Components/Layouts/MainLayout',
+  title: 'Layouts/MainLayout',
   component: MainLayout,
   tags: ['autodocs'],
   argTypes: {

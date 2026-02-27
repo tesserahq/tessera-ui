@@ -3,7 +3,7 @@ import { EmptyContent } from './empty-content'
 import { Button } from '../ui/button'
 
 const meta: Meta<typeof EmptyContent> = {
-  title: 'Components/EmptyContent',
+  title: 'Information/EmptyContent',
   component: EmptyContent,
   parameters: {
     layout: 'fullscreen',

@@ -4,7 +4,7 @@ import { withRouter } from 'storybook-addon-remix-react-router'
 import React from 'react'
 
 const meta: Meta<typeof ComboBox> = {
-  title: 'Components/ComboBox',
+  title: 'Form/ComboBox',
   component: ComboBox,
   parameters: {
     layout: 'centered',

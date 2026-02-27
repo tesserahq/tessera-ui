@@ -3,7 +3,7 @@ import { Pagination } from './pagination'
 import { withRouter } from 'storybook-addon-remix-react-router'
 
 const meta: Meta<typeof Pagination> = {
-  title: 'Components/Pagination',
+  title: 'Navigation/Pagination',
   component: Pagination,
   parameters: {
     layout: 'centered',

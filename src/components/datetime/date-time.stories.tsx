@@ -2,10 +2,60 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { DateTime } from './date-time'
 
 const meta: Meta<typeof DateTime> = {
-  title: 'Components/DateTime',
+  title: 'Information/DateTime',
   component: DateTime,
+  tags: ['autodocs'],
   parameters: {
     layout: 'centered',
+    docs: {
+      description: {
+        component: [
+          'Displays a date/time with timezone support and a rich tooltip.',
+          '',
+          '- Accepts a `Date` or a string. If a string is missing a trailing `Z`, it is treated as UTC.',
+          '- Tooltip shows UTC, selected timezone, relative time, and timestamp.',
+          '',
+          'Import:',
+          '',
+          '```tsx',
+          "import { DateTime } from 'tessera-ui/components/datetime'",
+          '```',
+        ].join('\n'),
+      },
+    },
+  },
+  argTypes: {
+    date: {
+      control: { type: 'text' },
+      description:
+        'Date/time to display. Accepts a `Date` or an ISO string. Strings without a timezone suffix get a trailing `Z` (UTC).',
+    },
+    formatStr: {
+      control: { type: 'text' },
+      description: 'A `date-fns` format string.',
+      table: { defaultValue: { summary: 'MMM dd, yyyy HH:mm:ss' } },
+    },
+    timezone: {
+      control: { type: 'text' },
+      description:
+        'IANA timezone (e.g. `UTC`, `America/New_York`). Defaults to the browser timezone (fallback: `America/New_York`).',
+    },
+    showTimezone: {
+      control: { type: 'boolean' },
+      description: 'Append the timezone abbreviation to the rendered value.',
+      table: { defaultValue: { summary: 'false' } },
+    },
+    tooltipSide: {
+      control: { type: 'select' },
+      options: ['top', 'right', 'bottom', 'left'],
+      table: { defaultValue: { summary: 'bottom' } },
+    },
+    tooltipAlign: {
+      control: { type: 'select' },
+      options: ['start', 'center', 'end'],
+      table: { defaultValue: { summary: 'start' } },
+    },
+    className: { control: false },
   },
 }
 
@@ -13,11 +63,10 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-// Sample dates for stories
-const now = new Date()
+const sampleDate = '2026-02-26T12:00:00Z'
 
 export const Default: Story = {
   args: {
-    date: now,
+    date: sampleDate,
   },
 }

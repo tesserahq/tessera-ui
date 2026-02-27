@@ -6,7 +6,7 @@ import type { BreadcrumbItemData, DetailItemsProps } from '../types'
 import { DetailLayout } from './detail.layout'
 
 const meta: Meta<typeof DetailLayout> = {
-  title: 'Components/Layouts/DetailLayout',
+  title: 'Layouts/DetailLayout',
   component: DetailLayout,
   parameters: {
     layout: 'fullscreen',

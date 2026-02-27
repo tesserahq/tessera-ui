@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { ResourceID } from './resource-id'
 
 const meta: Meta<typeof ResourceID> = {
-  title: 'Components/ResourceID',
+  title: 'Shortcut/ResourceID',
   component: ResourceID,
   tags: ['autodocs'],
   parameters: {

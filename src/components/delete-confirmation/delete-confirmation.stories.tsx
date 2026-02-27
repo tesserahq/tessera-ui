@@ -4,7 +4,7 @@ import DeleteConfirmation, { type DeleteConfirmationHandle } from './delete-conf
 import { Button } from '../ui/button'
 
 const meta: Meta<typeof DeleteConfirmation> = {
-  title: 'Components/DeleteConfirmation',
+  title: 'Information/DeleteConfirmation',
   component: DeleteConfirmation,
   parameters: {
     layout: 'centered',

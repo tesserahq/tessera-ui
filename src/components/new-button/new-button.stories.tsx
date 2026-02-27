@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { NewButton } from './new-button'
 
 const meta: Meta<typeof NewButton> = {
-  title: 'Components/NewButton',
+  title: 'Shortcut/NewButton',
   component: NewButton,
   parameters: {
     layout: 'centered',
