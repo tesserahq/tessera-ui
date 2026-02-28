@@ -1,0 +1,67 @@
+import { Meta } from '@storybook/blocks'
+import { StorybookTable } from '../misc/storybook-table/storybook-table.tsx'
+
+<Meta title="Shortcut/ResourceID" />
+
+# ResourceID
+
+The `ResourceID` component displays a resource identifier in a compact, monospaced “pill”, with an optional copy-to-clipboard action.
+
+## Features
+
+- **Compact display**: Truncates long IDs to a configurable length
+- **Full value tooltip**: Hover the value to see the complete ID (when `value` is set)
+- **Copy action**: Copy button with success/failure feedback
+- **Hover behavior**: Optionally show the copy button only on hover/focus
+- **Accessible**: Copy button includes an `aria-label`
+
+## Usage
+
+```tsx
+import { ResourceID } from 'tessera-ui/components/resource-id'
+
+export function Row({ id }: { id: string }) {
+  return <ResourceID value={id} />
+}
+```
+
+## Props
+
+<StorybookTable
+  rows={[
+    {
+      name: 'value',
+      required: false,
+      type: 'string | null',
+      default: '-',
+      description: 'Full identifier to display and copy',
+    },
+    {
+      name: 'truncate',
+      required: false,
+      type: 'number',
+      default: '8',
+      description: 'Number of characters to show',
+    },
+    {
+      name: 'showCopyOnHover',
+      required: false,
+      type: 'boolean',
+      default: 'true',
+      description: 'Show copy button only on hover/focus',
+    },
+    {
+      name: 'copyFeedbackDurationMs',
+      required: false,
+      type: 'number',
+      default: '2000',
+      description: 'How long to show copy feedback (ms)',
+    },
+  ]}
+/>
+
+## Behavior
+
+- When `value` is empty/null, the copy action is disabled and the full-value tooltip is omitted.
+- The value tooltip shows the full `value`; the rendered text shows the truncated value.
+- After clicking copy, the icon/tooltip briefly changes to reflect success/failure, then resets.

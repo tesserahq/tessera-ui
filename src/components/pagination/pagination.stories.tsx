@@ -1,12 +1,16 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Pagination } from './pagination'
 import { withRouter } from 'storybook-addon-remix-react-router'
+import PaginationDocs from './pagination.mdx'
 
 const meta: Meta<typeof Pagination> = {
   title: 'Navigation/Pagination',
   component: Pagination,
   parameters: {
     layout: 'centered',
+    docs: {
+      page: PaginationDocs,
+    },
   },
   decorators: [withRouter],
 }

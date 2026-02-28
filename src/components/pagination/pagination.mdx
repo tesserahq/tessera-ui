@@ -1,0 +1,107 @@
+import { Meta } from '@storybook/blocks'
+import { StorybookTable } from '../misc/storybook-table/storybook-table.tsx'
+
+<Meta title="Navigation/Pagination" />
+
+# Pagination
+
+The `Pagination` component renders a full pagination bar: "Items per page" size selector (25, 50, 75, 100), current range label (e.g. "1–25 of 120"), and first/prev/page numbers/next/last controls. It can drive the current page and size via URL (scoped params) or via an optional callback.
+
+## Usage
+
+```tsx
+import { Pagination } from 'tessera-ui/components/pagination';
+<Pagination
+  meta={{
+    page: 1,
+    pages: 5,
+    size: 25,
+    total: 120,
+  }}
+/>
+```
+
+With a scope for URL-based navigation:
+
+```tsx
+<Pagination
+  scope="list"
+  meta={{
+    page: 2,
+    pages: 8,
+    size: 25,
+    total: 200,
+  }}
+/>
+```
+
+With a callback (no URL updates):
+
+```tsx
+<Pagination
+  meta={{ page: 1, pages: 4, size: 50, total: 180 }}
+  callback={({ page, size }) => {
+    fetchPage(page, size)
+  }}
+/>
+```
+
+## Props
+
+<StorybookTable
+  title="Pagination props"
+  rows={[
+    {
+      name: 'meta',
+      required: true,
+      type: 'IPagingInfo',
+      description:
+        'Current paging state: page, pages, size, total. Used to render range and page controls.',
+    },
+    {
+      name: 'scope',
+      required: false,
+      type: 'string',
+      description:
+        'Optional scope for URL query params (e.g. "list"). When set, navigation updates URL via useScopedParams.',
+    },
+    {
+      name: 'callback',
+      required: false,
+      type: '({ page: number, size: number }) => void',
+      description: 'Optional. When provided, navigation calls this instead of updating the URL.',
+    },
+  ]}
+/>
+
+## IPagingInfo (meta shape)
+
+<StorybookTable
+  title="IPagingInfo"
+  rows={[
+    {
+      name: 'page',
+      required: true,
+      type: 'number',
+      description: 'Current 1-based page index',
+    },
+    {
+      name: 'pages',
+      required: true,
+      type: 'number',
+      description: 'Total number of pages',
+    },
+    {
+      name: 'size',
+      required: true,
+      type: 'number',
+      description: 'Number of items per page (e.g. 25, 50, 75, 100)',
+    },
+    {
+      name: 'total',
+      required: true,
+      type: 'number',
+      description: 'Total number of items across all pages',
+    },
+  ]}
+/>

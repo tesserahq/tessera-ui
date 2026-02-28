@@ -4,6 +4,7 @@ import { Header } from './header'
 import { TesseraProvider, type AppHostUrls } from '../../../../main'
 import { Button } from '../../../ui/button'
 import type React from 'react'
+import HeaderDocs from './header.mdx'
 
 const defaultAppHostUrls: AppHostUrls = {
   quore: 'https://quore.example.com',
@@ -19,15 +20,11 @@ const defaultAppHostUrls: AppHostUrls = {
 const meta: Meta<typeof Header> = {
   title: 'Layouts/Header',
   component: Header,
-  tags: ['autodocs'],
   decorators: [withRouter],
   parameters: {
     layout: 'fullscreen',
     docs: {
-      description: {
-        component:
-          'Main layout header containing the app switcher, logo/title link, optional action slot, and profile menu.',
-      },
+      page: HeaderDocs,
     },
   },
   args: {

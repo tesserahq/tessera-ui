@@ -1,0 +1,120 @@
+import { Meta } from '@storybook/blocks'
+import { StorybookTable } from '../misc/storybook-table/storybook-table.tsx'
+
+<Meta title="Form/ComboBox" />
+
+# ComboBox
+
+The `ComboBox` component is a flexible, searchable dropdown that works with string arrays or object arrays. It supports custom option rendering, search/filter, and integrates with forms via a hidden input. Use it for selecting a single value from a list with optional type-to-search.
+
+## Usage
+
+```tsx
+import { ComboBox } from 'tessera-ui/components/combo-box'
+import React from 'react'
+
+const fruits = ['apple', 'banana', 'cherry', 'date', 'elderberry']
+const [selected, setSelected] = React.useState<string | null>(fruits[0])
+
+<ComboBox
+  name="fruit"
+  label="Select a fruit"
+  value={selected ?? ''}
+  onChange={(fruit) => setSelected(fruit)}
+  options={fruits}
+  getOptionId={(fruit) => fruit}
+  getOptionLabel={(fruit) => fruit}
+  placeholder="Search fruits..."
+/>
+```
+
+## Props
+
+<StorybookTable
+  rows={[
+    {
+      name: 'name',
+      required: true,
+      type: 'string',
+      description: 'Name attribute for the hidden input (used for form submission)',
+    },
+    {
+      name: 'label',
+      required: true,
+      type: 'string',
+      description: 'Label text displayed above the input',
+    },
+    {
+      name: 'value',
+      required: true,
+      type: 'string',
+      description: 'Current selected value (ID from getOptionId). Controlled by parent state.',
+    },
+    {
+      name: 'onChange',
+      required: true,
+      type: '(option: T | null) => void',
+      description:
+        'Callback when user selects an option; receives the full selected object or null.',
+    },
+    {
+      name: 'options',
+      required: true,
+      type: 'T[]',
+      description: 'Array of options (strings or objects) to display in the dropdown',
+    },
+    {
+      name: 'getOptionId',
+      required: true,
+      type: '(option: T) => string',
+      description:
+        'Function to extract unique ID from each option (used for value, keys, form submission)',
+    },
+    {
+      name: 'getOptionLabel',
+      required: true,
+      type: '(option: T) => string',
+      description: 'Function to extract display label from each option',
+    },
+    {
+      name: 'getSearchValue',
+      required: false,
+      type: '(option: T) => string',
+      default: 'getOptionLabel(option)',
+      description: 'Optional. Text used for search/filter. Defaults to getOptionLabel.',
+    },
+    {
+      name: 'renderOption',
+      required: false,
+      type: '(option: T) => React.ReactNode',
+      description:
+        'Optional custom render for dropdown items (e.g. name + email). Defaults to label.',
+    },
+    {
+      name: 'required',
+      required: false,
+      type: 'boolean',
+      default: 'false',
+      description: 'Whether the field is required (adds asterisk to label)',
+    },
+    {
+      name: 'error',
+      required: false,
+      type: 'string',
+      description: 'Error message shown below the input; also applies error styling to the input',
+    },
+    {
+      name: 'placeholder',
+      required: false,
+      type: 'string',
+      default: '"Search..."',
+      description: 'Placeholder text in the search input inside the dropdown',
+    },
+    {
+      name: 'className',
+      required: false,
+      type: 'string',
+      description: 'Additional CSS classes for the input container',
+    },
+  ]}
+/>

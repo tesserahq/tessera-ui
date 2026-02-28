@@ -6,7 +6,7 @@ const preview: Preview = {
     layout: 'fullscreen',
     options: {
       storySort: {
-        order: ['Intro'],
+        order: ['Docs Overview', '*'],
       },
     },
     actions: { argTypesRegex: '^on[A-Z].*' },

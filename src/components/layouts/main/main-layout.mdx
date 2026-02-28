@@ -1,0 +1,80 @@
+import { Meta } from '@storybook/blocks'
+import { StorybookTable } from '../../misc/storybook-table/storybook-table.tsx'
+
+<Meta title="Layouts/MainLayout" />
+
+# MainLayout
+
+The `MainLayout` component provides the primary application shell: a collapsible sidebar navigation and a main content area. It wraps content in `SidebarProvider` and renders `SidebarPanel` plus a `SidebarInset` for the page body.
+
+## Usage
+
+```tsx
+import { MainLayout } from 'tessera-ui/components/layouts/main'
+import { Header } from 'tessera-ui/components/layouts/main/header'
+import type { MainItemProps } from 'tessera-ui/components/layouts/types'
+import { KeyRound, Settings, Users } from 'lucide-react'
+
+const menuItems: MainItemProps[] = [
+  { title: 'Roles', path: '/roles', icon: KeyRound },
+  { title: 'Users', path: '/users', icon: Users },
+  { title: 'Settings', path: '/settings', icon: Settings },
+]
+
+function App() {
+  const collapseSidebar = false // e.g. derive from route depth
+
+  return (
+    <>
+      <Header title="Custos" {...headerProps} />
+      <MainLayout menuItems={menuItems} collapseSidebar={collapseSidebar}>
+        <div className="p-6">Your page content or nested DetailLayout</div>
+      </MainLayout>
+    </>
+  )
+}
+```
+
+## Props
+
+### MainLayout
+
+<StorybookTable
+  rows={[
+    {
+      name: 'children',
+      required: true,
+      type: 'React.ReactNode',
+      description: 'Main content to display in the layout (e.g. page content or DetailLayout).',
+    },
+    {
+      name: 'menuItems',
+      required: true,
+      type: 'MainItemProps[]',
+      description: 'Array of menu items to display in the sidebar navigation.',
+    },
+    {
+      name: 'collapseSidebar',
+      required: true,
+      type: 'boolean',
+      description: 'When true, the sidebar is collapsed to icon-only mode.',
+    },
+    {
+      name: 'customSidebar',
+      required: false,
+      type: 'React.ReactNode',
+      description: 'Optional custom sidebar content instead of the default menu.',
+    },
+    {
+      name: 'className',
+      required: false,
+      type: 'string',
+      description:
+        'Additional CSS classes for the layout container (currently not applied to root).',
+    },
+  ]}
+/>
+
+### Related types
+
+- **MainItemProps**: `{ title, path, icon, children?, divider?, disabled? }`

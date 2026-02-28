@@ -1,0 +1,117 @@
+import { Meta } from '@storybook/blocks'
+import { StorybookTable } from '../misc/storybook-table/storybook-table.tsx'
+
+<Meta title="Shortcut/NewButton" />
+
+# NewButton
+
+The `NewButton` component provides a standardized "New" button with a plus icon and tooltip. It's designed for consistent creation actions throughout the application, such as creating new items, documents, or entries.
+
+## Features
+
+- **Consistent Design**: Standardized "New" button with plus icon
+- **Tooltip Support**: Helpful tooltip on hover showing the action label
+- **Flexible Sizing**: Supports multiple button sizes
+- **Disabled State**: Built-in disabled state support
+- **Accessible**: Uses Radix UI Tooltip for accessibility
+- **Customizable**: Accepts custom onClick handler and styling
+
+## Usage
+
+```tsx
+import { NewButton } from 'tessera-ui'
+
+function ProjectHeader({ onCreateProject }) {
+  return <NewButton label="Create a new project" onClick={onCreateProject} />
+}
+```
+
+## Props
+
+<StorybookTable
+  rows={[
+    {
+      name: 'label',
+      required: true,
+      type: 'string',
+      default: '-',
+      description: 'Tooltip text shown on hover ',
+    },
+    {
+      name: 'onClick',
+      required: true,
+      type: '() => void',
+      default: '-',
+      description: 'Click handler function',
+    },
+    {
+      name: 'size',
+      required: false,
+      type: '"sm" \| "lg" \| "default" \| "xs" \| "icon" \| null \| undefined',
+      default: '"default"',
+      description: 'Button size variant',
+    },
+    {
+      name: 'disabled',
+      required: false,
+      type: 'boolean',
+      default: 'false',
+      description: 'Whether the button is disabled',
+    },
+  ]}
+/>
+
+## Button Sizes
+
+The component supports the following size options (passed to the underlying Button component):
+
+- `"xs"` - Extra small
+- `"sm"` - Small
+- `"default"` - Default size
+- `"lg"` - Large
+- `"icon"` - Icon-only size
+
+## Behavior
+
+#### Tooltip
+
+- Appears on hover with a 100ms delay (`delayDuration={100}`)
+- Positioned at the bottom of the button
+- Shows the `label` prop text
+- Uses Radix UI Tooltip for accessibility
+
+#### Button Content
+
+- Plus icon (`<Plus />`) from lucide-react
+- "New" text with semibold font weight
+- Icon and text are displayed side by side
+
+#### Click Handling
+
+- Calls the `onClick` prop when clicked
+- Respects the `disabled` state
+- No default behavior (e.g., form submission)
+
+## Requirements
+
+- `lucide-react` - Required for Plus icon
+- Tailwind CSS - Required for styling
+- Radix UI Tooltip - Required for tooltip functionality
+- Radix UI Button - Required for button component
+
+## Styling
+
+The button uses the default Button component styling with:
+
+- Plus icon from lucide-react
+- "New" text with `font-semibold` class
+- Tooltip positioned at the bottom
+- Standard button hover and focus states
+
+## Notes
+
+- The tooltip delay is set to 100ms for quick feedback
+- The "New" text is always displayed (not just an icon)
+- The component wraps the Button in a TooltipProvider
+- Size prop is passed directly to the underlying Button component
+- The label prop is used exclusively for the tooltip, not button text

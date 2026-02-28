@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { AppMenu } from './app-menu'
 import type { AppHostUrls } from './app-menu'
 import { withRouter } from 'storybook-addon-remix-react-router'
+import AppMenuDocs from './app-menu.mdx'
 
 const CURRENT_APP_OPTIONS = [
   'quore',
@@ -19,6 +20,9 @@ const meta: Meta<typeof AppMenu> = {
   component: AppMenu,
   parameters: {
     layout: 'centered',
+    docs: {
+      page: AppMenuDocs,
+    },
   },
   decorators: [withRouter],
   argTypes: {
@@ -44,7 +48,7 @@ const defaultAppHostUrls: AppHostUrls = {
   orcha: 'https://orcha.example.com',
 }
 
-export const Default: Story = {
+export const Example: Story = {
   args: {
     currentApp: 'identies',
     appHostUrls: defaultAppHostUrls,

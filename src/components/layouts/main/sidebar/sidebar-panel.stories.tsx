@@ -6,19 +6,16 @@ import { reactRouterParameters, withRouter } from 'storybook-addon-remix-react-r
 import { SidebarProvider } from '../../../ui/sidebar'
 import type { MainItemProps } from '../../types'
 import { SidebarPanel } from './sidebar-panel'
+import SidebarDocs from './sidebar.mdx'
 
 const meta: Meta<typeof SidebarPanel> = {
   title: 'Layouts/Sidebar',
   component: SidebarPanel,
-  tags: ['autodocs'],
   decorators: [withRouter],
   parameters: {
     layout: 'fullscreen',
     docs: {
-      description: {
-        component:
-          'A route-aware sidebar panel used by `MainLayout`. It automatically collapses on “deep” routes (more than 2 path segments) and expands on shallow routes.',
-      },
+      page: SidebarDocs,
     },
   },
   argTypes: {

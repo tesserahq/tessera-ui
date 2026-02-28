@@ -1,27 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { DateTime } from './date-time'
+import DatetimeDocs from './date-time.mdx'
 
 const meta: Meta<typeof DateTime> = {
   title: 'Information/DateTime',
   component: DateTime,
-  tags: ['autodocs'],
   parameters: {
     layout: 'centered',
     docs: {
-      description: {
-        component: [
-          'Displays a date/time with timezone support and a rich tooltip.',
-          '',
-          '- Accepts a `Date` or a string. If a string is missing a trailing `Z`, it is treated as UTC.',
-          '- Tooltip shows UTC, selected timezone, relative time, and timestamp.',
-          '',
-          'Import:',
-          '',
-          '```tsx',
-          "import { DateTime } from 'tessera-ui/components/datetime'",
-          '```',
-        ].join('\n'),
-      },
+      page: DatetimeDocs,
     },
   },
   argTypes: {
@@ -65,7 +52,7 @@ type Story = StoryObj<typeof meta>
 
 const sampleDate = '2026-02-26T12:00:00Z'
 
-export const Default: Story = {
+export const Example: Story = {
   args: {
     date: sampleDate,
   },

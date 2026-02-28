@@ -2,12 +2,16 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { ComboBox } from './combo-box'
 import { withRouter } from 'storybook-addon-remix-react-router'
 import React from 'react'
+import ComboBoxDocs from './combo-box.mdx'
 
 const meta: Meta<typeof ComboBox> = {
   title: 'Form/ComboBox',
   component: ComboBox,
   parameters: {
     layout: 'centered',
+    docs: {
+      page: ComboBoxDocs,
+    },
   },
   decorators: [
     withRouter,
@@ -17,7 +21,6 @@ const meta: Meta<typeof ComboBox> = {
       </div>
     ),
   ],
-  tags: ['autodocs'],
 }
 
 export default meta

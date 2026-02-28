@@ -1,0 +1,113 @@
+import { Meta } from '@storybook/blocks'
+import { StorybookTable } from '../../../misc/storybook-table/storybook-table.tsx'
+
+<Meta title="Layouts/Header" />
+
+# Header
+
+The `Header` component is the main application header bar. It includes the app switcher (AppMenu), logo/title link, optional left/center/right content slots, and the profile menu with theme switching and logout.
+
+## Usage
+
+```tsx
+import { Header } from 'tessera-ui/components/layouts/main/header'
+import { TesseraProvider } from 'tessera-ui/main'
+import type { AppHostUrls } from 'tessera-ui/main'
+
+const appHostUrls: AppHostUrls = {
+  custos: 'https://custos.example.com',
+  quore: 'https://quore.example.com',
+  // ... other app URLs
+}
+
+function AppShell() {
+  return (
+    <TesseraProvider identiesApiUrl="" token="">
+      <Header
+        title="Custos"
+        selectedTheme="system"
+        onSetTheme={(theme) => {}}
+        actionLogout={() => {}}
+        actionProfile={() => {}}
+        appHostUrls={appHostUrls}
+        isStorybook={false}
+      />
+      <main className="pt-[60px]">Your page content</main>
+    </TesseraProvider>
+  )
+}
+```
+
+## Props
+
+<StorybookTable
+  rows={[
+    {
+      name: 'title',
+      required: true,
+      type: 'string',
+      description:
+        'Application title shown next to the logo (used for app switcher and avatar fallback).',
+    },
+    {
+      name: 'selectedTheme',
+      required: true,
+      type: 'string',
+      description: 'Current theme: "light" | "dark" | "system".',
+    },
+    {
+      name: 'onSetTheme',
+      required: true,
+      type: '(theme: string) => void',
+      description: 'Callback when the user changes theme from the profile menu.',
+    },
+    {
+      name: 'actionLogout',
+      required: true,
+      type: '() => void',
+      description: 'Callback when the user triggers logout from the profile menu.',
+    },
+    {
+      name: 'actionProfile',
+      required: true,
+      type: '() => void',
+      description: 'Callback when the user opens profile from the profile menu.',
+    },
+    {
+      name: 'appHostUrls',
+      required: true,
+      type: 'AppHostUrls',
+      description: 'Map of app names to host URLs for the app switcher.',
+    },
+    {
+      name: 'defaultAvatar',
+      required: false,
+      type: 'string',
+      description: 'URL for the user avatar image in the profile menu.',
+    },
+    {
+      name: 'contentLeft',
+      required: false,
+      type: 'React.ReactNode',
+      description: 'Optional content rendered to the left (after logo, before center).',
+    },
+    {
+      name: 'contentCenter',
+      required: false,
+      type: 'React.ReactNode',
+      description: 'Optional content in the center of the header.',
+    },
+    {
+      name: 'contentRight',
+      required: false,
+      type: 'React.ReactNode',
+      description: 'Optional content on the right (e.g. action buttons, before profile menu).',
+    },
+    {
+      name: 'isStorybook',
+      required: false,
+      type: 'boolean',
+      description: 'When true, enables Storybook-specific behavior (e.g. profile menu).',
+    },
+  ]}
+/>
