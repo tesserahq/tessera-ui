@@ -107,41 +107,16 @@ export function ResourceID({
 
         <Tooltip>
           <TooltipTrigger asChild>
-            <span
-              className={cn(
-                'inline-flex',
-                'overflow-hidden',
-                'transition-[max-width,opacity,margin-left]',
-                'duration-200',
-                'ease-out',
-                showCopyOnHover
-                  ? [
-                      'pointer-events-none',
-                      'max-w-0',
-                      'opacity-0',
-                      'ml-0',
-                      'group-hover:pointer-events-auto',
-                      'group-hover:max-w-8',
-                      'group-hover:opacity-100',
-                      'group-hover:ml-1.5',
-                      'group-focus-within:pointer-events-auto',
-                      'group-focus-within:max-w-8',
-                      'group-focus-within:opacity-100',
-                      'group-focus-within:ml-1.5',
-                    ]
-                  : ['pointer-events-auto', 'max-w-8', 'opacity-100', 'ml-1.5']
-              )}>
-              <Button
-                type="button"
-                variant="ghost"
-                size="xs"
-                className="h-6 w-6 p-0"
-                onClick={handleCopy}
-                disabled={!canCopy}
-                aria-label="Copy resource id">
-                {copyState === 'copied' ? <Check /> : <Copy />}
-              </Button>
-            </span>
+            <Button
+              type="button"
+              variant="ghost"
+              size="xs"
+              className="h-6 w-6 p-0 ml-1"
+              onClick={handleCopy}
+              disabled={!canCopy}
+              aria-label="Copy resource id">
+              {copyState === 'copied' ? <Check /> : <Copy />}
+            </Button>
           </TooltipTrigger>
           <TooltipContent side="top">
             <span>{tooltipLabel}</span>
