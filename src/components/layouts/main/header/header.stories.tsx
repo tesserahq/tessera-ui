@@ -15,6 +15,7 @@ const defaultAppHostUrls: AppHostUrls = {
   indexa: 'https://indexa.example.com',
   sendly: 'https://sendly.example.com',
   orcha: 'https://orcha.example.com',
+  conversa: 'https://conversa.example.com',
 }
 
 const meta: Meta<typeof Header> = {
@@ -49,6 +50,7 @@ const meta: Meta<typeof Header> = {
     onSetTheme: { action: 'onSetTheme' },
     actionLogout: { action: 'actionLogout' },
     actionProfile: { action: 'actionProfile' },
+    avatarUrl: { action: { type: 'text' } },
     defaultAvatar: { control: { type: 'text' } },
     appHostUrls: { control: { type: 'object' } },
   },

@@ -12,7 +12,7 @@ import identies from '../../../../../public/logo/identies-logo.png'
 import indexa from '../../../../../public/logo/indexa-logo.png'
 import sendly from '../../../../../public/logo/sendly-logo.png'
 import orcha from '../../../../../public/logo/orcha-logo.png'
-import lindenBackoffice from '../../../../../public/logo/linden-backoffice-logo.png'
+import conversa from '../../../../../public/logo/conversa-logo.png'
 
 export const logos = {
   custos,
@@ -23,7 +23,7 @@ export const logos = {
   indexa,
   sendly,
   orcha,
-  lindenBackoffice,
+  conversa,
 }
 
 interface IProps {
@@ -33,6 +33,7 @@ interface IProps {
   actionLogout: () => void
   actionProfile: () => void
   appHostUrls: AppHostUrls
+  avatarUrl?: string
   defaultAvatar?: string
   contentLeft?: React.ReactNode
   contentCenter?: React.ReactNode
@@ -52,6 +53,7 @@ export function Header({
   defaultAvatar,
   appHostUrls,
   isStorybook,
+  avatarUrl,
 }: IProps) {
   const convertTitle = (title: string) => {
     const toCamelCase = title
@@ -76,7 +78,7 @@ export function Header({
         <Link to="/" className="space-x-2">
           <div className="flex items-center gap-2 lg:ml-0">
             <Avatar className="ring-0 w-8 h-8">
-              <AvatarImage src={logos[convertTitle(title) as keyof typeof logos]} />
+              <AvatarImage src={avatarUrl || logos[convertTitle(title) as keyof typeof logos]} />
               <AvatarFallback>{title.charAt(0).toUpperCase()}</AvatarFallback>
             </Avatar>
             <span className="text-base font-bold">{title}</span>
