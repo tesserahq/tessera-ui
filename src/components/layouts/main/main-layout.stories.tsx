@@ -119,6 +119,7 @@ const defaultAppHostUrls: AppHostUrls = {
   indexa: 'https://indexa.example.com',
   sendly: 'https://sendly.example.com',
   orcha: 'https://orcha.example.com',
+  conversa: '',
 }
 
 // Mock page components

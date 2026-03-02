@@ -21,15 +21,15 @@ const APPS = [
 ]
 
 export interface AppHostUrls {
-  quore: string
-  looply: string
-  vaulta: string
-  identies: string
-  custos: string
-  indexa: string
-  sendly: string
-  orcha: string
-  conversa: string
+  quore?: string
+  looply?: string
+  vaulta?: string
+  identies?: string
+  custos?: string
+  indexa?: string
+  sendly?: string
+  orcha?: string
+  conversa?: string
 }
 
 type App =
