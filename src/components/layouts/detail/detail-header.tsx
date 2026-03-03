@@ -31,8 +31,6 @@ export function DetailHeader({
   isLoading: boolean
   className?: string
 }) {
-  const shouldCapitalize = (label: string) => !label.includes('@')
-
   return (
     <div
       className={cn(
