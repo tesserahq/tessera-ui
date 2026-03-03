@@ -8,20 +8,40 @@ import { Link } from 'react-router'
 import { Grip } from 'lucide-react'
 import { logos } from './logo'
 
-const APPS = ['quore', 'looply', 'vaulta', 'identies', 'custos', 'indexa', 'sendly', 'orcha']
+const APPS = [
+  'quore',
+  'looply',
+  'vaulta',
+  'identies',
+  'custos',
+  'indexa',
+  'sendly',
+  'orcha',
+  'conversa',
+]
 
 export interface AppHostUrls {
-  quore: string
-  looply: string
-  vaulta: string
-  identies: string
-  custos: string
-  indexa: string
-  sendly: string
-  orcha: string
+  quore?: string
+  looply?: string
+  vaulta?: string
+  identies?: string
+  custos?: string
+  indexa?: string
+  sendly?: string
+  orcha?: string
+  conversa?: string
 }
 
-type App = 'quore' | 'looply' | 'vaulta' | 'identies' | 'custos' | 'indexa' | 'sendly' | 'orcha'
+type App =
+  | 'quore'
+  | 'looply'
+  | 'vaulta'
+  | 'identies'
+  | 'custos'
+  | 'indexa'
+  | 'sendly'
+  | 'orcha'
+  | 'conversa'
 
 export interface AppMenuProps {
   name: App
