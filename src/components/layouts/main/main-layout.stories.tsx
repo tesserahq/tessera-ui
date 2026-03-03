@@ -9,6 +9,7 @@ import { DetailLayout } from '../detail/detail.layout'
 import type { MainItemProps } from '../types'
 import type { DetailItemsProps, BreadcrumbItemData } from '../types'
 import type { AppHostUrls } from '../../../main'
+import MainLayoutDocs from './main-layout.mdx'
 
 const AutoCollapseMainLayout = ({
   children,
@@ -32,9 +33,13 @@ const AutoCollapseMainLayout = ({
 }
 
 const meta: Meta<typeof MainLayout> = {
-  title: 'Components/Layouts/MainLayout',
+  title: 'Layouts/MainLayout',
   component: MainLayout,
-  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      page: MainLayoutDocs,
+    },
+  },
   argTypes: {
     menuItems: {
       description: 'Array of menu items to display in the sidebar navigation',
@@ -114,6 +119,7 @@ const defaultAppHostUrls: AppHostUrls = {
   indexa: 'https://indexa.example.com',
   sendly: 'https://sendly.example.com',
   orcha: 'https://orcha.example.com',
+  conversa: '',
 }
 
 // Mock page components

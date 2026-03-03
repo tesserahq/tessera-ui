@@ -1,12 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { EmptyContent } from './empty-content'
 import { Button } from '../ui/button'
+import EmptyContentDocs from './empty-content.mdx'
 
 const meta: Meta<typeof EmptyContent> = {
-  title: 'Components/EmptyContent',
+  title: 'Information/EmptyContent',
   component: EmptyContent,
   parameters: {
-    layout: 'fullscreen',
+    docs: {
+      page: EmptyContentDocs,
+    },
   },
 }
 

@@ -1,0 +1,68 @@
+import { Meta } from '@storybook/blocks'
+import { StorybookTable } from '../misc/storybook-table/storybook-table.tsx'
+
+<Meta title="Information/EmptyContent" />
+
+# EmptyContent
+
+The `EmptyContent` component displays an empty state with an image, title, optional description, and custom content. It's perfect for showing helpful messages when lists are empty, search results return nothing, or when guiding users to take action.
+
+## Features
+
+- **Visual Image**: Large image display for visual context
+- **Flexible Layout**: Responsive layout that adapts to screen size (column on mobile, row on desktop)
+- **Custom Content**: Support for custom children (e.g., action buttons)
+- **Animated**: Slide-up animation for smooth appearance
+- **Accessible**: Semantic HTML structure
+- **Dark Mode Support**: Built-in dark mode styling
+
+## Usage
+
+```tsx
+import { EmptyContent } from 'tessera-ui/components/empty-content'
+
+function EmptyList() {
+  return (
+    <EmptyContent
+      image="/images/empty-folder.svg"
+      title="No items found"
+      description="Get started by creating your first item."
+    />
+  )
+}
+```
+
+## Props
+
+<StorybookTable
+  rows={[
+    {
+      name: 'image',
+      required: true,
+      type: 'string',
+      description: 'URL or path to the image to display',
+    },
+    { name: 'title', required: true, type: 'string', description: 'Main title text' },
+    {
+      name: 'description',
+      required: false,
+      type: 'string',
+      description: 'Optional description text below the title',
+    },
+    {
+      name: 'children',
+      required: false,
+      type: 'React.ReactNode',
+      description: 'Custom content to display (e.g., action buttons)',
+    },
+  ]}
+/>
+
+## Notes
+
+- The component uses semantic HTML for accessibility
+- Image alt text is automatically set to the title prop
+- Children are rendered below the description with margin top of 5 units
+- The component is fully responsive and adapts layout based on screen size
+- Dark mode styles are included for title and description
+- The slide-up animation should be defined in your global CSS or Tailwind config

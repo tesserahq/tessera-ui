@@ -1,0 +1,73 @@
+import { Meta } from '@storybook/blocks'
+import { StorybookTable } from '../../../misc/storybook-table/storybook-table.tsx'
+
+<Meta title="Layouts/Sidebar" />
+
+# Sidebar
+
+The `SidebarPanel` component is a route-aware sidebar used by `MainLayout`. It renders a collapsible sidebar (icon-only when collapsed) with a menu of navigation items and can auto-collapse on deeper routes when `collapseSidebar` is true.
+
+## Usage
+
+```tsx
+import { SidebarPanel } from 'tessera-ui/components/layouts/main/sidebar'
+import { SidebarProvider } from 'tessera-ui/components/ui/sidebar'
+import type { MainItemProps } from 'tessera-ui/components/layouts/types'
+import { KeyRound, Settings, Users } from 'lucide-react'
+
+const menuItems: MainItemProps[] = [
+  { title: 'Roles', path: '/roles', icon: KeyRound },
+  { title: 'Users', path: '/users', icon: Users },
+  { title: 'Settings', path: '/settings', icon: Settings },
+]
+
+function AppSidebar() {
+  const isDeepRoute = window.location.pathname.split('/').filter(Boolean).length > 2
+
+  return (
+    <SidebarProvider>
+      <SidebarPanel menuItems={menuItems} collapseSidebar={isDeepRoute} />
+      <main className="p-4">Page content</main>
+    </SidebarProvider>
+  )
+}
+```
+
+## Props
+
+### SidebarPanel
+
+<StorybookTable
+  rows={[
+    {
+      name: 'menuItems',
+      required: true,
+      type: 'MainItemProps[]',
+      description:
+        'Array of sidebar menu items (title, path, icon, optional children, divider, disabled).',
+    },
+    {
+      name: 'collapseSidebar',
+      required: true,
+      type: 'boolean',
+      description: 'When true, sidebar collapses to icon-only mode.',
+    },
+    {
+      name: 'customSidebar',
+      required: false,
+      type: 'React.ReactNode',
+      description: 'If provided, replaces the default SidebarMenu with custom content.',
+    },
+    {
+      name: '...props',
+      required: false,
+      type: 'ComponentProps<Sidebar>',
+      description:
+        'Additional props passed through to the underlying Sidebar component (e.g. className).',
+    },
+  ]}
+/>
+
+### Related types
+
+- **MainItemProps**: `{ title, path, icon, children?, divider?, disabled? }`

@@ -1,0 +1,116 @@
+import { Meta } from '@storybook/blocks'
+import { StorybookTable } from '../misc/storybook-table/storybook-table.tsx'
+
+<Meta title="Shortcut/AppMenu" />
+
+# AppMenu
+
+The `AppMenu` component provides a dropdown menu for displaying and navigating to multiple applications. It features a grid layout with app logos and names, perfect for application switchers or launcher menus.
+
+## Features
+
+- **Dropdown Menu**: Clean dropdown interface triggered by a grip icon button
+- **Grid Layout**: 2-column grid layout for app items
+- **App Logos**: Displays app logos/images with automatic path resolution
+- **External Links**: Opens app links in new tabs
+- **Hover Effects**: Smooth hover transitions for better UX
+- **Scrollable**: Automatically scrollable when content exceeds max height
+- **Accessible**: Built on Radix UI primitives for accessibility
+
+## Usage
+
+#### Basic Example
+
+```tsx
+import { AppMenu } from 'tessera-ui'
+import type { AppHostUrls } from 'tessera-ui'
+
+function Header() {
+  const defaultAppHostUrls: AppHostUrls = {
+    quore: 'https://quore.example.com',
+    looply: 'https://looply.example.com',
+    vaulta: 'https://vaulta.example.com',
+    identies: 'https://identies.example.com',
+    custos: 'https://custos.example.com',
+    indexa: 'https://indexa.example.com',
+    sendly: 'https://sendly.example.com',
+    orcha: 'https://orcha.example.com',
+  }
+
+  return <AppMenu currentApp="quore" appHostUrls={appHostUrls} />
+}
+```
+
+## Props
+
+<StorybookTable
+  title="AppMenu"
+  rows={[
+    {
+      name: 'currentApp',
+      required: true,
+      type: 'string',
+      description: 'Current app used this compponent',
+    },
+    {
+      name: 'appHostUrls',
+      required: true,
+      type: 'Object<AppHostUrls>',
+      description: 'Host url from each app',
+    },
+  ]}
+/>
+
+<StorybookTable
+  title="AppHostUrls"
+  rows={[
+    {
+      name: 'quore',
+      required: true,
+      type: 'string',
+      description: 'Quore host url',
+    },
+    {
+      name: 'identies',
+      required: true,
+      type: 'string',
+      description: 'Identies host url',
+    },
+    {
+      name: 'custos',
+      required: true,
+      type: 'string',
+      description: 'Custos host url',
+    },
+    {
+      name: 'orcha',
+      required: true,
+      type: 'string',
+      description: 'Orcha host url',
+    },
+    {
+      name: 'looply',
+      required: true,
+      type: 'string',
+      description: 'Looply host url',
+    },
+    {
+      name: 'vaulta',
+      required: true,
+      type: 'string',
+      description: 'Vaulta host url',
+    },
+    {
+      name: 'indexa',
+      required: true,
+      type: 'string',
+      description: 'Indexa host url',
+    },
+    {
+      name: 'sendly',
+      required: true,
+      type: 'string',
+      description: 'Sendly host url',
+    },
+  ]}
+/>

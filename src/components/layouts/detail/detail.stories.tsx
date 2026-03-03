@@ -4,38 +4,18 @@ import { FileText, Home, Settings, User } from 'lucide-react'
 import { withRouter } from 'storybook-addon-remix-react-router'
 import type { BreadcrumbItemData, DetailItemsProps } from '../types'
 import { DetailLayout } from './detail.layout'
+import DetailDocs from './detail.mdx'
 
 const meta: Meta<typeof DetailLayout> = {
-  title: 'Components/Layouts/DetailLayout',
+  title: 'Layouts/DetailLayout',
   component: DetailLayout,
   parameters: {
     layout: 'fullscreen',
     docs: {
-      description: {
-        component: `
-DetailLayout provides a full-page layout with a fixed sidebar, breadcrumb header, and main content area. Use it for detail pages, dashboards, or any screen that needs structured navigation.
-
-## Features
-- **DetailHeader** – Breadcrumb navigation at the top
-- **DetailSidenav** – Fixed left sidebar with menu items (supports nested items and dividers)
-- **DetailContent** – Main content area with spacing for the sidebar
-
-## Usage
-\`\`\`tsx
-<DetailLayout
-  menuItems={menuItems}
-  breadcrumbs={breadcrumbs}
-  isLoading={false}
->
-  <YourPageContent />
-</DetailLayout>
-\`\`\`
-        `,
-      },
+      page: DetailDocs,
     },
   },
   decorators: [withRouter],
-  tags: ['autodocs'],
   args: {
     menuItems: [],
     breadcrumbs: [],

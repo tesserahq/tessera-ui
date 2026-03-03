@@ -1,4 +1,9 @@
-# DeleteConfirmation Component
+import { Meta } from '@storybook/blocks'
+import { StorybookTable } from '../misc/storybook-table/storybook-table.tsx'
+
+<Meta title="Information/DeleteConfirmation" />
+
+# DeleteConfirmation
 
 The `DeleteConfirmation` component provides a reusable dialog for confirming destructive delete actions. It uses an imperative handle pattern, allowing parent components to programmatically open and control the dialog with dynamic configuration.
 
@@ -12,8 +17,6 @@ The `DeleteConfirmation` component provides a reusable dialog for confirming des
 - **Flexible**: Supports both controlled and uncontrolled usage patterns
 
 ## Usage
-
-### Basic Example with useRef
 
 ```tsx
 import { useRef } from 'react'
@@ -175,19 +178,92 @@ function DynamicDelete({ item }) {
 
 ### `DeleteConfirmation`
 
-| Prop            | Type                       | Required | Default | Description                                   |
-| --------------- | -------------------------- | -------- | ------- | --------------------------------------------- |
-| `defaultConfig` | `DeleteConfirmationConfig` | No       | -       | Default configuration for the dialog          |
-| `ref`           | `DeleteConfirmationHandle` | Yes      | -       | Ref object to control the dialog imperatively |
+<StorybookTable
+  title=""
+  rows={[
+    {
+      name: 'defaultConfig',
+      required: false,
+      type: 'DeleteConfirmationConfig',
+      default: '-',
+      description: 'Default configuration for the dialog',
+    },
+    {
+      name: 'ref',
+      required: true,
+      type: 'DeleteConfirmationHandle',
+      default: '-',
+      description: 'Ref object to control the dialog imperatively',
+    },
+  ]}
+/>
 
 ### `DeleteConfirmationConfig`
 
-| Property      | Type                          | Required | Description                                                 |
-| ------------- | ----------------------------- | -------- | ----------------------------------------------------------- |
-| `title`       | `string`                      | Yes      | Title text displayed in the dialog                          |
-| `description` | `string`                      | Yes      | Description text displayed below the title                  |
-| `onDelete`    | `() => void \| Promise<void>` | Yes      | Function called when user confirms deletion (can be async)  |
-| `isLoading`   | `boolean`                     | No       | Whether the delete operation is in progress (shows spinner) |
+<StorybookTable
+  title=""
+  rows={[
+    {
+      name: 'title',
+      required: true,
+      type: 'string',
+      default: '-',
+      description: 'Title text displayed in the dialog',
+    },
+    {
+      name: 'description',
+      required: true,
+      type: 'string',
+      default: '-',
+      description: 'Description text displayed below the title',
+    },
+    {
+      name: 'onDelete',
+      required: true,
+      type: '() => void | Promise<void>',
+      default: '-',
+      description: 'Function called when user confirms deletion (can be async)',
+    },
+    {
+      name: 'isLoading',
+      required: false,
+      type: 'boolean',
+      default: '-',
+      description: 'Whether the delete operation is in progress (shows spinner)',
+    },
+  ]}
+/>
+
+### `DeleteConfirmationHandle`
+
+<StorybookTable
+  title=""
+  rows={[
+    {
+      name: 'open',
+      required: false,
+      type: '(config?: DeleteConfirmationConfig) => void',
+      default: '-',
+      description:
+        'Opens the dialog with optional configuration. If config is provided, updates the dialog configuration before opening.',
+    },
+    {
+      name: 'close',
+      required: false,
+      type: '() => void',
+      default: '-',
+      description: 'Closes the dialog.',
+    },
+    {
+      name: 'updateConfig',
+      required: false,
+      type: '(updates: Partial<DeleteConfirmationConfig>) => void',
+      default: '-',
+      description:
+        'Updates the dialog configuration without opening/closing it. Useful for updating loading state or messages during async operations.',
+    },
+  ]}
+/>
 
 ## Imperative Handle API
 

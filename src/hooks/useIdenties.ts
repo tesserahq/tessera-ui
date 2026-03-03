@@ -63,8 +63,6 @@ export function useIdenties(config: UseIdentiesConfig): UseIdentiesReturn {
   )
 
   useEffect(() => {
-    console.log('TEST')
-
     if (token) {
       fetchUser()
     } else {

@@ -2,12 +2,15 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { useRef, useState } from 'react'
 import DeleteConfirmation, { type DeleteConfirmationHandle } from './delete-confirmation'
 import { Button } from '../ui/button'
+import DeleteConfirmationDocs from './delete-confirmation.mdx'
 
 const meta: Meta<typeof DeleteConfirmation> = {
-  title: 'Components/DeleteConfirmation',
+  title: 'Information/DeleteConfirmation',
   component: DeleteConfirmation,
   parameters: {
-    layout: 'centered',
+    docs: {
+      page: DeleteConfirmationDocs,
+    },
   },
   decorators: [
     (Story) => (

@@ -1,4 +1,9 @@
-# DateTime Component
+import { Meta } from '@storybook/blocks'
+import { StorybookTable } from '../misc/storybook-table/storybook-table.tsx'
+
+<Meta title="Information/DateTime" />
+
+# DateTime
 
 The `DateTime` component provides a comprehensive date and time display with timezone support and a detailed tooltip showing multiple date formats. It automatically detects the user's browser timezone and provides utilities for formatting dates in various timezones.
 
@@ -12,8 +17,6 @@ The `DateTime` component provides a comprehensive date and time display with tim
 - **Accessible**: Uses semantic `<time>` element with tooltip for additional information
 
 ## Usage
-
-### Basic Example
 
 ```tsx
 import { DateTime } from 'tessera-ui/components/datetime'
@@ -30,150 +33,57 @@ function PostCard({ post }) {
 }
 ```
 
-### With Custom Format
-
-```tsx
-import { DateTime } from 'tessera-ui/components/datetime'
-
-function EventCard({ event }) {
-  return (
-    <div>
-      <h2>{event.name}</h2>
-      <DateTime date={event.startTime} formatStr="EEEE, MMMM dd, yyyy 'at' HH:mm" />
-    </div>
-  )
-}
-```
-
-### With Custom Timezone
-
-```tsx
-import { DateTime } from 'tessera-ui/components/datetime'
-
-function GlobalEvent({ event }) {
-  return (
-    <div>
-      <h2>{event.name}</h2>
-      <DateTime
-        date={event.startTime}
-        timezone="America/Los_Angeles"
-        formatStr="MMM dd, yyyy HH:mm:ss"
-      />
-    </div>
-  )
-}
-```
-
-### With Timezone Display
-
-```tsx
-import { DateTime } from 'tessera-ui/components/datetime'
-
-function ScheduledMeeting({ meeting }) {
-  return (
-    <div>
-      <h2>{meeting.title}</h2>
-      <DateTime date={meeting.scheduledTime} timezone="America/New_York" showTimezone={true} />
-    </div>
-  )
-}
-```
-
-### Using Format Functions Directly
-
-```tsx
-import { formatDateTime, getRelativeTime } from 'tessera-ui/components/datetime'
-
-function CustomDateDisplay({ date }) {
-  const formatted = formatDateTime(date, 'MMM dd, yyyy HH:mm', 'America/New_York', true)
-  const relative = getRelativeTime(new Date(date))
-
-  return (
-    <div>
-      <p>Formatted: {formatted}</p>
-      <p>Relative: {relative}</p>
-    </div>
-  )
-}
-```
-
 ## Props
 
-### `DateTime`
-
-| Prop           | Type             | Required | Default                   | Description                                                             |
-| -------------- | ---------------- | -------- | ------------------------- | ----------------------------------------------------------------------- |
-| `date`         | `string \| Date` | Yes      | -                         | The date to display (string or Date object)                             |
-| `formatStr`    | `string`         | No       | `"MMM dd, yyyy HH:mm:ss"` | Date format string using date-fns format tokens                         |
-| `timezone`     | `string`         | No       | Browser timezone          | IANA timezone string (e.g., "America/New_York", "UTC", "Europe/London") |
-| `showTimezone` | `boolean`        | No       | `false`                   | Whether to append timezone abbreviation to the formatted date           |
-| `className`    | `string`         | No       | -                         | Additional CSS classes for the time element                             |
-
-## Exported Functions
-
-### `formatDateTime`
-
-Formats a date string or Date object according to the specified format and timezone.
-
-```tsx
-formatDateTime(
-  date: string | Date,
-  formatStr?: string,
-  timezone: string,
-  showTimezone?: boolean
-): string
-```
-
-**Parameters:**
-
-- `date`: The date to format (string or Date object)
-- `formatStr`: Format string using date-fns tokens (default: `"MMM dd, yyyy HH:mm:ss"`)
-- `timezone`: IANA timezone string (required)
-- `showTimezone`: Whether to append timezone abbreviation (default: `false`)
-
-**Returns:** Formatted date string
-
-**Example:**
-
-```tsx
-const formatted = formatDateTime(
-  '2024-01-15T10:30:00Z',
-  'MMM dd, yyyy HH:mm',
-  'America/New_York',
-  true
-)
-// Returns: "Jan 15, 2024 05:30 (EST)"
-```
-
-### `getRelativeTime`
-
-Gets a relative time string (e.g., "2 months ago", "in 3 days").
-
-```tsx
-getRelativeTime(date: Date): string
-```
-
-**Parameters:**
-
-- `date`: Date object or string
-
-**Returns:** Relative time string with suffix (e.g., "2 months ago")
-
-**Example:**
-
-```tsx
-const relative = getRelativeTime(new Date('2024-01-01'))
-// Returns: "2 months ago" (if current date is March 2024)
-```
+<StorybookTable
+  title=""
+  rows={[
+    {
+      name: 'date',
+      required: true,
+      type: 'string | Date',
+      default: '-',
+      description: 'The date to display (string or Date object)',
+    },
+    {
+      name: 'formatStr',
+      required: false,
+      type: 'string',
+      default: '"MMM dd, yyyy HH:mm:ss"',
+      description: 'Date format string using date-fns format tokens',
+    },
+    {
+      name: 'timezone',
+      required: false,
+      type: 'string',
+      default: 'Browser timezone',
+      description: 'IANA timezone string (e.g., "America/New_York", "UTC", "Europe/London")',
+    },
+    {
+      name: 'showTimezone',
+      required: false,
+      type: 'boolean',
+      default: 'false',
+      description: 'Whether to append timezone abbreviation to the formatted date',
+    },
+    {
+      name: 'className',
+      required: false,
+      type: 'string',
+      default: '-',
+      description: 'Additional CSS classes for the time element',
+    },
+  ]}
+/>
 
 ## Tooltip Information
 
 When hovering over the DateTime component, a tooltip displays:
 
-1. **UTC**: The date formatted in UTC timezone
-2. **Timezone**: The date formatted in the specified timezone (or browser timezone)
-3. **Relative**: Relative time string (e.g., "2 months ago")
-4. **Timestamp**: Unix timestamp in milliseconds
+- **UTC**: The date formatted in UTC timezone
+- **Timezone**: The date formatted in the specified timezone (or browser timezone)
+- **Relative**: Relative time string (e.g., "2 months ago")
+- **Timestamp**: Unix timestamp in milliseconds
 
 ## Date Parsing
 
@@ -188,10 +98,6 @@ The component automatically handles date strings:
 - `"2024-01-15T10:30:00"` → Treated as `"2024-01-15T10:30:00Z"` (UTC)
 - `"2024-01-15T10:30:00Z"` → Treated as UTC
 - `new Date("2024-01-15")` → Used directly
-
-## Timezone Detection
-
-The component automatically detects the user's browser timezone using `Intl.DateTimeFormat().resolvedOptions().timeZone`. If detection fails, it falls back to `"America/New_York"`.
 
 ## Format String Reference
 

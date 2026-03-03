@@ -1,0 +1,87 @@
+import { Meta } from '@storybook/blocks'
+import { StorybookTable } from '../../misc/storybook-table/storybook-table.tsx'
+
+<Meta title="Layouts/DetailLayout" />
+
+# DetailLayout
+
+The `DetailLayout` component provides a full-page layout with a fixed breadcrumb header, a left sidebar with menu items (supporting nested items and dividers), and a main content area. Use it for detail pages, resource dashboards, or any screen that needs structured navigation and breadcrumbs.
+
+## Usage
+
+```tsx
+import { DetailLayout } from 'tessera-ui/components/layouts'
+import type { DetailItemsProps, BreadcrumbItemData } from 'tessera-ui/components/layouts/types'
+import { Home, FileText, Settings } from 'lucide-react'
+
+const menuItems: DetailItemsProps[] = [
+  { title: 'Overview', path: '/overview', icon: Home, disabled: true },
+  { title: 'Documents', path: '/documents', icon: FileText },
+  { title: 'Settings', path: '/settings', icon: Settings, divider: true },
+]
+
+const breadcrumbs: BreadcrumbItemData[] = [
+  { label: 'Home', link: '/' },
+  { label: 'Project', link: '/project' },
+  { label: 'Overview', link: '/project/overview', disabled: true },
+]
+
+function ProjectOverviewPage() {
+  return (
+    <DetailLayout menuItems={menuItems} breadcrumbs={breadcrumbs} isLoading={false}>
+      <div className="p-4">
+        <h1>Overview</h1>
+        <p>Your main content here.</p>
+      </div>
+    </DetailLayout>
+  )
+}
+```
+
+## Props
+
+<StorybookTable
+  rows={[
+    {
+      name: 'children',
+      required: true,
+      type: 'React.ReactNode',
+      description: 'Main content rendered inside DetailContent.',
+    },
+    {
+      name: 'menuItems',
+      required: true,
+      type: 'DetailItemsProps[]',
+      description: 'Sidebar menu items. Can include nested children and optional divider.',
+    },
+    {
+      name: 'breadcrumbs',
+      required: true,
+      type: 'BreadcrumbItemData[]',
+      description: 'Breadcrumb items shown in the header (label, link, optional disabled).',
+    },
+    {
+      name: 'isLoading',
+      required: true,
+      type: 'boolean',
+      description: 'Whether to show loading state for breadcrumbs.',
+    },
+    {
+      name: 'className',
+      required: false,
+      type: 'string',
+      description: 'Optional class for the layout container (flex area below header).',
+    },
+    {
+      name: 'headerClassName',
+      required: false,
+      type: 'string',
+      description: 'Optional class for the DetailHeader wrapper.',
+    },
+  ]}
+/>
+
+### Related types
+
+- **DetailItemsProps**: `{ title, path, icon, children?, divider?, disabled? }`
+- **BreadcrumbItemData**: `{ label, link, disabled? }`

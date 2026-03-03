@@ -1,29 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-
 import { ResourceID } from './resource-id'
+import ResourceIdDocs from './resource-id.mdx'
 
 const meta: Meta<typeof ResourceID> = {
-  title: 'Components/ResourceID',
+  title: 'Shortcut/ResourceID',
   component: ResourceID,
-  tags: ['autodocs'],
   parameters: {
     layout: 'centered',
     docs: {
-      description: {
-        component: [
-          'Displays a resource identifier in a compact, monospaced “pill”.',
-          '',
-          '- Shows a truncated value by default (configurable via `truncate`).',
-          '- Reveals the full value in a tooltip when `value` is set.',
-          '- Provides an optional copy-to-clipboard button with feedback states.',
-          '',
-          'Import:',
-          '',
-          '```tsx',
-          "import { ResourceID } from 'tessera-ui/components/resource-id'",
-          '```',
-        ].join('\n'),
-      },
+      page: ResourceIdDocs,
     },
   },
   argTypes: {
@@ -57,7 +42,7 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {
+export const Example: Story = {
   args: {
     value: '6f6b4b0a-5c6c-4d9b-bbe1-9d7d5a8d2fd1',
   },

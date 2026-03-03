@@ -4,6 +4,7 @@ import { Header } from './header'
 import { TesseraProvider, type AppHostUrls } from '../../../../main'
 import { Button } from '../../../ui/button'
 import type React from 'react'
+import HeaderDocs from './header.mdx'
 
 const defaultAppHostUrls: AppHostUrls = {
   quore: 'https://quore.example.com',
@@ -14,20 +15,17 @@ const defaultAppHostUrls: AppHostUrls = {
   indexa: 'https://indexa.example.com',
   sendly: 'https://sendly.example.com',
   orcha: 'https://orcha.example.com',
+  conversa: 'https://conversa.example.com',
 }
 
 const meta: Meta<typeof Header> = {
-  title: 'Components/Layouts/Header',
+  title: 'Layouts/Header',
   component: Header,
-  tags: ['autodocs'],
   decorators: [withRouter],
   parameters: {
     layout: 'fullscreen',
     docs: {
-      description: {
-        component:
-          'Main layout header containing the app switcher, logo/title link, optional action slot, and profile menu.',
-      },
+      page: HeaderDocs,
     },
   },
   args: {
@@ -52,6 +50,7 @@ const meta: Meta<typeof Header> = {
     onSetTheme: { action: 'onSetTheme' },
     actionLogout: { action: 'actionLogout' },
     actionProfile: { action: 'actionProfile' },
+    avatarUrl: { action: { type: 'text' } },
     defaultAvatar: { control: { type: 'text' } },
     appHostUrls: { control: { type: 'object' } },
   },

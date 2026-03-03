@@ -4,6 +4,11 @@ import '@/index.css'
 const preview: Preview = {
   parameters: {
     layout: 'fullscreen',
+    options: {
+      storySort: {
+        order: ['Docs Overview', '*'],
+      },
+    },
     actions: { argTypesRegex: '^on[A-Z].*' },
     controls: {
       matchers: {

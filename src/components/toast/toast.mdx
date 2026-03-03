@@ -1,0 +1,102 @@
+import { Meta } from '@storybook/blocks'
+import { StorybookTable } from '../misc/storybook-table/storybook-table.tsx'
+
+<Meta title="Information/Toast" />
+
+# Toast
+
+The Toast system uses [Sonner](https://sonner.emilkowal.ski/) to show temporary notifications. Render the `Toaster` once (e.g. in your app root), then call `toast()` (and variants) from anywhere to display messages.
+
+## Features
+
+- **Rich variants**: `toast()`, `toast.success()`, `toast.error()`, `toast.promise()`, etc.
+- **Descriptions**: Optional second argument with `description` for extra context
+- **Close button**: Shown by default; toasts do not auto-dismiss (`duration: Infinity`) unless overridden
+- **Rich colors**: Success/error/info styling enabled by default
+- **Position**: Configurable via `Toaster` props (e.g. `top-right`, `bottom-center`)
+
+## Usage
+
+#### Setup: render Toaster once
+
+```tsx
+import { Toaster } from 'tessera-ui/components/toast'
+
+export function App() {
+  return (
+    <>
+      {/* Your app content */}
+      <Toaster position="top-right" />
+    </>
+  )
+}
+```
+
+#### Trigger toasts from anywhere
+
+```tsx
+import { toast } from 'tessera-ui/components/toast'
+
+// Basic
+toast('Saved successfully')
+
+// Success / Error with optional description
+toast.success('Changes applied')
+toast.error('Something went wrong', { description: 'Please try again later.' })
+
+// Promise (loading → success/error)
+toast.promise(saveData(), {
+  loading: 'Saving...',
+  success: 'Saved!',
+  error: 'Failed to save',
+})
+```
+
+## Toaster props
+
+<StorybookTable
+  title="Toaster"
+  rows={[
+    {
+      name: 'position',
+      required: false,
+      type: "'top-left' | 'top-center' | 'top-right' | 'bottom-left' | 'bottom-center' | 'bottom-right'",
+      default: "'bottom-right'",
+      description: 'Where toasts appear on the screen',
+    },
+    {
+      name: 'expand',
+      required: false,
+      type: 'boolean',
+      default: 'false',
+      description: 'Expand toasts by default when multiple are visible',
+    },
+    {
+      name: 'closeButton',
+      required: false,
+      type: 'boolean',
+      default: 'true',
+      description: 'Show a close button on each toast (default in this wrapper)',
+    },
+    {
+      name: 'duration',
+      required: false,
+      type: 'number',
+      default: 'Infinity',
+      description: 'Default duration in ms before auto-dismiss (this wrapper uses Infinity)',
+    },
+    {
+      name: 'richColors',
+      required: false,
+      type: 'boolean',
+      default: 'true',
+      description: 'Use distinct colors for success/error/info (default in this wrapper)',
+    },
+  ]}
+/>
+
+## Behavior
+
+- **Toaster** must be mounted somewhere in the tree for toasts to appear. Typically place it in the root layout.
+- **toast** is a function; you do not render it. Call `toast(...)` or `toast.success(...)` etc. in event handlers or after async work.
+- Defaults in this wrapper: `closeButton`, `duration={Infinity}`, and `richColors` are set on `Toaster` so toasts stay until dismissed and use colored styles. You can override these via `Toaster` props.
