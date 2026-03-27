@@ -1,30 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router'
+import { ProfileMenu, useApp } from '../../../../main'
+import { Applications } from '../../../applications/application'
 import { Avatar, AvatarFallback, AvatarImage } from '../../../ui/avatar'
 import { Separator } from '../../../ui/separator'
-import { AppMenu, ProfileMenu, type AppHostUrls } from '../../../../main'
-
-import custos from '../../../../../public/logo/custos-logo.png'
-import quore from '../../../../../public/logo/quore-logo.png'
-import looply from '../../../../../public/logo/looply-logo.png'
-import vaulta from '../../../../../public/logo/vaulta-logo.png'
-import identies from '../../../../../public/logo/identies-logo.png'
-import indexa from '../../../../../public/logo/indexa-logo.png'
-import sendly from '../../../../../public/logo/sendly-logo.png'
-import orcha from '../../../../../public/logo/orcha-logo.png'
-import conversa from '../../../../../public/logo/conversa-logo.png'
-
-export const logos = {
-  custos,
-  quore,
-  looply,
-  vaulta,
-  identies,
-  indexa,
-  sendly,
-  orcha,
-  conversa,
-}
 
 interface IProps {
   title: string
@@ -32,8 +11,7 @@ interface IProps {
   onSetTheme: (theme: string) => void
   actionLogout: () => void
   actionProfile: () => void
-  appHostUrls: AppHostUrls
-  avatarUrl?: string
+  defaultLogo?: string
   defaultAvatar?: string
   contentLeft?: React.ReactNode
   contentCenter?: React.ReactNode
@@ -51,20 +29,11 @@ export function Header({
   actionProfile,
   onSetTheme,
   defaultAvatar,
-  appHostUrls,
   isStorybook,
-  avatarUrl,
+  defaultLogo,
 }: IProps) {
-  const convertTitle = (title: string) => {
-    const toCamelCase = title
-      .split(' ')
-      .map((word, index) =>
-        index === 0 ? word.toLowerCase() : word.charAt(0).toUpperCase() + word.slice(1)
-      )
-      .join('')
-
-    return toCamelCase
-  }
+  const { applications } = useApp()
+  const currentApp = applications.find((app) => app.name === title)
 
   return (
     <header
@@ -74,12 +43,14 @@ export function Header({
         shadow-2xs ps-2">
       {/* Left Content */}
       <div className="flex items-center gap-2">
-        <AppMenu currentApp={title} appHostUrls={appHostUrls} />
+        <Applications currentApp={title} />
         <Link to="/" className="space-x-2">
           <div className="flex items-center gap-2 lg:ml-0">
-            <Avatar className="ring-0 w-8 h-8">
-              <AvatarImage src={avatarUrl || logos[convertTitle(title) as keyof typeof logos]} />
-              <AvatarFallback>{title.charAt(0).toUpperCase()}</AvatarFallback>
+            <Avatar className="ring-0 w-6 h-6">
+              <AvatarImage src={currentApp?.logo} alt="logo" />
+              <AvatarFallback>
+                <img src={defaultLogo} />
+              </AvatarFallback>
             </Avatar>
             <span className="text-base font-bold">{title}</span>
           </div>

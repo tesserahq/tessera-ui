@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { LogOut, Monitor, Moon, Sun, UserCog } from 'lucide-react'
-import { Avatar, AvatarImage } from '../../ui/avatar'
+import { Avatar, AvatarFallback, AvatarImage } from '../../ui/avatar'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '../../ui/dropdown'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../../ui/select'
 import { cn } from '../../../utils/misc'
@@ -28,6 +28,7 @@ export function ProfileMenu({
 }: Props) {
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false)
   const { user, isLoadingIdenties, updateUser } = useApp()
+
   const [loaded, setLoaded] = React.useState(false)
 
   const onUpdateTheme = async (value: string) => {
@@ -70,6 +71,9 @@ export function ProfileMenu({
                 alt="test"
                 onLoad={() => setTimeout(() => setLoaded(true), 1000)}
               />
+              <AvatarFallback>
+                <img src={defaultAvatar} />
+              </AvatarFallback>
             </Avatar>
             {!loaded && (
               <div className="animate-pulse absolute top-0">
@@ -84,7 +88,10 @@ export function ProfileMenu({
           align="end">
           <div className="mb-3 flex flex-row justify-start gap-x-3">
             <Avatar>
-              <AvatarImage src={user?.avatar_url || defaultAvatar} />
+              <AvatarImage src={user?.avatar_url} />
+              <AvatarFallback>
+                <img src={defaultAvatar} />
+              </AvatarFallback>
             </Avatar>
             <div className="flex flex-col justify-center">
               {user && (

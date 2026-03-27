@@ -1,22 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { withRouter } from 'storybook-addon-remix-react-router'
 import { Header } from './header'
-import { TesseraProvider, type AppHostUrls } from '../../../../main'
+import { TesseraProvider } from '../../../../main'
 import { Button } from '../../../ui/button'
 import type React from 'react'
 import HeaderDocs from './header.mdx'
-
-const defaultAppHostUrls: AppHostUrls = {
-  quore: 'https://quore.example.com',
-  looply: 'https://looply.example.com',
-  vaulta: 'https://vaulta.example.com',
-  identies: 'https://identies.example.com',
-  custos: 'https://custos.example.com',
-  indexa: 'https://indexa.example.com',
-  sendly: 'https://sendly.example.com',
-  orcha: 'https://orcha.example.com',
-  conversa: 'https://conversa.example.com',
-}
 
 const meta: Meta<typeof Header> = {
   title: 'Layouts/Header',
@@ -35,7 +23,6 @@ const meta: Meta<typeof Header> = {
     actionLogout: () => {},
     actionProfile: () => {},
     defaultAvatar: '/images/logo.png',
-    appHostUrls: defaultAppHostUrls,
     isStorybook: true,
   },
   argTypes: {
@@ -50,9 +37,8 @@ const meta: Meta<typeof Header> = {
     onSetTheme: { action: 'onSetTheme' },
     actionLogout: { action: 'actionLogout' },
     actionProfile: { action: 'actionProfile' },
-    avatarUrl: { action: { type: 'text' } },
+    defaultLogo: { action: { type: 'text' } },
     defaultAvatar: { control: { type: 'text' } },
-    appHostUrls: { control: { type: 'object' } },
   },
 }
 
