@@ -1,5 +1,7 @@
+import type { IPaging } from './../components/pagination/types'
 import axios, { type AxiosInstance, type AxiosRequestConfig, type AxiosResponse } from 'axios'
 import type { User, UserUpdate, ApiError } from '../types/user'
+import type { Application } from '../types/application'
 
 export interface IdentiesClientConfig {
   identiesApiUrl: string
@@ -39,9 +41,13 @@ export function createIdentiesClient(config: IdentiesClientConfig) {
     }
   )
 
+  const getApplications = async (): Promise<IPaging<Application>> => {
+    const response = await client.get<IPaging<Application>>('/applications/')
+    return response.data
+  }
+
   const getCurrentUser = async (): Promise<User> => {
     const response = await client.get<User>('/me')
-
     return response.data
   }
 
@@ -56,6 +62,7 @@ export function createIdentiesClient(config: IdentiesClientConfig) {
   }
 
   return {
+    getApplications,
     getCurrentUser,
     updateUser,
     request,

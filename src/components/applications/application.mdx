@@ -1,0 +1,111 @@
+import { Meta } from '@storybook/blocks'
+import { StorybookTable } from '../misc/storybook-table/storybook-table.tsx'
+
+<Meta title="Shortcut/Applications" />
+
+# Applications
+
+The `Applications` component renders an application launcher dropdown with a grid of app shortcuts. It reads application data and loading state from the app context and opens each app in a new tab.
+
+## Features
+
+- **Launcher trigger**: Opens from a compact icon button (`Grip`)
+- **Context-driven data**: Uses `useApp()` for `applications` and `isLoadingApps`
+- **Loading state**: Shows a spinner while app data is being fetched
+- **Grid layout**: Displays applications in a 3-column responsive grid
+- **Avatar fallback**: Uses the first letter when app logo is unavailable
+- **External navigation**: Opens app links in a new browser tab
+
+## Usage
+
+```tsx
+import { Applications } from 'tessera-ui'
+import { TesseraProvider } from 'tessera-ui'
+
+function HeaderActions() {
+  return (
+    <TesseraProvider identiesApiUrl={import.meta.env.VITE_IDENTIES_URL} token={token}>
+      <Applications />
+    </TesseraProvider>
+  )
+}
+```
+
+## Props
+
+`Applications` does not accept direct props. It depends on values provided by `AppProvider` context.
+
+<StorybookTable
+  title="App Context Requirements"
+  rows={[
+    {
+      name: 'isLoadingApps',
+      required: true,
+      type: 'boolean',
+      default: 'true',
+      description: 'Controls whether the loading spinner is shown in the dropdown.',
+    },
+    {
+      name: 'applications',
+      required: true,
+      type: 'Application[]',
+      default: '[]',
+      description: 'List of applications rendered as launcher items.',
+    },
+  ]}
+/>
+
+<StorybookTable
+  title="Application"
+  rows={[
+    {
+      name: 'id',
+      required: true,
+      type: 'string',
+      default: '-',
+      description: 'Unique application identifier.',
+    },
+    {
+      name: 'name',
+      required: true,
+      type: 'string',
+      default: '-',
+      description: 'Display name shown below the app icon.',
+    },
+    {
+      name: 'url',
+      required: true,
+      type: 'string',
+      default: '-',
+      description: 'Destination URL opened in a new browser tab.',
+    },
+    {
+      name: 'logo',
+      required: true,
+      type: 'string',
+      default: '-',
+      description: 'Image URL used for the app avatar.',
+    },
+    {
+      name: 'description',
+      required: true,
+      type: 'string',
+      default: '-',
+      description: 'Application description metadata.',
+    },
+    {
+      name: 'created_at',
+      required: true,
+      type: 'string',
+      default: '-',
+      description: 'ISO timestamp for when the application was created.',
+    },
+    {
+      name: 'updated_at',
+      required: true,
+      type: 'string',
+      default: '-',
+      description: 'ISO timestamp for when the application was last updated.',
+    },
+  ]}
+/>

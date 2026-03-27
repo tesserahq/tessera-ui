@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import { createIdentiesClient, type IdentiesClientConfig } from '../api/client'
 import type { User, UserUpdate, ApiError } from '../types/user'
+import type { Application } from '../types/application'
 
 export interface UseIdentiesConfig extends IdentiesClientConfig {
   autoFetchUser?: boolean
@@ -15,6 +16,10 @@ export interface UseIdentiesReturn {
   // User actions
   fetchUser: () => Promise<void>
   updateUser: (userUpdate: UserUpdate) => Promise<void>
+
+  // Applications state
+  applications: Application[]
+  isLoadingApps: boolean
 }
 
 export function useIdenties(config: UseIdentiesConfig): UseIdentiesReturn {
@@ -25,7 +30,9 @@ export function useIdenties(config: UseIdentiesConfig): UseIdentiesReturn {
 
   // State
   const [user, setUser] = useState<User | null>(null)
-  const [loading, setLoading] = useState(true)
+  const [applications, setApplications] = useState<Application[]>([])
+  const [loading, setLoading] = useState<boolean>(true)
+  const [isLoadingApps, setisLoadingApps] = useState<boolean>(true)
   const [error, setError] = useState<ApiError | null>(null)
 
   // Fetch user function
@@ -41,6 +48,21 @@ export function useIdenties(config: UseIdentiesConfig): UseIdentiesReturn {
       setUser(null)
     } finally {
       setLoading(false)
+    }
+  }, [client, token])
+
+  const fetchApplications = useCallback(async () => {
+    setisLoadingApps(true)
+    setError(null)
+
+    try {
+      const application = await client.getApplications()
+      setApplications(application.items)
+    } catch (err) {
+      setError(err as ApiError)
+      setApplications([])
+    } finally {
+      setisLoadingApps(false)
     }
   }, [client, token])
 
@@ -65,6 +87,7 @@ export function useIdenties(config: UseIdentiesConfig): UseIdentiesReturn {
   useEffect(() => {
     if (token) {
       fetchUser()
+      fetchApplications()
     } else {
       setLoading(false)
     }
@@ -76,5 +99,7 @@ export function useIdenties(config: UseIdentiesConfig): UseIdentiesReturn {
     fetchUser,
     error,
     updateUser,
+    isLoadingApps,
+    applications,
   }
 }
