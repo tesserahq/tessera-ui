@@ -80,22 +80,3 @@ export const Example: Story = {
     position: 'top-right',
   },
 }
-
-// const toast = new Proxy(sonnerToast, {
-//   apply(target, thisArg, argArray: Parameters<typeof sonnerToast>) {
-//     return Reflect.apply(target, thisArg, argArray)
-//   },
-//   get(target, prop, receiver) {
-//     if (prop === 'success') {
-//       return (
-//         message: Parameters<typeof sonnerToast.success>[0],
-//         options?: Parameters<typeof sonnerToast.success>[1]
-//       ) =>
-//         target.success(message, {
-//           ...options,
-//           duration: options?.duration ?? SUCCESS_AUTO_CLOSE_MS,
-//         })
-//     }
-//     return Reflect.get(target, prop, receiver)
-//   },
-// }) as typeof sonnerToast
