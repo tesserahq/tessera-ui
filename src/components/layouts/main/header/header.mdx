@@ -14,12 +14,6 @@ import { Header } from 'tessera-ui/components/layouts/main/header'
 import { TesseraProvider } from 'tessera-ui/main'
 import type { AppHostUrls } from 'tessera-ui/main'
 
-const appHostUrls: AppHostUrls = {
-  custos: 'https://custos.example.com',
-  quore: 'https://quore.example.com',
-  // ... other app URLs
-}
-
 function AppShell() {
   return (
     <TesseraProvider identiesApiUrl="" token="">
@@ -29,7 +23,6 @@ function AppShell() {
         onSetTheme={(theme) => {}}
         actionLogout={() => {}}
         actionProfile={() => {}}
-        appHostUrls={appHostUrls}
         isStorybook={false}
       />
       <main className="pt-[60px]">Your page content</main>
@@ -74,16 +67,10 @@ function AppShell() {
       description: 'Callback when the user opens profile from the profile menu.',
     },
     {
-      name: 'appHostUrls',
-      required: true,
-      type: 'AppHostUrls',
-      description: 'Map of app names to host URLs for the app switcher.',
-    },
-    {
-      name: 'avatarUrl',
+      name: 'defaultLogo',
       required: false,
       type: 'string',
-      description: 'Set avatar from app',
+      description: 'Set logo from app',
     },
     {
       name: 'defaultAvatar',

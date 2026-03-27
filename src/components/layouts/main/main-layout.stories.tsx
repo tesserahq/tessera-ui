@@ -8,7 +8,6 @@ import { Header } from './header/header'
 import { DetailLayout } from '../detail/detail.layout'
 import type { MainItemProps } from '../types'
 import type { DetailItemsProps, BreadcrumbItemData } from '../types'
-import type { AppHostUrls } from '../../../main'
 import MainLayoutDocs from './main-layout.mdx'
 
 const AutoCollapseMainLayout = ({
@@ -110,18 +109,6 @@ const defaultBreadcrumb: BreadcrumbItemData[] = [
   { label: 'Roles', link: '#' },
 ]
 
-const defaultAppHostUrls: AppHostUrls = {
-  quore: 'https://quore.example.com',
-  looply: 'https://looply.example.com',
-  vaulta: 'https://vaulta.example.com',
-  identies: 'https://identies.example.com',
-  custos: 'https://custos.example.com',
-  indexa: 'https://indexa.example.com',
-  sendly: 'https://sendly.example.com',
-  orcha: 'https://orcha.example.com',
-  conversa: '',
-}
-
 // Mock page components
 const RolesListPage = () => (
   <div className="space-y-6 p-6">
@@ -205,7 +192,7 @@ const MockHeader = () => {
       actionLogout={() => {}}
       actionProfile={() => {}}
       defaultAvatar=""
-      appHostUrls={defaultAppHostUrls}
+      defaultLogo=""
       isStorybook
     />
   )
