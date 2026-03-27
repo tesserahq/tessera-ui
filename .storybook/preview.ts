@@ -1,7 +1,5 @@
 import type { Preview } from '@storybook/react-vite'
-import React from 'react'
 import '@/index.css'
-import { Toaster } from '../src/components/toast'
 
 const preview: Preview = {
   parameters: {
