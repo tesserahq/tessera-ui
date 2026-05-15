@@ -1,0 +1,183 @@
+import { Meta } from '@storybook/blocks'
+import { StorybookTable } from '../components/misc/storybook-table/storybook-table.tsx'
+
+<Meta title="Auth/AuthProvider" />
+
+# AuthProvider
+
+Integrates [Auth0](https://auth0.com/) as the authentication provider for all Tessera apps. Wraps `Auth0Provider`, silently fetches an access token, and feeds it into `TesseraProvider` — giving every component in the tree access to both auth state and identities data.
+
+## How it works
+
+```
+AuthProvider
+  └── Auth0Provider        — handles login / logout / token lifecycle
+        └── TesseraAuth0Bridge  — silently fetches access token
+              └── TesseraProvider  — exposes user & applications via useApp()
+                    └── your app
+```
+
+## Installation
+
+`@auth0/auth0-react` is a peer dependency. Install it in your app:
+
+```sh
+bun add @auth0/auth0-react
+```
+
+## Basic setup
+
+```tsx
+import { AuthProvider } from 'tessera-ui'
+
+<AuthProvider
+  auth0={{
+    domain: import.meta.env.VITE_AUTH0_DOMAIN,
+    clientId: import.meta.env.VITE_AUTH0_CLIENT_ID,
+    audience: import.meta.env.VITE_AUTH0_AUDIENCE,
+  }}
+  identiesApiUrl={import.meta.env.VITE_IDENTIES_API_URL}
+>
+  <App />
+</AuthProvider>
+```
+
+Unauthenticated users are automatically redirected to the Auth0 login page.
+
+## AuthProvider props
+
+<StorybookTable
+  rows={[
+    { name: 'auth0.domain', required: true, type: 'string', description: 'Auth0 tenant domain' },
+    { name: 'auth0.clientId', required: true, type: 'string', description: 'Auth0 application client ID' },
+    { name: 'auth0.audience', required: true, type: 'string', description: 'API audience used for access token scope' },
+    { name: 'auth0.redirectUri', required: false, type: 'string', default: 'window.location.origin', description: 'Redirect URL after login' },
+    { name: 'auth0.prompt', required: false, type: "'login' | 'consent' | 'select_account' | 'none'", description: 'Auth0 prompt behaviour' },
+    { name: 'auth0.organizationID', required: false, type: 'string', description: 'Auth0 organization ID for org-level login' },
+    { name: 'auth0.onRedirectCallback', required: false, type: '(appState?) => void', description: 'Called after Auth0 redirects back to the app' },
+    { name: 'identiesApiUrl', required: true, type: 'string', description: 'Base URL of the Identies API' },
+    { name: 'requireAuth', required: false, type: 'boolean', default: 'true', description: 'When false, public routes render freely — use AuthGuard to protect specific routes' },
+    { name: 'loadingFallback', required: false, type: 'ReactNode', default: 'null', description: 'Rendered while Auth0 is initialising' },
+    { name: 'onUnauthenticated', required: false, type: '() => void', default: 'loginWithRedirect()', description: 'Custom handler when the user is not authenticated. Fires regardless of requireAuth. Falls back to loginWithRedirect() when omitted and requireAuth is true' },
+  ]}
+/>
+
+---
+
+# AuthGuard
+
+Protects individual routes by redirecting unauthenticated users. Use this when `requireAuth={false}` and you need to protect specific route groups.
+
+```tsx
+import { AuthGuard } from 'tessera-ui'
+
+<Route element={<AuthGuard fallback={<Spinner />}><Outlet /></AuthGuard>}>
+  <Route path="/dashboard" element={<Dashboard />} />
+</Route>
+```
+
+<StorybookTable
+  rows={[
+    { name: 'children', required: true, type: 'ReactNode', description: 'Rendered when the user is authenticated' },
+    { name: 'fallback', required: false, type: 'ReactNode', default: 'null', description: 'Rendered while loading or when unauthenticated' },
+  ]}
+/>
+
+---
+
+# Hooks
+
+## useApp()
+
+Access the authenticated user and their applications. Available inside `AuthProvider`.
+
+```tsx
+import { useApp } from 'tessera-ui'
+
+const { user, applications, isLoadingIdenties } = useApp()
+```
+
+<StorybookTable
+  rows={[
+    { name: 'user', required: false, type: 'User | null', description: 'Authenticated user profile from the Identies API' },
+    { name: 'applications', required: false, type: 'Application[]', description: 'Apps the user has access to' },
+    { name: 'isLoadingIdenties', required: false, type: 'boolean', description: 'Loading state for user fetch' },
+    { name: 'isLoadingApps', required: false, type: 'boolean', description: 'Loading state for applications fetch' },
+    { name: 'token', required: false, type: 'string | null', description: 'Raw Auth0 access token' },
+    { name: 'error', required: false, type: 'ApiError | null', description: 'Error from the Identies API' },
+    { name: 'updateUser', required: false, type: '(update: UserUpdate) => Promise<void>', description: 'Update the current user profile' },
+  ]}
+/>
+
+## useAuth()
+
+Access Auth0 state and actions.
+
+```tsx
+import { useAuth } from 'tessera-ui'
+
+const { isAuthenticated, user, logout, getAccessToken } = useAuth()
+```
+
+<StorybookTable
+  rows={[
+    { name: 'isAuthenticated', required: false, type: 'boolean', description: 'Whether the user is logged in' },
+    { name: 'isLoading', required: false, type: 'boolean', description: 'Auth0 initialisation loading state' },
+    { name: 'user', required: false, type: 'AuthUser | undefined', description: 'Auth0 user profile (email, name, picture, sub)' },
+    { name: 'loginWithRedirect', required: false, type: '() => void', description: 'Trigger Auth0 login' },
+    { name: 'logout', required: false, type: '(options?: { returnTo?: string }) => void', description: 'Log out and redirect. Defaults to window.location.origin' },
+    { name: 'getAccessToken', required: false, type: '() => Promise<string>', description: 'Fetch the current access token silently' },
+  ]}
+/>
+
+---
+
+# Public and private routes
+
+By default the entire app is protected (`requireAuth={true}`). For apps with mixed public/private routes:
+
+```tsx
+<AuthProvider
+  auth0={{ ... }}
+  identiesApiUrl={identiesApiUrl}
+  requireAuth={false}
+>
+  <Routes>
+    <Route path="/login" element={<LoginPage />} />
+    <Route path="/about" element={<AboutPage />} />
+
+    <Route element={<AuthGuard fallback={<Spinner />}><Outlet /></AuthGuard>}>
+      <Route path="/dashboard" element={<Dashboard />} />
+    </Route>
+  </Routes>
+</AuthProvider>
+```
+
+---
+
+# Using in Storybook
+
+Components that use `useApp()` or `useAuth()` need a mock provider in stories. Import `withAuth` from `auth.mock`:
+
+```tsx
+import { withAuth } from '@/auth/auth.mock'
+
+const meta: Meta<typeof MyComponent> = {
+  title: 'MyComponent',
+  component: MyComponent,
+  decorators: [withAuth()],
+}
+```
+
+Override specific context values for a story:
+
+```tsx
+export const AsAdmin: Story = {
+  decorators: [
+    withAuth({
+      user: { ...mockUser, first_name: 'Admin', verified: true },
+      applications: [{ id: '1', name: 'App One' }],
+    }),
+  ],
+}
+```

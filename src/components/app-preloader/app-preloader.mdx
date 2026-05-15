@@ -1,0 +1,47 @@
+import { Meta } from '@storybook/blocks'
+import { StorybookTable } from '../misc/storybook-table/storybook-table.tsx'
+
+<Meta title="Feedback/AppPreloader" />
+
+# AppPreloader
+
+The `AppPreloader` component displays a full-area loading screen while the application is initializing. It centers a spinner graphic within its container and is typically rendered at the root level before the main UI is ready.
+
+## Features
+
+- **Full-area coverage**: Stretches to fill its parent container (height and width 100%)
+- **Centered content**: Uses CSS grid to center the loading indicator
+- **Customizable**: Accepts an optional `className` to override or extend styles
+- **Dark Mode Support**: Inherits `bg-background` which adapts to the active theme
+
+## Usage
+
+```tsx
+import { AppPreloader } from 'tessera-ui/components/app-preloader'
+
+function App() {
+  if (!isReady) {
+    return <AppPreloader />
+  }
+
+  return <MainLayout />
+}
+```
+
+## Props
+
+<StorybookTable
+  rows={[
+    {
+      name: 'className',
+      required: false,
+      type: 'string',
+      description: 'Additional CSS classes to apply to the root element',
+    },
+  ]}
+/>
+
+## Notes
+
+- The component relies on CSS defined under the `.app-preloader` and `.app-preloader-inner` class names for its animation — ensure your global stylesheet includes these rules
+- Wrap the component in a `div` with an explicit height if the parent does not have one, otherwise the preloader will collapse to zero height

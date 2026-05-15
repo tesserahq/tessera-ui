@@ -3,7 +3,7 @@
 /* app-preloader */
 .app-preloader .app-preloader-inner::after,
 .app-preloader .app-preloader-inner::before {
-  @apply dark:bg-navy-300/50 absolute top-0 left-0 h-full w-full rounded-full bg-slate-300/[.25] content-[''];
+  @apply dark:bg-[#697a9b] absolute top-0 left-0 h-full w-full rounded-full bg-slate-300/[.25] content-[''];
   animation: spinner-grow 3s cubic-bezier(0.55, 0.15, 0.45, 0.85) infinite;
 }
 
