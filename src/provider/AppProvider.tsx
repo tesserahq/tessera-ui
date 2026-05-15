@@ -3,7 +3,7 @@ import type { ApiError, User, UserUpdate } from '../types/user'
 import { useIdenties } from '../hooks/useIdenties'
 import type { Application } from '../types/application'
 
-export interface ICoreUIContextProps {
+export interface ITesseraUIContextProps {
   user: User | null
   isLoadingIdenties: boolean
   error: ApiError | null
@@ -14,7 +14,7 @@ export interface ICoreUIContextProps {
   updateUser: (userUpdate: UserUpdate) => Promise<void>
 }
 
-export const CoreUIContext = React.createContext<ICoreUIContextProps>({
+export const TesseraUIContext = React.createContext<ITesseraUIContextProps>({
   token: null,
   user: null,
   isLoadingIdenties: true,
@@ -49,11 +49,11 @@ export function TesseraProvider({ children, token, identiesApiUrl }: IProviderPr
     [user, token, loading]
   )
 
-  return <CoreUIContext.Provider value={contextPayload}>{children}</CoreUIContext.Provider>
+  return <TesseraUIContext.Provider value={contextPayload}>{children}</TesseraUIContext.Provider>
 }
 
-export const useApp = (): ICoreUIContextProps => {
-  const context = React.useContext(CoreUIContext)
+export const useApp = (): ITesseraUIContextProps => {
+  const context = React.useContext(TesseraUIContext)
 
   if (!context) {
     throw new Error('useApp must be used within an IdentiesProvider')

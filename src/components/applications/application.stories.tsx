@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import type React from 'react'
 import { withRouter } from 'storybook-addon-remix-react-router'
 import { Applications } from './application'
-import { CoreUIContext, type ICoreUIContextProps } from '../../provider/AppProvider'
+import { TesseraUIContext, type ITesseraUIContextProps } from '../../provider/AppProvider'
 import type { Application } from '../../types/application'
 import ApplicationDocs from './application.mdx'
 
@@ -90,7 +90,7 @@ const applicationsMock: Application[] = [
   },
 ]
 
-const buildContext = (overrides?: Partial<ICoreUIContextProps>): ICoreUIContextProps => ({
+const buildContext = (overrides?: Partial<ITesseraUIContextProps>): ITesseraUIContextProps => ({
   token: 'storybook-token',
   user: null,
   isLoadingIdenties: false,
@@ -102,12 +102,12 @@ const buildContext = (overrides?: Partial<ICoreUIContextProps>): ICoreUIContextP
 })
 
 const withAppContext =
-  (contextValue: ICoreUIContextProps) =>
+  (contextValue: ITesseraUIContextProps) =>
   // eslint-disable-next-line react/display-name
   (Story: React.ComponentType): React.JSX.Element => (
-    <CoreUIContext.Provider value={contextValue}>
+    <TesseraUIContext.Provider value={contextValue}>
       <Story />
-    </CoreUIContext.Provider>
+    </TesseraUIContext.Provider>
   )
 
 const meta: Meta<typeof Applications> = {
