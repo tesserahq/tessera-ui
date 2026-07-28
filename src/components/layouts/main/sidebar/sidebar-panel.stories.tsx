@@ -32,7 +32,7 @@ type Story = StoryObj<typeof meta>
 
 const defaultMenuItems: MainItemProps[] = [
   { title: 'Roles', path: '/roles', icon: KeyRound, disabled: true },
-  { title: 'Users', path: '/users', icon: Users, disabled: true },
+  { title: 'Users', path: '/users', icon: Users, disabled: true, divider: true },
   { title: 'Settings', path: '/settings', icon: Settings, disabled: true },
 ]
 
