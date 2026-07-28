@@ -57,6 +57,9 @@ export function SidebarMenu({ menuItems }: { menuItems: MainItemProps[] }): Reac
                   <span>{item.title}</span>
                 </Link>
               </SidebarMenuButton>
+              {item.divider && (
+                <hr className="my-2 border-t border-slate-200 dark:border-slate-700" />
+              )}
             </SidebarMenuItem>
           ))}
         </div>

@@ -80,6 +80,7 @@ const defaultMenuItems: MainItemProps[] = [
     path: '#',
     icon: Users,
     disabled: true,
+    divider: true,
   },
   {
     title: 'Settings',
