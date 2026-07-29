@@ -91,7 +91,7 @@ export function AuthProvider({
       domain={domain}
       clientId={clientId}
       onRedirectCallback={onRedirectCallback}
-      acheLocation="localstorage"
+      cacheLocation="localstorage"
       authorizationParams={{
         redirect_uri: redirectUri ?? window.location.origin,
         audience,
