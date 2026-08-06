@@ -41,6 +41,12 @@ function getSnapshot(): ErrorDialogState {
   return state
 }
 
+const serverState: ErrorDialogState = { open: false, message: '' }
+
+function getServerSnapshot(): ErrorDialogState {
+  return serverState
+}
+
 export function useErrorDialogStore(): ErrorDialogState {
-  return React.useSyncExternalStore(subscribe, getSnapshot, getSnapshot)
+  return React.useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
 }
