@@ -42,5 +42,5 @@ function getSnapshot(): ErrorDialogState {
 }
 
 export function useErrorDialogStore(): ErrorDialogState {
-  return React.useSyncExternalStore(subscribe, getSnapshot)
+  return React.useSyncExternalStore(subscribe, getSnapshot, getSnapshot)
 }
