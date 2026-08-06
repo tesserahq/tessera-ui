@@ -1,0 +1,160 @@
+import { Meta } from '@storybook/blocks'
+import { StorybookTable } from '../misc/storybook-table/storybook-table.tsx'
+
+<Meta title="Information/ErrorDialog" />
+
+# ErrorDialog
+
+`ErrorDialog` shows a blocking dialog for the API errors that matter (e.g. `403`), while everything else falls back to a toast. Render `<ErrorDialog />` once (e.g. in your app root), then trigger it via the `useApiErrorHandler` hook — or `showErrorDialog` directly — from anywhere, same mental model as `Toaster`/`toast`.
+
+## Features
+
+- **Dialog vs. toast split**: pass `dialogCodes` to `useApiErrorHandler`; matching status codes open the dialog, everything else calls `toast.error(...)`
+- **No invented copy**: the dialog always shows the API's own `status_code` and `detail` text verbatim — the same status code can carry a different `message` on every call, since it's whatever the backend actually returned for that specific failure, not a fixed string picked by status code
+- **Custom actions**: optional `renderAction` prop lets the root mount render a status-code-specific button (e.g. "Log in again" on a 403), receiving the current `{ statusCode, message }`
+- **Global store**: built on `useSyncExternalStore` (no extra dependency), so it works even when triggered from outside the component tree — e.g. a react-query `onError`
+
+## Usage
+
+#### Setup: render ErrorDialog once
+
+```tsx
+import { ErrorDialog } from 'tessera-ui/components/error-dialog'
+import { Button } from 'tessera-ui/components/ui/button'
+
+export function App() {
+  const navigate = useNavigate()
+
+  return (
+    <>
+      {/* Your app content */}
+      <ErrorDialog
+        renderAction={({ statusCode }) =>
+          statusCode === 403 ? (
+            <Button onClick={() => navigate('/login')}>Log in again</Button>
+          ) : null
+        }
+      />
+    </>
+  )
+}
+```
+
+#### Trigger via the hook
+
+```tsx
+import { useApiErrorHandler } from 'tessera-ui'
+
+const { handleError } = useApiErrorHandler({ dialogCodes: [403, 500] })
+
+// react-query
+useQuery({ queryFn, onError: handleError })
+
+// plain try/catch
+try {
+  await doThing()
+} catch (err) {
+  handleError(err as ApiError)
+}
+```
+
+`handleError` never invents copy — whatever `detail` string the API sent back for that request is what shows up, verbatim, in the dialog or the toast.
+
+#### Trigger directly
+
+```tsx
+import { showErrorDialog, hideErrorDialog } from 'tessera-ui/components/error-dialog'
+
+showErrorDialog({ statusCode: 403, message: 'You do not have access to this resource.' })
+hideErrorDialog()
+```
+
+#### Same status code, different message
+
+A status code like `403` can happen for many different reasons, and the API's `detail` reflects that — the dialog is not tied to a fixed "Access Denied"-style string per code:
+
+```tsx
+// Denied because of a specific report's permissions
+showErrorDialog({ statusCode: 403, message: 'You do not have access to this billing report.' })
+
+// Denied because a session lost admin rights
+showErrorDialog({ statusCode: 403, message: 'Your session no longer has admin privileges.' })
+```
+
+Both are `403`s, but the dialog body differs because `message` is always `error.detail` from that specific API response, not something derived from the status code alone.
+
+## ErrorDialog props
+
+<StorybookTable
+  title=""
+  rows={[
+    {
+      name: 'renderAction',
+      required: false,
+      type: '(state: { statusCode: number; message: string }) => ReactNode',
+      default: '-',
+      description:
+        'Renders a custom action next to the Close button, based on the current status code and message. Return null/undefined to render only Close.',
+    },
+  ]}
+/>
+
+## useApiErrorHandler
+
+<StorybookTable
+  title="Options"
+  rows={[
+    {
+      name: 'dialogCodes',
+      required: false,
+      type: 'number[]',
+      default: '[403]',
+      description:
+        'Status codes that should open the dialog. Any other status code calls toast.error(error.detail) instead.',
+    },
+  ]}
+/>
+
+<StorybookTable
+  title="Returns"
+  rows={[
+    {
+      name: 'handleError',
+      required: true,
+      type: '(error: ApiError) => void',
+      default: '-',
+      description:
+        'Pass an ApiError ({ detail, status_code }) from a catch block, a mutation onError, etc.',
+    },
+  ]}
+/>
+
+## showErrorDialog payload
+
+<StorybookTable
+  title=""
+  rows={[
+    {
+      name: 'statusCode',
+      required: true,
+      type: 'number',
+      default: '-',
+      description: 'The HTTP status code, shown as "Error {statusCode}".',
+    },
+    {
+      name: 'message',
+      required: true,
+      type: 'string',
+      default: '-',
+      description:
+        "The error's detail text for this specific request, shown as the dialog body. Not derived from statusCode — two errors with the same statusCode can show different message text.",
+    },
+  ]}
+/>
+
+## Behavior
+
+- `ErrorDialog` must be mounted somewhere in the tree for dialogs to show — same caveat as `Toaster`. Typically place it in the root layout.
+- Status codes not listed in `dialogCodes` always fall through to `toast.error`, never the dialog.
+- `renderAction` is re-evaluated against the current store state each time the dialog opens, so it can react to both `statusCode` and `message` — not just a fixed per-code lookup.
+- Closing the dialog (Close button, ESC, click outside) always calls `hideErrorDialog()`; a custom action from `renderAction` does not close the dialog automatically unless it calls `hideErrorDialog()` itself.

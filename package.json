@@ -23,6 +23,10 @@
     "./components/delete-confirmation": {
       "types": "./src/components/delete-confirmation/delete-confirmation.tsx",
       "import": "./src/components/delete-confirmation/delete-confirmation.tsx"
+    },
+    "./error-dialog": {
+      "types": "./src/components/error-dialog/index.ts",
+      "import": "./src/components/error-dialog/index.ts"
     }
   },
   "files": [
