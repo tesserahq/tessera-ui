@@ -4,6 +4,7 @@ import { ProfileMenu, useApp } from '../../../../main'
 import { Applications } from '../../../applications/application'
 import { Avatar, AvatarFallback, AvatarImage } from '../../../ui/avatar'
 import { Separator } from '../../../ui/separator'
+import { SidebarTrigger } from '../../../ui/sidebar'
 
 interface IProps {
   title: string
@@ -42,7 +43,7 @@ export function Header({
         justify-between gap-2 top-0 backdrop-blur-md transition-[width,height] ease-linear pe-5
         shadow-2xs ps-2">
       {/* Left Content */}
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-1 md:gap-2">
         <Applications currentApp={title} />
         <Link to="/" className="space-x-2">
           <div className="flex items-center gap-2 lg:ml-0">
@@ -69,8 +70,9 @@ export function Header({
       {contentCenter && <div className="flex-1">{contentCenter}</div>}
 
       {/* Right Content */}
-      <div className="pe-4 flex items-center gap-2">
+      <div className="md:pe-4 flex items-center gap-2">
         {contentRight && <div>{contentRight}</div>}
+        <SidebarTrigger className="md:hidden" />
         <ProfileMenu
           isStorybook={isStorybook}
           selectedTheme={selectedTheme}

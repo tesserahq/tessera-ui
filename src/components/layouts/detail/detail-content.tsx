@@ -7,5 +7,5 @@ interface Props {
 }
 
 export function DetailContent({ children, className }: Props) {
-  return <div className={cn('flex-1 p-3 h-auto ml-56', className)}>{children}</div>
+  return <div className={cn('flex-1 p-3 h-auto ml-14 md:ml-56', className)}>{children}</div>
 }

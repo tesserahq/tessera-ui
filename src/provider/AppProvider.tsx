@@ -56,7 +56,7 @@ export const useApp = (): ITesseraUIContextProps => {
   const context = React.useContext(TesseraUIContext)
 
   if (!context) {
-    throw new Error('useApp must be used within an IdentiesProvider')
+    throw new Error('useApp must be used within a TesseraProvider')
   }
 
   return context
