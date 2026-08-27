@@ -7,11 +7,13 @@ import {
   SidebarMenu as SidebarMenuComponent,
   SidebarMenuButton,
   SidebarMenuItem,
+  useSidebar,
 } from '../../../ui/sidebar'
 import type { MainItemProps } from '../../types'
 
 export function SidebarMenu({ menuItems }: { menuItems: MainItemProps[] }): React.ReactElement {
   const { pathname } = useLocation()
+  const { isMobile, setOpenMobile } = useSidebar()
 
   const isActive = (itemUrl: string) => {
     // For exact match (like Dashboard at /inside or News at /inside/news)
@@ -47,6 +49,9 @@ export function SidebarMenu({ menuItems }: { menuItems: MainItemProps[] }): Reac
               <SidebarMenuButton asChild tooltip={item.title}>
                 <Link
                   to={item.disabled ? '#' : item.path}
+                  onClick={() => {
+                    if (isMobile) setOpenMobile(false)
+                  }}
                   className={cn(
                     'hover:bg-primary/20! hover:text-primary! dark:hover:text-primary-foreground!',
                     isActive(item.path) &&
