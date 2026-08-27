@@ -1,6 +1,6 @@
 import * as React from 'react'
 
-import { Link, useLocation } from 'react-router'
+import { Link, useLocation, useNavigate } from 'react-router'
 import { cn } from '../../../../utils/misc'
 import {
   SidebarGroup,
@@ -13,7 +13,16 @@ import type { MainItemProps } from '../../types'
 
 export function SidebarMenu({ menuItems }: { menuItems: MainItemProps[] }): React.ReactElement {
   const { pathname } = useLocation()
+  const navigate = useNavigate()
   const { isMobile, setOpenMobile } = useSidebar()
+
+  const handleClick = (e: React.MouseEvent, path: string) => {
+    if (isMobile) {
+      e.preventDefault()
+      navigate(path)
+      setTimeout(() => setOpenMobile(false), 200)
+    }
+  }
 
   const isActive = (itemUrl: string) => {
     // For exact match (like Dashboard at /inside or News at /inside/news)
@@ -49,14 +58,7 @@ export function SidebarMenu({ menuItems }: { menuItems: MainItemProps[] }): Reac
               <SidebarMenuButton asChild tooltip={item.title}>
                 <Link
                   to={item.disabled ? '#' : item.path}
-                  onClick={() => {
-                    if (isMobile) {
-                      // Defer to the next frame so the active-item highlight settles
-                      // before the sidebar starts its close transition, instead of
-                      // both changing in the same paint.
-                      requestAnimationFrame(() => setOpenMobile(false))
-                    }
-                  }}
+                  onClick={(e) => handleClick(e, item.disabled ? '#' : item.path)}
                   className={cn(
                     'hover:bg-primary/20! hover:text-primary! dark:hover:text-primary-foreground!',
                     isActive(item.path) &&
