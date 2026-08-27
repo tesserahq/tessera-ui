@@ -216,8 +216,8 @@ export const HomePage: Story = {
   },
   render: ({ collapseSidebar }) => (
     <MemoryRouter initialEntries={['/roles']}>
-      <MockHeader />
       <AutoCollapseMainLayout menuItems={defaultMenuItems} collapseSidebar={collapseSidebar}>
+        <MockHeader />
         <Routes>
           <Route path="/roles" element={<RolesListPage />} />
           <Route path="/roles/:id/overview" element={<RoleDetailPage />} />
@@ -244,8 +244,8 @@ export const DetailPage: Story = {
   },
   render: () => (
     <MemoryRouter initialEntries={['/roles']}>
-      <MockHeader />
       <AutoCollapseMainLayout menuItems={defaultMenuItems} collapseSidebar={true}>
+        <MockHeader />
         <Routes>
           <Route
             path="/roles"

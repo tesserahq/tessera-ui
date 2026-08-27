@@ -23,8 +23,9 @@ export function DetailSidenav({ menuItems, className }: DetailSidenavProps): Rea
 
   const itemClassName = (active: boolean) => {
     return cn(
-      `hover:bg-primary/20 w-full text-sm flex p-2 mb-1 items-center justify-start gap-2
-        overflow-hidden rounded-md cursor-pointer hover:text-primary dark:hover:text-primary-foreground`,
+      `hover:bg-primary/20 w-full text-sm flex p-1.5 md:p-2 mb-1 items-center justify-center md:justify-start
+        gap-2 overflow-hidden rounded-md cursor-pointer hover:text-primary
+        dark:hover:text-primary-foreground`,
       active &&
         ' text-primary dark:text-primary-foreground bg-primary/10 border border-primary font-medium'
     )
@@ -33,7 +34,7 @@ export function DetailSidenav({ menuItems, className }: DetailSidenavProps): Rea
   return (
     <div
       className={cn(
-        'w-56 dark:bg-sidebar-background p-3 fixed h-full border-r bg-white overflow-y-auto',
+        'w-14 md:w-56 dark:bg-sidebar-background p-3 fixed h-full border-r bg-white overflow-y-auto',
         className
       )}>
       <Accordion
@@ -48,9 +49,12 @@ export function DetailSidenav({ menuItems, className }: DetailSidenavProps): Rea
               <AccordionItem value={item.path} className="border-none">
                 <AccordionTrigger
                   disabled={item.disabled}
-                  className={itemClassName(isMenuActive(item.path) || hasActiveChild(item))}>
+                  className={cn(
+                    itemClassName(isMenuActive(item.path) || hasActiveChild(item)),
+                    '[&_.accordion-chevron]:hidden md:[&_.accordion-chevron]:block'
+                  )}>
                   <item.icon size={18} />
-                  <span className="flex-1 text-left">{item.title}</span>
+                  <span className="flex-1 text-left hidden md:inline">{item.title}</span>
                 </AccordionTrigger>
                 <AccordionContent className="pb-0">
                   <div className="pl-2 space-y-1">
@@ -60,7 +64,7 @@ export function DetailSidenav({ menuItems, className }: DetailSidenavProps): Rea
                         to={child.disabled ? '#' : child.path}
                         className={itemClassName(isMenuActive(child.path))}>
                         <item.icon size={18} />
-                        {child.title}
+                        <span className="hidden md:inline">{child.title}</span>
                       </Link>
                     ))}
                   </div>
@@ -71,7 +75,7 @@ export function DetailSidenav({ menuItems, className }: DetailSidenavProps): Rea
                 to={item.disabled ? '#' : item.path}
                 className={itemClassName(isMenuActive(item.path))}>
                 <item.icon size={18} />
-                {item.title}
+                <span className="hidden md:inline">{item.title}</span>
               </Link>
             )}
 
