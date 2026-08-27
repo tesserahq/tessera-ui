@@ -50,7 +50,12 @@ export function SidebarMenu({ menuItems }: { menuItems: MainItemProps[] }): Reac
                 <Link
                   to={item.disabled ? '#' : item.path}
                   onClick={() => {
-                    if (isMobile) setOpenMobile(false)
+                    if (isMobile) {
+                      // Defer to the next frame so the active-item highlight settles
+                      // before the sidebar starts its close transition, instead of
+                      // both changing in the same paint.
+                      requestAnimationFrame(() => setOpenMobile(false))
+                    }
                   }}
                   className={cn(
                     'hover:bg-primary/20! hover:text-primary! dark:hover:text-primary-foreground!',
