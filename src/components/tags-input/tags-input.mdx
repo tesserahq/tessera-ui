@@ -1,0 +1,58 @@
+import { Meta } from '@storybook/blocks'
+import { StorybookTable } from '../misc/storybook-table/storybook-table.tsx'
+
+<Meta title="Form/TagsInput" />
+
+# TagsInput
+
+The `TagsInput` component lets a user build up a list of free-form string tags as pill-shaped chips. Type text and press Enter, comma, or Space to commit it as a tag (typing "hello there" produces two tags); Backspace on an empty input removes the last tag. Duplicate tags (after trim + lowercase normalization) are ignored.
+
+## Usage
+
+```tsx
+import { TagsInput } from 'tessera-ui/components/tags-input'
+import React from 'react'
+
+const [tags, setTags] = React.useState<string[]>(['newsletter'])
+
+<TagsInput value={tags} onChange={setTags} placeholder="Add a tag" />
+```
+
+## Props
+
+<StorybookTable
+  rows={[
+    {
+      name: 'value',
+      required: true,
+      type: 'string[]',
+      description: 'Current list of tags. Controlled by parent state.',
+    },
+    {
+      name: 'onChange',
+      required: true,
+      type: '(tags: string[]) => void',
+      description: 'Callback fired whenever the tag list changes (add or remove).',
+    },
+    {
+      name: 'placeholder',
+      required: false,
+      type: 'string',
+      description: 'Placeholder text shown in the input when there are no tags yet.',
+      default: '"Add a tag"',
+    },
+    {
+      name: 'className',
+      required: false,
+      type: 'string',
+      description: 'Additional CSS classes to apply to the input container.',
+    },
+    {
+      name: 'disabled',
+      required: false,
+      type: 'boolean',
+      description: 'Disables adding/removing tags and dims the control.',
+      default: 'false',
+    },
+  ]}
+/>
