@@ -3,6 +3,15 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: storybook-image-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   push_to_registry:
     name: Push Docker image to Docker Hub
@@ -22,6 +31,9 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: mustela/tessera-ui-storybook
+          tags: |
+            type=ref,event=branch
+            type=sha,format=long,prefix=sha-
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
