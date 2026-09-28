@@ -1,0 +1,68 @@
+import { Meta } from '@storybook/blocks'
+
+<Meta title="Information/NotFound" />
+
+# NotFound
+
+Full-page 404 view with a "Back to Home" link. It does not read any loader data, so it is
+safe to render from a root `ErrorBoundary`, where the root loader did not run.
+
+`GenericErrorBoundary` from `tessera-ui/react-router` renders it for 404 responses by default,
+so most apps never render it directly.
+
+## Usage
+
+```tsx
+import { NotFound } from 'tessera-ui/components'
+
+<NotFound />
+
+<NotFound
+  image="/images/404.svg"
+  title="Page not found"
+  description="The page you are looking for does not exist."
+  homeHref="/dashboard"
+  homeLabel="Go to Dashboard"
+/>
+```
+
+`NotFound` renders a React Router `<Link>`, so it must be rendered inside a router.
+
+## Adding an image in your app
+
+The image lives in each app (not in tessera-ui), so every app can match its own brand color.
+
+1. **Pick the illustration.** Open [Storyset — 404 error (pana)](https://storyset.com/illustration/404-error/pana).
+2. **Change the color to the app's primary color.** Use Storyset's color picker and enter the app's primary color — the `--color-primary` value in the app's theme CSS.
+3. **Download and name it.** Download as SVG (preferred) or PNG, and save it in the app's `public/images/` folder as `404.svg` (or `404.png`, etc.).
+4. **Pass it to the `image` prop** using its public path:
+
+   ```tsx
+   <NotFound image="/images/404.(svg|png)" />
+   ```
+
+   For the default 404 page rendered by `GenericErrorBoundary`, override the 404 handler in the root `ErrorBoundary`:
+
+   ```tsx
+   import { NotFound } from 'tessera-ui/components'
+   import { GenericErrorBoundary } from 'tessera-ui/react-router'
+   <GenericErrorBoundary statusHandlers={{ 404: () => <NotFound image="/images/404.(svg|png)" /> }} />
+   ```
+
+Check Storyset's license before shipping: the free license requires attribution to Storyset.
+
+## Props
+
+| Prop             | Type        | Default               | Description                            |
+| ---------------- | ----------- | --------------------- | -------------------------------------- |
+| `image`          | `string`    | help icon             | Image URL shown above the title        |
+| `title`          | `string`    | `'Whoops!'`           | Main heading                           |
+| `description`    | `string`    | `'Nothing here yet!'` | Text under the heading                 |
+| `homeHref`       | `string`    | `'/'`                 | Target of the default link             |
+| `homeLabel`      | `string`    | `'Back to Home'`      | Label of the default link              |
+| `children`       | `ReactNode` | —                     | Replaces the default link, if provided |
+| `className`      | `string`    | —                     | Merged over the root container classes |
+| `imageClassName` | `string`    | —                     | Merged over the image classes          |
+
+`className` and `imageClassName` are merged with `cn()` (tailwind-merge), so conflicting
+classes override the defaults — e.g. `className="h-[500px]"` replaces the full-screen height.

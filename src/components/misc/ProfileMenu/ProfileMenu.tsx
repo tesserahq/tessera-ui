@@ -40,21 +40,50 @@ export function ProfileMenu({
     return <ProfileStoryBook open={isDropdownOpen} setIsOpen={setIsDropdownOpen} />
   }
 
+  // Keep Logout reachable while identities load or after they fail to load: with an expired
+  // token the request can hang or fail, and Logout is the user's only way out.
   if (isLoadingIdenties) {
     return (
-      <div className="animate-pulse">
-        <div className="rounded-full bg-gray-200 w-10 h-10"></div>
-      </div>
+      <LogoutOnlyMenu
+        open={isDropdownOpen}
+        setIsOpen={setIsDropdownOpen}
+        onLogout={actionLogout}
+        trigger={
+          <div className="animate-pulse">
+            <div className="rounded-full bg-gray-200 w-10 h-10"></div>
+          </div>
+        }>
+        <div className="mb-3 flex animate-pulse flex-row justify-start gap-x-3">
+          <div className="size-10 shrink-0 rounded-full bg-gray-200"></div>
+          <div className="flex flex-1 flex-col justify-center gap-2">
+            <div className="h-3 w-3/4 rounded bg-gray-200"></div>
+            <div className="h-3 w-full rounded bg-gray-200"></div>
+          </div>
+        </div>
+      </LogoutOnlyMenu>
     )
   }
 
   if (!user) {
     return (
-      <div
-        className="relative flex size-10 shrink-0 overflow-hidden rounded-full ring-1
-          ring-slate-300">
-        <img src={AvatarDummy} alt="default-avatar" />
-      </div>
+      <LogoutOnlyMenu
+        open={isDropdownOpen}
+        setIsOpen={setIsDropdownOpen}
+        onLogout={actionLogout}
+        trigger={
+          <div
+            className="relative flex size-10 shrink-0 overflow-hidden rounded-full ring-1
+              ring-slate-300">
+            <img src={AvatarDummy} alt="default-avatar" />
+          </div>
+        }>
+        <div className="mb-3 flex flex-row items-center justify-start gap-x-3">
+          <div className="relative flex size-10 shrink-0 overflow-hidden rounded-full">
+            <img src={AvatarDummy} alt="default-avatar" />
+          </div>
+          <p className="text-sm text-muted-foreground">Unable to load your profile.</p>
+        </div>
+      </LogoutOnlyMenu>
     )
   }
 
@@ -161,17 +190,51 @@ export function ProfileMenu({
                   </div>
                 )
               })}
-            <button
-              className="flex w-full flex-row items-center gap-2 rounded-sm px-3 py-2
-                hover:bg-destructive hover:text-white transition-all duration-200"
-              onClick={actionLogout}>
-              <LogOut size={16} />
-              Logout
-            </button>
+            <LogoutButton onClick={actionLogout} />
           </div>
         </DropdownMenuContent>
       </DropdownMenu>
     )
+}
+
+const LogoutOnlyMenu = ({
+  open,
+  setIsOpen,
+  onLogout,
+  trigger,
+  children,
+}: {
+  open: boolean
+  setIsOpen: (open: boolean) => void
+  onLogout: () => void
+  trigger: React.ReactNode
+  children: React.ReactNode
+}) => {
+  return (
+    <DropdownMenu open={open} onOpenChange={setIsOpen}>
+      <DropdownMenuTrigger asChild className="cursor-pointer">
+        {trigger}
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className="flex w-[16rem] flex-col px-5 py-5" side="bottom" align="end">
+        {children}
+        <div className="border-t pt-1">
+          <LogoutButton onClick={onLogout} />
+        </div>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  )
+}
+
+const LogoutButton = ({ onClick }: { onClick: () => void }) => {
+  return (
+    <button
+      className="flex w-full flex-row items-center gap-2 rounded-sm px-3 py-2 hover:bg-destructive
+        hover:text-white transition-all duration-200"
+      onClick={onClick}>
+      <LogOut size={16} />
+      Logout
+    </button>
+  )
 }
 
 const ProfileStoryBook = ({
