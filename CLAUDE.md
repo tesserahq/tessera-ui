@@ -4,11 +4,35 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-`tessera-ui` is TesseraHQ's private, shared React component library — not an app.
+`tessera-ui` is TesseraHQ's public, shared React component library — not an app.
 It's distributed to consumer apps via `bun link` or a git dependency
 (`bun install git+https://github.com/tesserahq/tessera-ui.git`), imported under the
 `tessera-ui` path alias. There is no consumer app in this repo; changes here are
 verified through Storybook.
+
+Consumer apps pin a release tag (`github:tesserahq/tessera-ui#vX.Y.Z`). Keep
+`package.json` `version` in sync with the tag; while on `0.x`, bump minor for new
+features or breaking changes and patch for fixes.
+
+Testing unreleased changes in a consumer app with `bun link` (`bun link` here,
+`bun link tessera-ui` there) symlinks this repo, including its own
+`node_modules`:
+
+- The consumer's Vite `resolve.dedupe` must list `react-router` (besides `react`,
+  `react-dom`, `@auth0/auth0-react`), or the `tessera-ui/react-router` hooks get
+  a second router instance and lose route context.
+- In the consumer's dev server (SSR), packages under this repo's `node_modules`
+  (`sonner`, `radix-ui`, …) are loaded by Node from their real path, so they
+  pick up this repo's own `react` — `dedupe` doesn't apply — and SSR fails with
+  `Cannot read properties of null (reading 'useState')`. While linked, point this
+  repo's `node_modules/react` and `node_modules/react-dom` at the consumer's
+  copies: `rm -rf` them here, then run
+  `ln -s ../../<consumer>/node_modules/react node_modules/react` (same for
+  `react-dom`). `bun install` here restores them.
+- The consumer's `tsc` can still fail with `ref`/`LucideIcon` incompatibilities
+  from two `@types/react` copies. That is a link-only artifact — runtime and
+  build are fine; run the consumer's typecheck against a tag install instead.
+- `bun install` in the consumer replaces the link; re-run `bun link tessera-ui`.
 
 ## Commands
 
@@ -34,17 +58,41 @@ verification happens by running Storybook and clicking through the affected stor
 ### Public API surface (barrel exports)
 
 Everything consumers import flows through `src/main.ts`, which re-exports from:
+
 - `provider/AppProvider` — `TesseraProvider`, `useApp`
 - `auth` — `AuthProvider`, `AuthGuard`, `useAuth`
 - `components/misc/ProfileMenu`, `components/misc/Form`
 - `components` (barrel of `components/index.ts`, itself re-exporting `layouts`,
-  `app-menu`, `datetime`, `new-button`, `empty-content`, `toast`, `pagination`,
-  `combo-box`, `resource-id`)
+  `app-menu`, `datetime`, `new-button`, `empty-content`, `not-found`, `toast`,
+  `pagination`, `combo-box`, `resource-id`, `tags-input`)
 
 `package.json` also exposes narrower subpath exports (`tessera-ui/layouts`,
 `tessera-ui/components`, `tessera-ui/components/delete-confirmation`) mapped
 directly to their `index.ts`/component file. When adding a new public component,
 wire it into the relevant barrel file, not just its own folder.
+
+Two subpaths are deliberately kept out of `src/main.ts`:
+
+- `tessera-ui/react-router` (`src/react-router/`) — root-template helpers for
+  React Router framework mode: `useRequestInfo`/`useOptionalRequestInfo`,
+  `useHints`, `useTheme`/`useOptionalTheme`, `useNonce`, `ClientHintCheck`,
+  `GenericErrorBoundary`. They need a data router, so they must not leak into the
+  main entry (which also works under a plain `<BrowserRouter>`).
+- `tessera-ui/server` (`src/server/`) — loader/action/`entry.server` helpers
+  (`getRequestInfo`, `getTheme`, `getRequestTheme`, `setTheme`,
+  `parseThemeFormData`). No CSS import, no React. Plain filenames (no
+  `.server.ts`): the subpath is the boundary.
+
+Contract with consumer apps: the root route keeps id `root` and its loader returns
+`requestInfo: getRequestInfo(request)`. The root `ErrorBoundary` also renders when
+the root loader did not run (unmatched URLs, loader failures), so anything it
+renders — including `GenericErrorBoundary`'s defaults and `NotFound` — must not
+require loader data; use the `useOptional*` hooks there. For the right theme on
+those pages, `entry.server.tsx` wraps the app in
+`<RequestThemeProvider value={getRequestTheme(request)}>`; in the browser
+`useOptionalTheme` reads the same cookies via `document.cookie`
+(`getThemeFromCookie`), so both sides must keep parsing cookies identically or
+hydration will mismatch. Details in `src/react-router/README.md`.
 
 `src/components/layouts` uses a compound-component export pattern — `Layout` is
 assembled in `layouts/index.ts` as `Object.assign(Layout, { Main, Header, Detail,
@@ -58,7 +106,7 @@ names.
   and bridges it to this library's own context: it waits for Auth0 to finish
   loading, resolves an access token via `getAccessTokenSilently`, and only then
   mounts `TesseraProvider` around `children`. If there's no token and
-  `requireAuth` is false, `children` render *without* `TesseraProvider` — so
+  `requireAuth` is false, `children` render _without_ `TesseraProvider` — so
   anything reading `useApp()` in that path must tolerate/handle that.
 - `TesseraProvider` (`src/provider/AppProvider.tsx`) calls `useIdenties`
   (`src/hooks/useIdenties.ts`), which fetches the current user and applications
@@ -76,7 +124,7 @@ names.
 - Storybook mocks: `src/auth/auth.mock.tsx` provides `MockAuthProvider`/`withAuth`
   (wraps both `Auth0Context.Provider` and `TesseraUIContext.Provider` with fixed
   mock data) for stories that need a populated user/app context without hitting
-  the real API. Stories that just need *a* provider (without caring about the
+  the real API. Stories that just need _a_ provider (without caring about the
   data) instead mount the real `TesseraProvider` directly with
   `identiesApiUrl=""` `token=""` — see `header.stories.tsx`. Any story rendering
   a component that calls `useApp()` needs one of these two, or it will throw.
