@@ -1,34 +1,13 @@
 @import 'tailwindcss';
-
-@custom-variant dark (&:is(.dark *));
-
-@theme {
-  --color-background: #f8f9fb;
-  --color-black: #000000;
-  --color-foreground: #333333;
-  --color-card: #ffffff;
-  --color-card-foreground: #333333;
-  --color-popover: #ffffff;
-  --color---popover-foreground: #171717;
-  --color-primary: #5bbc26;
-  --color-primary-foreground: #ffffff;
-  --color-secondary: #f3f4f6;
-  --color-secondary-foreground: #4b5563;
-  --color-muted: #f9fafb;
-  --color-muted-foreground: #6b7280;
-  --color-accent: #e0f8cf;
-  --color-accent-foreground: #2d5b19;
-  --color-destructive: #ef4444;
-  --color-destructive-foreground: #ffffff;
-  --color-border: #e7ecf4;
-  --color-input: #e7ecf4;
-  --color-ring: #e05d38;
-  --radius: 0.75rem;
-}
+@import './styles/theme.css';
 
 @layer base {
   * {
     @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
   }
 
   .d-list {
@@ -36,7 +15,7 @@
   }
 
   .d-list .d-item {
-    @apply flex items-center gap-1 border-b pb-2.5 dark:border-slate-200;
+    @apply flex items-center gap-1 border-b pb-2.5;
   }
 
   .d-list .d-item:last-child {

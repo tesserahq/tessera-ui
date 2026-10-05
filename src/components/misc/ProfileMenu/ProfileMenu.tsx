@@ -50,14 +50,14 @@ export function ProfileMenu({
         onLogout={actionLogout}
         trigger={
           <div className="animate-pulse">
-            <div className="rounded-full bg-gray-200 w-10 h-10"></div>
+            <div className="rounded-full bg-foreground/10 w-10 h-10"></div>
           </div>
         }>
         <div className="mb-3 flex animate-pulse flex-row justify-start gap-x-3">
-          <div className="size-10 shrink-0 rounded-full bg-gray-200"></div>
+          <div className="size-10 shrink-0 rounded-full bg-foreground/10"></div>
           <div className="flex flex-1 flex-col justify-center gap-2">
-            <div className="h-3 w-3/4 rounded bg-gray-200"></div>
-            <div className="h-3 w-full rounded bg-gray-200"></div>
+            <div className="h-3 w-3/4 rounded bg-foreground/10"></div>
+            <div className="h-3 w-full rounded bg-foreground/10"></div>
           </div>
         </div>
       </LogoutOnlyMenu>
@@ -73,7 +73,7 @@ export function ProfileMenu({
         trigger={
           <div
             className="relative flex size-10 shrink-0 overflow-hidden rounded-full ring-1
-              ring-slate-300">
+              ring-border">
             <img src={AvatarDummy} alt="default-avatar" />
           </div>
         }>
@@ -106,7 +106,7 @@ export function ProfileMenu({
             </Avatar>
             {!loaded && (
               <div className="animate-pulse absolute top-0">
-                <div className="w-10 h-10 rounded-full bg-gray-200"></div>
+                <div className="w-10 h-10 rounded-full bg-foreground/10"></div>
               </div>
             )}
           </div>
@@ -140,7 +140,7 @@ export function ProfileMenu({
                 <div className="p-2">
                   <SelectItem
                     value={'dark'}
-                    className="cursor-pointer rounded px-2 py-1 hover:bg-gray-100">
+                    className="cursor-pointer rounded px-2 py-1 hover:bg-foreground/5">
                     <div className="flex flex-row items-center gap-2">
                       <Moon size={15} />
                       <span>Dark</span>
@@ -148,7 +148,7 @@ export function ProfileMenu({
                   </SelectItem>
                   <SelectItem
                     value={'light'}
-                    className="cursor-pointer rounded px-2 py-1 hover:bg-gray-100">
+                    className="cursor-pointer rounded px-2 py-1 hover:bg-foreground/5">
                     <div className="flex flex-row items-center gap-2">
                       <Sun size={15} />
                       <span>Light</span>
@@ -156,7 +156,7 @@ export function ProfileMenu({
                   </SelectItem>
                   <SelectItem
                     value={'system'}
-                    className="cursor-pointer rounded px-2 py-1 hover:bg-gray-100">
+                    className="cursor-pointer rounded px-2 py-1 hover:bg-foreground/5">
                     <div className="flex flex-row items-center gap-2">
                       <Monitor size={15} />
                       <span>System</span>
@@ -229,7 +229,7 @@ const LogoutButton = ({ onClick }: { onClick: () => void }) => {
   return (
     <button
       className="flex w-full flex-row items-center gap-2 rounded-sm px-3 py-2 hover:bg-destructive
-        hover:text-white transition-all duration-200"
+        hover:text-destructive-foreground transition-all duration-200"
       onClick={onClick}>
       <LogOut size={16} />
       Logout
@@ -274,7 +274,7 @@ const ProfileStoryBook = ({
               <div className="p-2">
                 <SelectItem
                   value={'dark'}
-                  className="cursor-pointer rounded px-2 py-1 hover:bg-gray-100">
+                  className="cursor-pointer rounded px-2 py-1 hover:bg-foreground/5">
                   <div className="flex flex-row items-center gap-2">
                     <Moon size={15} />
                     <span>Dark</span>
@@ -282,7 +282,7 @@ const ProfileStoryBook = ({
                 </SelectItem>
                 <SelectItem
                   value={'light'}
-                  className="cursor-pointer rounded px-2 py-1 hover:bg-gray-100">
+                  className="cursor-pointer rounded px-2 py-1 hover:bg-foreground/5">
                   <div className="flex flex-row items-center gap-2">
                     <Sun size={15} />
                     <span>Light</span>
@@ -290,7 +290,7 @@ const ProfileStoryBook = ({
                 </SelectItem>
                 <SelectItem
                   value={'system'}
-                  className="cursor-pointer rounded px-2 py-1 hover:bg-gray-100">
+                  className="cursor-pointer rounded px-2 py-1 hover:bg-foreground/5">
                   <div className="flex flex-row items-center gap-2">
                     <Monitor size={15} />
                     <span>System</span>
@@ -312,7 +312,7 @@ const ProfileStoryBook = ({
           </div>
           <button
             className="flex w-full flex-row items-center gap-2 rounded-sm px-3 py-2
-              hover:bg-destructive hover:text-white transition-all duration-200"
+              hover:bg-destructive hover:text-destructive-foreground transition-all duration-200"
             onClick={() => {}}>
             <LogOut size={16} />
             Logout

@@ -140,7 +140,7 @@ persistent flex column. `src/components/layouts/main/sidebar/sidebar-panel.tsx`
 and `main-layout.tsx` are the concrete usage of this primitive for the app's main
 nav.
 
-This project's Tailwind theme (`src/index.css`, Tailwind v4 `@theme` block) only
+This project's Tailwind theme (`src/styles/theme.css`, `@theme inline` block) only
 defines `--color-sidebar-background` (not the shadcn-standard bare
 `--color-sidebar`) plus `sidebar-border`/`sidebar-accent`/`sidebar-foreground`/etc.
 When touching `ui/sidebar.tsx`, use `bg-sidebar-background`, not `bg-sidebar` —
@@ -149,8 +149,17 @@ token in this theme.
 
 ### Styling conventions
 
-- Tailwind v4, theme tokens defined in `src/index.css` under `@theme` (not a
-  `tailwind.config.ts` — this project uses CSS-first Tailwind config).
+- Tailwind v4, CSS-first config (no `tailwind.config.ts`). Color tokens live in
+  `src/styles/theme.css`, exported as `tessera-ui/theme.css` and imported by every consumer
+  app: `:root`/`.dark` hold bare HSL channels, `@theme inline` maps them to `--color-*`.
+  Neutral tokens are owned here; apps override only `--primary`, `--primary-foreground`,
+  `--accent`, `--accent-foreground` (ring, sidebar brand and `chart-1` derive from those).
+  `src/index.css` is Storybook's entry and just imports the theme; the Storybook toolbar
+  has a Light/Dark toggle.
+- Never use raw palette classes for color in components (`slate-*`, `gray-*`, `navy-*`,
+  `white`): consumers don't share a palette (`navy` only exists in some portals'
+  configs) and it bypasses the theme. Use semantic tokens, or a token with opacity
+  (`bg-foreground/10`) for overlays that must work on any surface.
 - `cn()` (`src/utils/misc.ts`, `clsx` + `tailwind-merge`) is the standard
   className-merge helper used throughout — prefer it over string concatenation
   for any conditional/overridable className.

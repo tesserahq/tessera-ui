@@ -65,7 +65,38 @@ Or for Tailwind v4, add to your CSS:
 @source './node_modules/tessera-ui/src/**/*.{js,jsx,ts,tsx}';
 ```
 
-#### 4. Import in your App
+#### 4. Import the shared theme
+
+`tessera-ui/theme.css` owns the neutral color tokens (surfaces, text, borders, status) for light
+and dark mode, so every app looks the same. Import it right after Tailwind and override only your
+brand tokens:
+
+```css
+@import 'tailwindcss';
+@import 'tessera-ui/theme.css';
+@source '../../node_modules/tessera-ui/src/**/*.{js,jsx,ts,tsx}';
+
+:root {
+  --primary: 158 73% 28%;
+  --primary-foreground: 0 0% 100%;
+  --accent: 158 60% 94%;
+  --accent-foreground: 158 73% 20%;
+}
+
+.dark {
+  --primary: 158 60% 45%;
+  --primary-foreground: 217 35% 10%;
+  --accent: 158 45% 18%;
+  --accent-foreground: 158 60% 80%;
+}
+```
+
+Values are bare HSL channels. `--ring`, `--sidebar-primary`, `--sidebar-accent` and `--chart-1`
+follow the brand tokens automatically. Don't redefine neutral tokens in the app, and don't use raw
+palette classes (`slate-*`, `gray-*`, `navy-*`, `white`) for color in components; use the semantic tokens (`bg-card`,
+`border-border`, `text-muted-foreground`) instead.
+
+#### 5. Import in your App
 
 ```typescript
 import { Layout, ProfileMenu, FormField } from 'tessera-ui/components/layouts'

@@ -1,7 +1,7 @@
 {
   "name": "tessera-ui",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.1.0",
   "type": "module",
   "main": "./src/main.ts",
   "module": "./src/main.ts",
@@ -31,12 +31,18 @@
     "./server": {
       "types": "./src/server/index.ts",
       "import": "./src/server/index.ts"
+    },
+    "./theme.css": {
+      "style": "./src/styles/theme.css",
+      "default": "./src/styles/theme.css"
     }
   },
   "files": [
     "src"
   ],
-  "sideEffects": false,
+  "sideEffects": [
+    "*.css"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",

@@ -126,7 +126,7 @@ function ComboBoxInner<T>(props: ComboBoxProps<T>, ref: React.ForwardedRef<HTMLD
                       value={searchValue}
                       onSelect={() => handleSelect(optionId)}
                       className={cn(
-                        'dark:hover:bg-navy-300/20 cursor-pointer text-base hover:bg-slate-300/20',
+                        'hover:bg-foreground/5 cursor-pointer text-base',
                         value === optionId && 'bg-accent'
                       )}>
                       <Check

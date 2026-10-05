@@ -60,18 +60,16 @@ export function SidebarMenu({ menuItems }: { menuItems: MainItemProps[] }): Reac
                   to={item.disabled ? '#' : item.path}
                   onClick={(e) => handleClick(e, item.disabled ? '#' : item.path)}
                   className={cn(
-                    'hover:bg-primary/20! hover:text-primary! dark:hover:text-primary-foreground!',
+                    'hover:bg-primary/20! hover:text-primary! dark:hover:text-foreground!',
                     isActive(item.path) &&
-                      `text-primary! dark:text-primary-foreground! bg-primary/10 border
-                      border-primary opacity-100 font-medium`
+                      `text-primary! dark:text-foreground! bg-primary/10 border border-primary
+                      opacity-100 font-medium`
                   )}>
                   <item.icon size={18} />
                   <span>{item.title}</span>
                 </Link>
               </SidebarMenuButton>
-              {item.divider && (
-                <hr className="my-2 border-t border-slate-200 dark:border-slate-700" />
-              )}
+              {item.divider && <hr className="border-border my-2 border-t" />}
             </SidebarMenuItem>
           ))}
         </div>
