@@ -50,8 +50,8 @@ export function NotFound({
         </div>
       )}
       <div className="flex flex-col items-center gap-2">
-        <p className="text-primary text-2xl font-medium dark:text-primary-foreground">{title}</p>
-        <p className="text-primary/60 text-center text-lg font-normal dark:text-primary-foreground">
+        <p className="text-primary dark:text-foreground text-2xl font-medium">{title}</p>
+        <p className="text-primary/60 dark:text-foreground text-center text-lg font-normal">
           {description}
         </p>
         <div className="mt-3">

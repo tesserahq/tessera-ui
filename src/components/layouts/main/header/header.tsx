@@ -38,10 +38,9 @@ export function Header({
 
   return (
     <header
-      className="fixed h-[60px] animate-slide-down duration-100 z-20! left-0 bg-white
-        dark:bg-sidebar-background w-full border-b-[0.5px] border-border shrink-0 flex items-center
-        justify-between gap-2 top-0 backdrop-blur-md transition-[width,height] ease-linear pe-5
-        shadow-2xs ps-2">
+      className="fixed h-[60px] animate-slide-down duration-100 z-20! left-0 bg-sidebar-background
+        w-full border-b-[0.5px] border-border shrink-0 flex items-center justify-between gap-2 top-0
+        backdrop-blur-md transition-[width,height] ease-linear pe-5 shadow-2xs ps-2">
       {/* Left Content */}
       <div className="flex items-center gap-1 md:gap-2">
         <Applications currentApp={title} />
@@ -58,10 +57,7 @@ export function Header({
         </Link>
         {contentLeft && (
           <>
-            <Separator
-              orientation="vertical"
-              className="mr-1.5 h-3 bg-slate-400 dark:bg-slate-500"
-            />
+            <Separator orientation="vertical" className="bg-muted-foreground/40 mr-1.5 h-3" />
             {contentLeft}
           </>
         )}

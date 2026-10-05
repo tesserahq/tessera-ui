@@ -54,9 +54,7 @@ export function GenericErrorBoundary({
   const handlers = { ...defaultStatusHandlers, ...statusHandlers }
 
   return (
-    <div
-      className="dark:text-primary-foreground flex h-full w-full flex-col items-center
-        justify-center">
+    <div className="dark:text-foreground flex h-full w-full flex-col items-center justify-center">
       {isRouteErrorResponse(error)
         ? (handlers[error.status] ?? defaultStatusHandler)({ error, params })
         : unexpectedErrorHandler(error)}

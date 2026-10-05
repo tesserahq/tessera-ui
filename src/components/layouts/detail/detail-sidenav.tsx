@@ -25,16 +25,15 @@ export function DetailSidenav({ menuItems, className }: DetailSidenavProps): Rea
     return cn(
       `hover:bg-primary/20 w-full text-sm flex p-1.5 md:p-2 mb-1 items-center justify-center md:justify-start
         gap-2 overflow-hidden rounded-md cursor-pointer hover:text-primary
-        dark:hover:text-primary-foreground`,
-      active &&
-        ' text-primary dark:text-primary-foreground bg-primary/10 border border-primary font-medium'
+        dark:hover:text-foreground`,
+      active && ' text-primary dark:text-foreground bg-primary/10 border border-primary font-medium'
     )
   }
 
   return (
     <div
       className={cn(
-        'w-14 md:w-56 dark:bg-sidebar-background p-3 fixed h-full border-r bg-white overflow-y-auto',
+        'w-14 md:w-56 bg-sidebar-background p-3 fixed h-full border-r overflow-y-auto',
         className
       )}>
       <Accordion
@@ -79,9 +78,7 @@ export function DetailSidenav({ menuItems, className }: DetailSidenavProps): Rea
               </Link>
             )}
 
-            {item.divider && (
-              <hr className="my-2 border-t border-slate-200 dark:border-slate-700" />
-            )}
+            {item.divider && <hr className="border-border my-2 border-t" />}
           </div>
         ))}
       </Accordion>

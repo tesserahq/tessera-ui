@@ -15,9 +15,9 @@ import { cn } from '../../../utils/misc'
 function BreadcrumbLoader() {
   return (
     <div className="flex items-center gap-2">
-      <div className="h-5 w-16 animate-pulse bg-slate-200 dark:bg-slate-600 rounded-lg"></div>
-      <div className="h-5 w-32 animate-pulse bg-slate-200 dark:bg-slate-600 rounded-lg"></div>
-      <div className="h-5 w-16 animate-pulse bg-slate-200 dark:bg-slate-600 rounded-lg"></div>
+      <div className="bg-foreground/10 h-5 w-16 animate-pulse rounded-lg"></div>
+      <div className="bg-foreground/10 h-5 w-32 animate-pulse rounded-lg"></div>
+      <div className="bg-foreground/10 h-5 w-16 animate-pulse rounded-lg"></div>
     </div>
   )
 }
@@ -34,7 +34,7 @@ export function DetailHeader({
   return (
     <div
       className={cn(
-        'bg-white dark:bg-sidebar-background w-full fixed top-[60px] z-5 px-3 py-4 border-b',
+        'bg-sidebar-background w-full fixed top-[60px] z-5 px-3 py-4 border-b',
         className
       )}>
       {isLoading && <BreadcrumbLoader />}

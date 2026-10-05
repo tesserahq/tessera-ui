@@ -122,7 +122,7 @@ export interface ComboBoxProps<T> {
    * renderOption={(user) => (
    *   <div>
    *     <div className="font-bold">{user.name}</div>
-   *     <div className="text-sm text-gray-500">{user.email}</div>
+   *     <div className="text-muted-foreground text-sm">{user.email}</div>
    *   </div>
    * )}
    *

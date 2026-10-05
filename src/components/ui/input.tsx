@@ -55,7 +55,7 @@ const InputFloat = React.forwardRef<HTMLInputElement, InputProps>(
             font-medium placeholder-transparent transition-all duration-100 hover:border-primary
             focus:ring-0 focus:ring-offset-0 focus-visible:border-primary focus-visible:outline-none
             focus-visible:ring-0 focus-visible:ring-offset-0 disabled:cursor-not-allowed
-            disabled:opacity-50 dark:text-primary-foreground`,
+            disabled:opacity-50 dark:text-foreground`,
             className
           )}
           ref={inputRef}
@@ -68,8 +68,8 @@ const InputFloat = React.forwardRef<HTMLInputElement, InputProps>(
             onClick={() => inputRef.current?.focus()}
             className="absolute -top-2 left-2 cursor-text bg-card px-2 text-xs text-muted-foreground
               transition-all duration-300 peer-placeholder-shown:top-2.5
-              peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400
-              peer-focus:-top-2 peer-focus:text-xs peer-focus:text-primary">
+              peer-placeholder-shown:text-base peer-focus:-top-2 peer-focus:text-xs
+              peer-focus:text-primary">
             {label}
             {required && <span className="text-red-500">*</span>}
           </label>
