@@ -205,7 +205,7 @@ exception is listed here. There are no exceptions yet.
 - tessera-ui: `bun run check` (format, lint, typecheck) and a Storybook build. Visual check of the
   affected stories with the Light/Dark toolbar toggle.
 - Portals: `bun run lint`, `bun run typecheck`, `bun run build`. Before releasing a tessera-ui
-  change, test it in a portal with `bun link` (see `CLAUDE.md` for the SSR `react` symlink
+  change, test it in a portal with `bun link` (see `AGENTS.md` for the SSR `react` symlink
   workaround); typecheck errors about duplicate `@types/react` while linked are expected and go
   away with a tag install.
 - Check the built CSS: the shared values (for example `--card:217 30% 17%`) are present and no
