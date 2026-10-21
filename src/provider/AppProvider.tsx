@@ -46,7 +46,7 @@ export function TesseraProvider({ children, token, identiesApiUrl }: IProviderPr
       isLoadingApps,
       applications,
     }),
-    [user, token, loading]
+    [user, token, loading, error, updateUser, isLoadingApps, applications]
   )
 
   return <TesseraUIContext.Provider value={contextPayload}>{children}</TesseraUIContext.Provider>
