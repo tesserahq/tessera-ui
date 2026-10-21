@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useMemo } from 'react'
 import { createIdentiesClient, type IdentiesClientConfig } from '../api/client'
 import type { User, UserUpdate, ApiError } from '../types/user'
 import type { Application } from '../types/application'
@@ -23,65 +23,70 @@ export interface UseIdentiesReturn {
 }
 
 export function useIdenties(config: UseIdentiesConfig): UseIdentiesReturn {
-  const { token, ...clientConfig } = config
+  const { token, identiesApiUrl, timeout, headers } = config
 
-  // Create client instance
-  const client = createIdentiesClient({ ...clientConfig, token })
+  // Create client instance, recreated only when its config changes
+  const client = useMemo(
+    () => createIdentiesClient({ identiesApiUrl, token, timeout, headers }),
+    [identiesApiUrl, token, timeout, headers]
+  )
 
   // State
   const [user, setUser] = useState<User | null>(null)
   const [applications, setApplications] = useState<Application[]>([])
   const [loading, setLoading] = useState<boolean>(true)
   const [isLoadingApps, setisLoadingApps] = useState<boolean>(true)
-  const [error, setError] = useState<ApiError | null>(null)
+  // Separate errors so one request can't clear the other's failure
+  const [userError, setUserError] = useState<ApiError | null>(null)
+  const [appsError, setAppsError] = useState<ApiError | null>(null)
 
   // Fetch user function
   const fetchUser = useCallback(async () => {
     setLoading(true)
-    setError(null)
+    setUserError(null)
 
     try {
       const userData = await client.getCurrentUser()
       setUser(userData)
     } catch (err) {
-      setError(err as ApiError)
+      setUserError(err as ApiError)
       setUser(null)
     } finally {
       setLoading(false)
     }
-  }, [client, token])
+  }, [client])
 
   const fetchApplications = useCallback(async () => {
     setisLoadingApps(true)
-    setError(null)
+    setAppsError(null)
 
     try {
       const application = await client.getApplications()
       setApplications(application.items)
     } catch (err) {
-      setError(err as ApiError)
+      setAppsError(err as ApiError)
       setApplications([])
     } finally {
       setisLoadingApps(false)
     }
-  }, [client, token])
+  }, [client])
 
   // Update user function
   const updateUser = useCallback(
     async (userUpdate: UserUpdate) => {
-      setError(null)
+      setUserError(null)
 
       try {
         const updatedUser = await client.updateUser(userUpdate)
         setUser(updatedUser)
       } catch (err) {
-        setError(err as ApiError)
+        setUserError(err as ApiError)
         throw err
       } finally {
         setLoading(false)
       }
     },
-    [client, token]
+    [client]
   )
 
   useEffect(() => {
@@ -91,13 +96,13 @@ export function useIdenties(config: UseIdentiesConfig): UseIdentiesReturn {
     } else {
       setLoading(false)
     }
-  }, [token])
+  }, [token, fetchUser, fetchApplications])
 
   return {
     user,
     loading,
     fetchUser,
-    error,
+    error: userError ?? appsError,
     updateUser,
     isLoadingApps,
     applications,
