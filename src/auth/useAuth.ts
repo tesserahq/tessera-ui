@@ -28,6 +28,10 @@ export function useAuth(): AuthState {
     loginWithRedirect: () => loginWithRedirect(),
     logout: (options) =>
       logout({ logoutParams: { returnTo: options?.returnTo ?? window.location.origin } }),
-    getAccessToken: () => getAccessTokenSilently(),
+    getAccessToken: async () => {
+      const accessToken = await getAccessTokenSilently()
+      if (!accessToken) throw new Error('Auth0 returned no access token')
+      return accessToken
+    },
   }
 }
