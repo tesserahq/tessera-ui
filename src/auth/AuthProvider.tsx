@@ -54,7 +54,10 @@ function TesseraAuth0Bridge({
       return
     }
     getAccessTokenSilently({ authorizationParams: { audience } })
-      .then(setToken) // get shared token
+      .then((accessToken) => {
+        if (!accessToken) throw new Error('Auth0 returned no access token')
+        setToken(accessToken) // get shared token
+      })
       .catch(() => {
         if (requireAuth) {
           loginWithRedirect()
