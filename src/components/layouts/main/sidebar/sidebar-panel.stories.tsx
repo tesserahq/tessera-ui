@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { KeyRound, Settings, Users } from 'lucide-react'
-import { MemoryRouter } from 'react-router-dom'
+import { MemoryRouter } from 'react-router'
 import { reactRouterParameters, withRouter } from 'storybook-addon-remix-react-router'
 
 import { SidebarProvider } from '../../../ui/sidebar'
