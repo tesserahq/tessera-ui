@@ -50,6 +50,7 @@
     "lint:fix": "npx eslint \"src/**/*.{ts,tsx}\" --fix",
     "check": "bun run format && bun run lint && bun run typecheck",
     "typecheck": "tsc -b",
+    "test": "vitest run",
     "format": "npx prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md}\" \"!**/locales/**\"",
     "format:check": "npx prettier --check \"**/*.{js,jsx,ts,tsx,json,css,md}\" \"!**/locales/**\"",
     "preview": "vite preview",
@@ -118,7 +119,8 @@
     "typescript-eslint": "^8.72.0",
     "vite": "^7.0.4",
     "vite-plugin-dts": "^4.5.4",
-    "vite-tsconfig-paths": "^6.1.1"
+    "vite-tsconfig-paths": "^6.1.1",
+    "vitest": "^4"
   },
   "dependencies": {
     "@epic-web/client-hints": "^1.3.5",
