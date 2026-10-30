@@ -29,10 +29,18 @@ export function getRequestTheme(request: Request): Theme {
  */
 export function setTheme(theme: ThemeExtended): string {
   if (theme === 'system') {
-    return cookie.serialize(THEME_COOKIE_KEY, '', { path: '/', maxAge: -1, sameSite: 'lax' })
+    return cookie.stringifySetCookie({
+      name: THEME_COOKIE_KEY,
+      value: '',
+      path: '/',
+      maxAge: -1,
+      sameSite: 'lax',
+    })
   }
 
-  return cookie.serialize(THEME_COOKIE_KEY, theme, {
+  return cookie.stringifySetCookie({
+    name: THEME_COOKIE_KEY,
+    value: theme,
     path: '/',
     maxAge: 31536000,
     sameSite: 'lax',
